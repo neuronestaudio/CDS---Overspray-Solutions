@@ -40,13 +40,9 @@
   drawerClose.addEventListener("click", closeDrawer);
   drawer.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeDrawer); });
 
-  /* ---------- Gallery data (32 real project photos) ---------- */
-  // Loose service tagging so the filter reads sensibly across all real jobs.
-  var cats = {
-    coating: [15, 16, 24, 25, 31, 32],
-    fleet: [26, 27, 28, 29, 30],
-    detail: [] // fallback filled below
-  };
+  /* ---------- Work pool (floating carousel) ---------- */
+  var cats = { coating: [15, 16, 24, 25, 31, 32], fleet: [26, 27, 28, 29, 30] };
+  function catLabel(c) { return c === "coating" ? "Coating" : c === "fleet" ? "Fleet" : "Detailing"; }
   var items = [];
   for (var i = 1; i <= 32; i++) {
     var n = ("0" + i).slice(-2);
@@ -55,66 +51,93 @@
     else if (cats.fleet.indexOf(i) > -1) cat = "fleet";
     items.push({ n: n, cat: cat });
   }
+  var srcs = items.map(function (it) { return "assets/gallery/" + it.n + ".jpg"; }); // lightbox order
 
-  var gallery = document.getElementById("gallery");
-  var frag = document.createDocumentFragment();
-  var plus = '<span class="g-plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>';
-  items.forEach(function (it, idx) {
-    var d = document.createElement("figure");
-    d.className = "g-item";
-    d.setAttribute("data-cat", it.cat);
-    d.setAttribute("data-idx", idx);
-    d.innerHTML = '<img loading="lazy" src="assets/gallery/' + it.n + '.jpg" alt="CDS detailing project ' + it.n + '">' + plus;
-    frag.appendChild(d);
-  });
-  gallery.appendChild(frag);
+  var ratios = ["4 / 3", "1 / 1", "3 / 4", "5 / 4", "4 / 3", "16 / 10"];
+  var offsets = [0, 26, 12, 32, 8, 20];
+  var expandSvg = '<span class="pool-exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>';
 
-  /* ---------- Filters ---------- */
-  var filterBtns = document.querySelectorAll(".gal-filters button");
-  filterBtns.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      filterBtns.forEach(function (b) { b.classList.remove("active"); });
-      btn.classList.add("active");
-      var f = btn.getAttribute("data-filter");
-      gallery.querySelectorAll(".g-item").forEach(function (el) {
-        var show = f === "all" || el.getAttribute("data-cat") === f;
-        el.classList.toggle("hide", !show);
-      });
+  function makeCard(it, idx, clone) {
+    var card = document.createElement("figure");
+    card.className = "pool-card";
+    card.setAttribute("data-src", "assets/gallery/" + it.n + ".jpg");
+    if (clone) card.setAttribute("aria-hidden", "true");
+    card.style.setProperty("--ar", ratios[idx % ratios.length]);
+    card.style.marginTop = offsets[idx % offsets.length] + "px";
+    card.innerHTML =
+      '<img loading="lazy" src="assets/gallery/' + it.n + '.jpg" alt="CDS project: ' + catLabel(it.cat) + '">' +
+      '<span class="pool-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>' + catLabel(it.cat) + '</span>' +
+      expandSvg;
+    return card;
+  }
+
+  function setupRow(row, dir) {
+    var track = row.querySelector(".pool-track");
+    var half = 0;
+    function measure() { half = Math.round(track.scrollWidth / 2); }
+    measure();
+    track.querySelectorAll("img").forEach(function (im) { im.addEventListener("load", measure); });
+    window.addEventListener("resize", measure);
+
+    var paused = false, dragging = false, startX = 0, startScroll = 0, moved = 0, speed = 0.35;
+    function wrap() {
+      if (half <= 0) return;
+      if (row.scrollLeft >= half) row.scrollLeft -= half;
+      else if (row.scrollLeft <= 0) row.scrollLeft += half;
+    }
+    function frame() {
+      if (!paused && !dragging && !reduceMotion && half > 0) { row.scrollLeft += speed * dir; wrap(); }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    row.addEventListener("pointerenter", function () { paused = true; });
+    row.addEventListener("pointerleave", function () { paused = false; });
+    row.addEventListener("pointerdown", function (e) {
+      dragging = true; moved = 0; startX = e.clientX; startScroll = row.scrollLeft;
+      row.classList.add("dragging"); try { row.setPointerCapture(e.pointerId); } catch (_) {}
     });
+    row.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - startX; moved = Math.max(moved, Math.abs(dx));
+      row.scrollLeft = startScroll - dx; wrap();
+    });
+    function end(e) { if (!dragging) return; dragging = false; row.classList.remove("dragging"); try { row.releasePointerCapture(e.pointerId); } catch (_) {} }
+    row.addEventListener("pointerup", end);
+    row.addEventListener("pointercancel", end);
+    row.addEventListener("click", function (e) {
+      if (moved > 6) { e.preventDefault(); return; } // was a drag, not a tap
+      var card = e.target.closest(".pool-card");
+      if (card) openLbSrc(card.getAttribute("data-src"));
+    });
+  }
+
+  var poolRows = document.querySelectorAll(".pool-row");
+  var rowSets = [items.slice(0, 16), items.slice(16, 32)];
+  poolRows.forEach(function (row, ri) {
+    var track = row.querySelector(".pool-track");
+    var set = rowSets[ri] && rowSets[ri].length ? rowSets[ri] : items;
+    for (var pass = 0; pass < 2; pass++) {
+      set.forEach(function (it, idx) { track.appendChild(makeCard(it, idx, pass === 1)); });
+    }
+    setupRow(row, parseInt(row.getAttribute("data-dir"), 10) || 1);
   });
 
-  /* ---------- Lightbox ---------- */
+  /* ---------- Lightbox (shared, driven by src list) ---------- */
   var lb = document.getElementById("lightbox");
   var lbImg = document.getElementById("lbImg");
   var lbClose = document.getElementById("lbClose");
   var lbPrev = document.getElementById("lbPrev");
   var lbNext = document.getElementById("lbNext");
-  var current = 0;
-
-  function visibleItems() {
-    return Array.prototype.slice.call(gallery.querySelectorAll(".g-item:not(.hide)"));
-  }
-  function openLb(idx) {
-    current = idx;
-    var list = visibleItems();
-    var src = list[current].querySelector("img").getAttribute("src");
-    lbImg.setAttribute("src", src);
-    lb.classList.add("open");
-    lb.setAttribute("aria-hidden", "false");
+  var lbIndex = 0;
+  function openLbSrc(src) {
+    lbIndex = Math.max(0, srcs.indexOf(src));
+    lbImg.setAttribute("src", srcs[lbIndex]);
+    lb.classList.add("open"); lb.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
   }
   function closeLb() { lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; }
-  function step(dir) {
-    var list = visibleItems();
-    current = (current + dir + list.length) % list.length;
-    lbImg.setAttribute("src", list[current].querySelector("img").getAttribute("src"));
-  }
-  gallery.addEventListener("click", function (e) {
-    var item = e.target.closest(".g-item");
-    if (!item) return;
-    var list = visibleItems();
-    openLb(list.indexOf(item));
-  });
+  function step(dir) { lbIndex = (lbIndex + dir + srcs.length) % srcs.length; lbImg.setAttribute("src", srcs[lbIndex]); }
   lbClose.addEventListener("click", closeLb);
   lbPrev.addEventListener("click", function () { step(-1); });
   lbNext.addEventListener("click", function () { step(1); });
