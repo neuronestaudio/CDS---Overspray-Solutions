@@ -54,7 +54,6 @@
   var srcs = items.map(function (it) { return "assets/gallery/" + it.n + ".jpg"; }); // lightbox order
 
   var ratios = ["4 / 3", "1 / 1", "3 / 4", "5 / 4", "4 / 3", "16 / 10"];
-  var offsets = [0, 26, 12, 32, 8, 20];
   var expandSvg = '<span class="pool-exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>';
 
   function makeCard(it, idx, clone) {
@@ -63,7 +62,6 @@
     card.setAttribute("data-src", "assets/gallery/" + it.n + ".jpg");
     if (clone) card.setAttribute("aria-hidden", "true");
     card.style.setProperty("--ar", ratios[idx % ratios.length]);
-    card.style.marginTop = offsets[idx % offsets.length] + "px";
     card.innerHTML =
       '<img loading="lazy" src="assets/gallery/' + it.n + '.jpg" alt="CDS project: ' + catLabel(it.cat) + '">' +
       '<span class="pool-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>' + catLabel(it.cat) + '</span>' +
@@ -79,7 +77,7 @@
     track.querySelectorAll("img").forEach(function (im) { im.addEventListener("load", measure); });
     window.addEventListener("resize", measure);
 
-    var paused = false, dragging = false, startX = 0, startScroll = 0, moved = 0, speed = 0.35;
+    var paused = false, dragging = false, startX = 0, startScroll = 0, moved = 0, speed = 0.5;
     function wrap() {
       if (half <= 0) return;
       if (row.scrollLeft >= half) row.scrollLeft -= half;
@@ -91,8 +89,7 @@
     }
     requestAnimationFrame(frame);
 
-    row.addEventListener("pointerenter", function () { paused = true; });
-    row.addEventListener("pointerleave", function () { paused = false; });
+    // continuous loop: no hover pause; only manual drag interrupts the drift
     row.addEventListener("pointerdown", function (e) {
       dragging = true; moved = 0; startX = e.clientX; startScroll = row.scrollLeft;
       row.classList.add("dragging"); try { row.setPointerCapture(e.pointerId); } catch (_) {}
@@ -113,10 +110,12 @@
   }
 
   var poolRows = document.querySelectorAll(".pool-row");
-  var rowSets = [items.slice(0, 16), items.slice(16, 32)];
+  var perRow = Math.ceil(items.length / poolRows.length);
   poolRows.forEach(function (row, ri) {
     var track = row.querySelector(".pool-track");
-    var set = rowSets[ri] && rowSets[ri].length ? rowSets[ri] : items;
+    var set = items.slice(ri * perRow, (ri + 1) * perRow);
+    if (!set.length) set = items;
+    // duplicate the row's set so the infinite loop has a seamless second half
     for (var pass = 0; pass < 2; pass++) {
       set.forEach(function (it, idx) { track.appendChild(makeCard(it, idx, pass === 1)); });
     }

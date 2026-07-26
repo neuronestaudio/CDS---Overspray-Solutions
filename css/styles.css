@@ -254,23 +254,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ---------- Work pool (floating horizontal carousel) ---------- */
 .work{overflow:hidden}
 .pool{
-  display:flex;flex-direction:column;gap:14px;margin-top:6px;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);
-  mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);
+  display:flex;flex-direction:column;gap:10px;margin-top:6px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);
 }
-.pool-row{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;cursor:grab;padding:22px 0;touch-action:pan-y}
+.pool-row{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;cursor:grab;padding:11px 0;touch-action:pan-y}
 .pool-row::-webkit-scrollbar{display:none}
 .pool-row.dragging{cursor:grabbing}
-.pool-track{display:flex;align-items:flex-start;gap:18px;width:max-content;padding-inline:clamp(20px,5vw,64px)}
+.pool-track{display:flex;align-items:flex-start;gap:10px;width:max-content;padding-inline:clamp(16px,4vw,48px)}
 .pool-card{
-  position:relative;flex:none;height:clamp(180px,20vw,244px);width:auto;aspect-ratio:var(--ar,4/3);
-  border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--bg-3);
-  box-shadow:0 22px 44px -26px rgba(0,0,0,.85);
-  transition:transform .55s var(--ease),box-shadow .55s var(--ease);will-change:transform;
+  position:relative;flex:none;height:clamp(148px,15vw,202px);width:auto;aspect-ratio:var(--ar,4/3);
+  border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--bg-3);
+  box-shadow:0 16px 34px -24px rgba(0,0,0,.85);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);will-change:transform;
 }
 .pool-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.94) brightness(.88);transition:transform .8s var(--ease),filter .5s var(--ease)}
 .pool-card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,6,8,.55),transparent 55%);opacity:.75;transition:opacity .4s}
-.pool-row:not(.dragging) .pool-card:hover{transform:translateY(-10px) scale(1.035)}
+.pool-row:not(.dragging) .pool-card:hover{transform:translateY(-6px) scale(1.03)}
 .pool-card:hover{box-shadow:0 34px 60px -22px rgba(0,0,0,.95),0 0 0 1px var(--line-2)}
 .pool-card:hover img{transform:scale(1.09);filter:saturate(1.06) brightness(1.02)}
 .pool-card:hover::after{opacity:1}
