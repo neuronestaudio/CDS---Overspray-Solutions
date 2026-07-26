@@ -157,6 +157,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* hero A/B compare fallbacks (mood-matched until the real photo is added) */
 .hero-a .hero-media{background:radial-gradient(130% 120% at 70% 38%,#4a3b2c 0%,#241a12 55%,#0d0a08 100%)}
 .hero-b .hero-media{background:radial-gradient(120% 130% at 82% 52%,#2a2320 0%,#121013 60%,#0a0a0c 100%)}
+.hero-c .hero-media{background:radial-gradient(120% 130% at 50% 50%,#26242a 0%,#131217 60%,#0a0a0c 100%)}
 .hero-missing{margin-top:26px;display:inline-block;font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.05);border:1px dashed var(--line-2);border-radius:var(--r-pill);padding:8px 16px}
 .hero-inner{position:relative;z-index:2;width:100%}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:40px;align-items:end}

@@ -20,7 +20,7 @@
   /* ---------- Hero A/B compare (?hero=a | ?hero=b) ---------- */
   var heroParam = (location.search.match(/[?&]hero=([a-z0-9]+)/i) || [])[1];
   if (heroParam) {
-    var heroSrc = { a: "assets/img/hero-a.jpg", b: "assets/img/hero-b.jpg" };
+    var heroSrc = { a: "assets/img/hero-a.png", b: "assets/img/hero-b.png", c: "assets/img/hero-c.png" };
     var hImg = document.querySelector(".hero-media img");
     if (hImg && heroSrc[heroParam]) {
       document.querySelector(".hero").classList.add("hero-" + heroParam);
