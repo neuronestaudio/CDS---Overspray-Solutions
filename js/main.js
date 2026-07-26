@@ -24,7 +24,14 @@
     var hImg = document.querySelector(".hero-media img");
     if (hImg && heroSrc[heroParam]) {
       document.querySelector(".hero").classList.add("hero-" + heroParam);
-      hImg.onerror = function () { hImg.style.display = "none"; }; // fall back to CSS gradient
+      hImg.onerror = function () {
+        hImg.style.display = "none"; // fall back to CSS gradient
+        var note = document.createElement("div");
+        note.className = "hero-missing";
+        note.textContent = "Preview mode: save your image as assets/img/hero-" + heroParam + ".jpg to see it here";
+        var host = document.querySelector(".hero .wrap");
+        if (host) host.appendChild(note);
+      };
       hImg.src = heroSrc[heroParam];
     }
   }
@@ -83,20 +90,23 @@
 
   function setupRow(row, dir) {
     var track = row.querySelector(".pool-track");
-    var half = 0;
-    function measure() { half = Math.round(track.scrollWidth / 2); }
+    // 3 identical copies: keep scrollLeft in the MIDDLE copy [seg, 2*seg) so it
+    // never touches the browser's 0/max clamp (that clamp caused the jitter).
+    var seg = 0;
+    function measure() { seg = track.scrollWidth / 3; }
     measure();
     track.querySelectorAll("img").forEach(function (im) { im.addEventListener("load", measure); });
     window.addEventListener("resize", measure);
 
-    var paused = false, dragging = false, startX = 0, startScroll = 0, moved = 0, speed = 0.5;
+    var seeded = false, dragging = false, startX = 0, startScroll = 0, moved = 0, speed = 0.5;
     function wrap() {
-      if (half <= 0) return;
-      if (row.scrollLeft >= half) row.scrollLeft -= half;
-      else if (row.scrollLeft <= 0) row.scrollLeft += half;
+      if (seg <= 0) return;
+      if (row.scrollLeft >= 2 * seg) row.scrollLeft -= seg;
+      else if (row.scrollLeft < seg) row.scrollLeft += seg;
     }
     function frame() {
-      if (!paused && !dragging && !reduceMotion && half > 0) { row.scrollLeft += speed * dir; wrap(); }
+      if (seg > 0 && !seeded) { row.scrollLeft = seg; seeded = true; } // start in the middle copy
+      if (!dragging && !reduceMotion && seg > 0) { row.scrollLeft += speed * dir; wrap(); }
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
@@ -127,9 +137,9 @@
     var track = row.querySelector(".pool-track");
     var set = items.slice(ri * perRow, (ri + 1) * perRow);
     if (!set.length) set = items;
-    // duplicate the row's set so the infinite loop has a seamless second half
-    for (var pass = 0; pass < 2; pass++) {
-      set.forEach(function (it, idx) { track.appendChild(makeCard(it, idx, pass === 1)); });
+    // triple the row's set so the loop can live in the middle copy (seamless, no edge clamp)
+    for (var pass = 0; pass < 3; pass++) {
+      set.forEach(function (it, idx) { track.appendChild(makeCard(it, idx, pass > 0)); });
     }
     setupRow(row, parseInt(row.getAttribute("data-dir"), 10) || 1);
   });
