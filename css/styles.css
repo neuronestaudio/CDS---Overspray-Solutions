@@ -213,7 +213,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .pill-list span{font-size:.78rem;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--line);padding:6px 12px;border-radius:var(--r-pill)}
 
 /* ---------- Overspray signature section ---------- */
-.overspray{background:linear-gradient(180deg,var(--bg) 0%,#08080a 100%);border-block:1px solid var(--line)}
+.overspray{position:relative;isolation:isolate;background:linear-gradient(180deg,var(--bg) 0%,#08080a 100%);border-block:1px solid var(--line)}
+/* subtle carbon / hex-mesh texture instead of flat black */
+.overspray::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url("../assets/img/carbon-mesh.png") repeat;
+  background-size:22px 38px;opacity:.5;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+}
+.overspray > .wrap{position:relative;z-index:1}
 .osp-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,72px);align-items:center}
 .osp-media{position:relative;border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line-2);aspect-ratio:4/3}
 .osp-media img{width:100%;height:100%;object-fit:cover}
