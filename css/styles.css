@@ -237,7 +237,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 88%,transparent 100%);
 }
 .overspray{background:linear-gradient(180deg,var(--bg) 0%,#08080a 100%);border-block:1px solid var(--line)}
-.osp-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,72px);align-items:center}
+.osp-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,72px);align-items:start}
 .osp-media{position:relative;display:flex;flex-direction:column;gap:14px}
 .osp-media img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:var(--r-card);border:1px solid var(--line-2)}
 .osp-media .stat-float{
@@ -276,7 +276,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .pool-row.dragging{cursor:grabbing}
 .pool-track{display:flex;align-items:flex-start;gap:10px;width:max-content;padding-inline:clamp(16px,4vw,48px)}
 .pool-card{
-  position:relative;flex:none;height:clamp(148px,15vw,202px);width:auto;aspect-ratio:var(--ar,4/3);
+  position:relative;flex:none;height:clamp(207px,21vw,283px);width:auto;aspect-ratio:var(--ar,4/3);
   border-radius:14px;overflow:hidden;border:1px solid transparent;
   /* thin translucent brushed-metal edge */
   background:linear-gradient(var(--bg-3),var(--bg-3)) padding-box,
