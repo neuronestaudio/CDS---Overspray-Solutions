@@ -380,6 +380,30 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .area-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .area-tags span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);padding:5px 11px;border-radius:var(--r-pill)}
 
+/* Contact: white trust card floating on a dark studio image with a shadow scrim */
+.contact-section{position:relative;isolation:isolate;border-top:1px solid var(--line)}
+.contact-section::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(8,8,10,.82),rgba(8,8,10,.9)),url("../assets/img/wash.jpg") center/cover;
+}
+.contact-card{
+  background:#fbfbfc;color:#17171d;border-radius:22px;padding:clamp(26px,4vw,58px);
+  box-shadow:0 50px 120px -34px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06);
+}
+.contact-card h2{color:#111116}
+.contact-card .eyebrow{color:#70707a}
+.contact-card .lede{color:#55555e}
+.contact-card .field label{color:#55555e}
+.contact-card .field input,.contact-card .field select,.contact-card .field textarea{background:#fff;border-color:#d7d7de;color:#17171d}
+.contact-card .field input::placeholder,.contact-card .field textarea::placeholder{color:#a0a0a8}
+.contact-card .field input:focus,.contact-card .field select:focus,.contact-card .field textarea:focus{border-color:var(--accent);background:#fff}
+.contact-card .form-note{color:#8b8b93}
+.contact-card .c-block{background:#f3f3f6;border-color:#e6e6ec}
+.contact-card .c-block .lbl{color:#8b8b93}
+.contact-card .c-block .val{color:#17171d}
+.contact-card .c-block .sub{color:#6a6a73}
+.contact-card .area-tags span{color:#55555e;border-color:#d7d7de}
+
 /* ---------- Footer ---------- */
 .footer{border-top:1px solid var(--line);background:#08080a;padding-block:clamp(56px,7vw,84px) 30px}
 .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
