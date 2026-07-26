@@ -154,6 +154,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     linear-gradient(100deg,rgba(8,8,10,.96) 0%,rgba(8,8,10,.82) 38%,rgba(8,8,10,.35) 66%,rgba(8,8,10,.15) 100%),
     linear-gradient(0deg,var(--bg) 2%,transparent 40%);
 }
+/* hero A/B compare fallbacks (mood-matched until the real photo is added) */
+.hero-a .hero-media{background:radial-gradient(130% 120% at 70% 38%,#4a3b2c 0%,#241a12 55%,#0d0a08 100%)}
+.hero-b .hero-media{background:radial-gradient(120% 130% at 82% 52%,#2a2320 0%,#121013 60%,#0a0a0c 100%)}
 .hero-inner{position:relative;z-index:2;width:100%}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:40px;align-items:end}
 .hero-copy{max-width:760px}
@@ -235,6 +238,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .osp-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,72px);align-items:center}
 .osp-media{position:relative;border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line-2);aspect-ratio:4/3}
 .osp-media img{width:100%;height:100%;object-fit:cover}
+.osp-media .osp-inset{position:absolute;top:14px;right:14px;width:42%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:2px solid rgba(255,255,255,.2);box-shadow:0 16px 34px -12px rgba(0,0,0,.85);z-index:3}
 .osp-media .stat-float{
   position:absolute;left:20px;bottom:20px;background:rgba(10,10,12,.82);
   backdrop-filter:blur(10px);border:1px solid var(--line-2);border-radius:14px;padding:16px 20px;

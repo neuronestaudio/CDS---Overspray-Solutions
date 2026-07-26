@@ -17,6 +17,18 @@
     nav.classList.toggle("scrolled", !entries[0].isIntersecting);
   }, { threshold: 0 }).observe(sentinel);
 
+  /* ---------- Hero A/B compare (?hero=a | ?hero=b) ---------- */
+  var heroParam = (location.search.match(/[?&]hero=([a-z0-9]+)/i) || [])[1];
+  if (heroParam) {
+    var heroSrc = { a: "assets/img/hero-a.jpg", b: "assets/img/hero-b.jpg" };
+    var hImg = document.querySelector(".hero-media img");
+    if (hImg && heroSrc[heroParam]) {
+      document.querySelector(".hero").classList.add("hero-" + heroParam);
+      hImg.onerror = function () { hImg.style.display = "none"; }; // fall back to CSS gradient
+      hImg.src = heroSrc[heroParam];
+    }
+  }
+
   /* ---------- Scroll reveals ---------- */
   var reveals = document.querySelectorAll(".reveal");
   if (reduceMotion || qaMode) {
