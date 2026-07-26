@@ -68,7 +68,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:12px;
   letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
 }
-.eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+.eyebrow::before{content:"";width:28px;height:1px;background:linear-gradient(90deg,var(--accent),rgba(225,29,42,0))}
 .h-lead{font-size:clamp(2rem,4.6vw,3.6rem)}
 .h-sec{font-size:clamp(1.9rem,4.2vw,3.25rem)}
 .lede{color:var(--muted);font-size:clamp(1rem,1.3vw,1.15rem);max-width:60ch}
@@ -85,14 +85,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:.95rem;
   letter-spacing:.01em;padding:var(--pad);border-radius:var(--r-pill);
   border:1px solid transparent;cursor:pointer;white-space:nowrap;
-  transition:transform .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);
+  position:relative;overflow:hidden;isolation:isolate;
+  transition:transform .25s var(--ease),box-shadow .3s var(--ease),border-color .25s var(--ease);
 }
 .btn svg{width:18px;height:18px;flex:none}
-.btn-primary{background:var(--accent);color:#fff;box-shadow:var(--shadow-red)}
-.btn-primary:hover{background:var(--accent-hot);transform:translateY(-2px)}
+/* primary: modern red gradient + hover sheen sweep */
+.btn-primary{background:linear-gradient(135deg,#ff3446 0%,var(--accent) 52%,#c1141f 100%);color:#fff;box-shadow:var(--shadow-red)}
+.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.4) 50%,transparent 72%);transform:translateX(-130%);transition:transform .7s var(--ease);pointer-events:none}
+.btn-primary:hover::after{transform:translateX(130%)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 55px -16px rgba(225,29,42,.72)}
 .btn-primary:active{transform:translateY(0) scale(.98)}
+/* ghost: directional gradient fill grows on hover */
 .btn-ghost{background:rgba(255,255,255,.04);color:var(--text);border-color:var(--line-2)}
-.btn-ghost:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+.btn-ghost::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.05));transform:scaleY(0);transform-origin:bottom;transition:transform .4s var(--ease)}
+.btn-ghost:hover::before{transform:scaleY(1)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.4)}
 .btn-ghost:active{transform:translateY(0) scale(.98)}
 .btn-lg{--pad:17px 32px;font-size:1rem}
 
@@ -112,8 +119,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .foot-brand .brand-mark{height:30px}
 .brand small{display:block;font-family:"Manrope";font-weight:500;font-size:.62rem;letter-spacing:.24em;color:var(--muted);text-transform:uppercase}
 .nav-links{display:flex;align-items:center;gap:30px}
-.nav-links a{font-size:.92rem;color:var(--muted);font-weight:500;transition:color .2s}
+.nav-links a{position:relative;font-size:.92rem;color:var(--muted);font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent-hot));transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav-links a:hover::after{transform:scaleX(1)}
 .nav-cta{display:flex;align-items:center;gap:14px}
 .nav-phone{display:inline-flex;align-items:center;gap:8px;font-family:"Space Grotesk";font-weight:500;font-size:.95rem}
 .nav-phone svg{width:16px;height:16px;color:var(--accent)}
@@ -183,10 +192,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .card{
   position:relative;border:1px solid var(--line);border-radius:var(--r-card);
   background:var(--bg-2);overflow:hidden;padding:28px;
-  transition:transform .4s var(--ease),border-color .4s var(--ease),background .4s var(--ease);
+  transition:transform .45s var(--ease),border-color .4s var(--ease),box-shadow .5s var(--ease);
   min-height:230px;display:flex;flex-direction:column;
 }
-.card:hover{transform:translateY(-5px);border-color:var(--line-2)}
+.card:hover{transform:translateY(-5px);border-color:var(--line-2);box-shadow:0 26px 54px -30px rgba(0,0,0,.85),0 0 0 1px rgba(225,29,42,.4),0 18px 50px -24px rgba(225,29,42,.3)}
 .card .num{font-family:"Space Grotesk";font-weight:500;font-size:.8rem;color:var(--accent);letter-spacing:.14em}
 .card h3{font-size:1.5rem;margin:auto 0 10px}
 .card p{color:var(--muted);font-size:.95rem}
@@ -206,9 +215,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .col-4{grid-column:span 4}
 .col-6{grid-column:span 6}
 .feature-tag{
-  position:absolute;top:20px;left:20px;z-index:3;background:var(--accent);color:#fff;
+  position:absolute;top:20px;left:20px;z-index:3;background:linear-gradient(135deg,#ff3446,#c1141f);color:#fff;
   font-family:"Space Grotesk";font-weight:500;font-size:.72rem;letter-spacing:.12em;
-  text-transform:uppercase;padding:7px 13px;border-radius:var(--r-pill);
+  text-transform:uppercase;padding:7px 13px;border-radius:var(--r-pill);box-shadow:0 8px 20px -8px rgba(225,29,42,.6);
 }
 .pill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .pill-list span{font-size:.78rem;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--line);padding:6px 12px;border-radius:var(--r-pill)}
