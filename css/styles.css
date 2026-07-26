@@ -384,7 +384,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .contact-section{position:relative;isolation:isolate;border-top:1px solid var(--line)}
 .contact-section::before{
   content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(8,8,10,.82),rgba(8,8,10,.9)),url("../assets/img/wash.jpg") center/cover;
+  background:linear-gradient(180deg,rgba(8,8,10,.8),rgba(8,8,10,.9)),url("../assets/gallery/31.jpg") center/cover;
 }
 .contact-card{
   background:#fbfbfc;color:#17171d;border-radius:22px;padding:clamp(26px,4vw,58px);
