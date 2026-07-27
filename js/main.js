@@ -17,24 +17,38 @@
     nav.classList.toggle("scrolled", !entries[0].isIntersecting);
   }, { threshold: 0 }).observe(sentinel);
 
-  /* ---------- Hero A/B compare (?hero=a | ?hero=b) ---------- */
-  var heroParam = (location.search.match(/[?&]hero=([a-z0-9]+)/i) || [])[1];
-  if (heroParam) {
-    var heroSrc = { a: "assets/img/hero-a.png", b: "assets/img/hero-b.png", c: "assets/img/hero-c.png" };
-    var hImg = document.querySelector(".hero-media img");
-    if (hImg && heroSrc[heroParam]) {
-      document.querySelector(".hero").classList.add("hero-" + heroParam);
-      hImg.onerror = function () {
-        hImg.style.display = "none"; // fall back to CSS gradient
-        var note = document.createElement("div");
-        note.className = "hero-missing";
-        note.textContent = "Preview mode: save your image as assets/img/hero-" + heroParam + ".jpg to see it here";
-        var host = document.querySelector(".hero .wrap");
-        if (host) host.appendChild(note);
-      };
-      hImg.src = heroSrc[heroParam];
+  /* ---------- Hero A/B/C demo switcher (corner buttons + ?hero=) ---------- */
+  var heroEl = document.querySelector(".hero");
+  var heroImg = document.querySelector(".hero-media img");
+  var heroSrc = { a: "assets/img/hero-a.png", b: "assets/img/hero-b.png", c: "assets/img/hero-c.png" };
+  var heroDefaultSrc = heroImg ? heroImg.getAttribute("src") : "";
+  function applyHero(key) {
+    if (!heroImg) return;
+    heroEl.classList.remove("hero-a", "hero-b", "hero-c");
+    heroImg.style.display = "";
+    if (heroSrc[key]) {
+      heroEl.classList.add("hero-" + key);
+      heroImg.onerror = function () { heroImg.style.display = "none"; }; // gradient fallback
+      heroImg.src = heroSrc[key];
+    } else {
+      key = "default";
+      heroImg.onerror = null;
+      heroImg.src = heroDefaultSrc;
     }
+    document.querySelectorAll(".hero-switch button").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-hero") === key);
+    });
+    try {
+      var u = new URL(location.href);
+      if (key === "default") u.searchParams.delete("hero"); else u.searchParams.set("hero", key);
+      history.replaceState(null, "", u);
+    } catch (_) {}
   }
+  document.querySelectorAll(".hero-switch button").forEach(function (b) {
+    b.addEventListener("click", function () { applyHero(b.getAttribute("data-hero")); });
+  });
+  var heroParam = (location.search.match(/[?&]hero=([a-z0-9]+)/i) || [])[1];
+  applyHero(heroParam || "default");
 
   /* ---------- Scroll reveals ---------- */
   var reveals = document.querySelectorAll(".reveal");

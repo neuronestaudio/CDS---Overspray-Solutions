@@ -159,6 +159,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .hero-b .hero-media{background:radial-gradient(120% 130% at 82% 52%,#2a2320 0%,#121013 60%,#0a0a0c 100%)}
 .hero-c .hero-media{background:radial-gradient(120% 130% at 50% 50%,#26242a 0%,#131217 60%,#0a0a0c 100%)}
 .hero-missing{margin-top:26px;display:inline-block;font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.05);border:1px dashed var(--line-2);border-radius:var(--r-pill);padding:8px 16px}
+/* Demo hero switcher (corner) */
+.hero-switch{position:absolute;right:clamp(16px,3vw,34px);bottom:26px;z-index:6;display:flex;align-items:center;gap:5px;padding:7px 9px 7px 15px;border-radius:var(--r-pill);background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 30px rgba(0,0,0,.35)}
+.hero-switch>span{font-family:"Space Grotesk";font-size:.66rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-right:3px}
+.hero-switch button{font-family:"Space Grotesk";font-weight:500;font-size:.82rem;color:#fff;background:transparent;border:0;width:30px;height:30px;border-radius:50%;cursor:pointer;transition:background .2s var(--ease),transform .2s var(--ease)}
+.hero-switch button:hover{background:rgba(255,255,255,.16)}
+.hero-switch button.active{background:var(--accent);color:#fff}
+.hero-switch button:active{transform:scale(.92)}
+@media(max-width:600px){.hero-switch{bottom:auto;top:84px;right:12px;padding:5px 7px 5px 12px}.hero-switch>span{display:none}}
 .hero-inner{position:relative;z-index:2;width:100%}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:40px;align-items:end}
 .hero-copy{max-width:760px}
@@ -474,3 +482,57 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .hero-trust{gap:14px 22px}
   .lb-prev{left:12px}.lb-next{right:12px}
 }
+
+/* =========================================================================
+   Sub-pages: Warranties & Product TDS
+   ========================================================================= */
+.page-hero{position:relative;isolation:isolate;padding:calc(74px + clamp(44px,7vw,92px)) 0 clamp(38px,5vw,68px);border-bottom:1px solid var(--line);overflow:hidden}
+.page-hero .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:.9rem;margin-bottom:22px;transition:color .2s}
+.page-hero .back:hover{color:var(--text)}
+.page-hero .back svg{width:16px;height:16px}
+.page-hero h1{font-size:clamp(2.2rem,5vw,3.6rem);margin:16px 0 18px}
+.page-hero .lede{max-width:62ch}
+
+.warranty-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(216px,1fr));gap:16px}
+.warranty-card{position:relative;border:1px solid var(--line);border-radius:var(--r-card);background:var(--bg-2);padding:26px;display:flex;flex-direction:column;gap:10px;transition:transform .4s var(--ease),border-color .4s var(--ease)}
+.warranty-card:hover{transform:translateY(-4px);border-color:var(--line-2)}
+.warranty-card.feat{background:linear-gradient(180deg,rgba(225,29,42,.13),var(--bg-2));border-color:rgba(225,29,42,.42)}
+.wc-brand{font-family:"Space Grotesk";font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.wc-name{font-family:"Space Grotesk";font-weight:500;font-size:1.05rem}
+.wc-term{font-family:"Space Grotesk";font-weight:700;font-size:2.4rem;line-height:1;letter-spacing:-.02em;margin-top:4px}
+.wc-term span{font-size:.95rem;color:var(--accent);font-weight:500;margin-left:2px}
+.wc-scope{color:var(--muted);font-size:.9rem;margin-top:auto;padding-top:8px}
+
+.cover-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cover-panel{border:1px solid var(--line);border-radius:var(--r-card);background:var(--bg-2);padding:clamp(24px,3vw,34px)}
+.cover-panel h3{font-size:1.3rem;margin-bottom:20px}
+.cover-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
+.cover-list li{display:flex;gap:12px;align-items:flex-start;color:#d4d4da;font-size:.95rem}
+.cover-list li svg{width:20px;height:20px;flex:none;margin-top:1px}
+.cover-list.yes li svg{color:#43d17a}
+.cover-list.no li svg{color:var(--accent)}
+
+.terms-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.term-card{border:1px solid var(--line);border-radius:var(--r-card);background:var(--bg-2);padding:26px}
+.term-card .n{font-family:"Space Grotesk";font-weight:700;color:transparent;-webkit-text-stroke:1.2px var(--chrome-3);font-size:2rem;line-height:1;display:block;margin-bottom:14px}
+.term-card h3{font-size:1.1rem;margin-bottom:8px}
+.term-card p{color:var(--muted);font-size:.92rem}
+
+.tds-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(288px,1fr));gap:16px}
+.tds-card{display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);border-radius:var(--r-card);background:var(--bg-2);padding:26px;transition:transform .4s var(--ease),border-color .4s var(--ease)}
+.tds-card:hover{transform:translateY(-4px);border-color:var(--line-2)}
+.tds-badge{align-self:flex-start;font-family:"Space Grotesk";font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.08);border:1px solid var(--line-2);padding:5px 11px;border-radius:var(--r-pill)}
+.tds-badge.gold{background:linear-gradient(135deg,rgba(225,29,42,.9),#c1141f);border-color:transparent}
+.tds-card h3{font-size:1.15rem}
+.tds-card p{color:var(--muted);font-size:.92rem;flex:1}
+.tds-card .btn{align-self:flex-start;margin-top:6px}
+
+.disclaimer{display:flex;gap:12px;align-items:flex-start;border:1px dashed var(--line-2);border-radius:var(--r-card);background:rgba(255,255,255,.03);padding:18px 22px;color:var(--muted);font-size:.9rem;margin-top:26px}
+.disclaimer svg{width:20px;height:20px;color:var(--accent);flex:none;margin-top:1px}
+
+.page-cta{border-top:1px solid var(--line);background:var(--bg-2)}
+.page-cta .inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+.page-cta h2{font-size:clamp(1.6rem,3vw,2.4rem)}
+.page-cta .actions{display:flex;flex-wrap:wrap;gap:12px}
+
+@media(max-width:640px){.cover-cols{grid-template-columns:1fr}}
