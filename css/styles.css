@@ -147,7 +147,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ---------- Hero ---------- */
 .hero{position:relative;min-height:100dvh;display:flex;align-items:center;overflow:hidden;padding-top:74px}
 .hero-media{position:absolute;inset:0;z-index:0}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transform:scale(1.06);animation:heroZoom 18s var(--ease) forwards}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 58%;transform:scale(1.06);animation:heroZoom 18s var(--ease) forwards}
 @keyframes heroZoom{to{transform:scale(1)}}
 .hero-media::after{
   content:"";position:absolute;inset:0;
@@ -156,10 +156,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     linear-gradient(0deg,var(--bg) 2%,transparent 40%);
 }
 /* hero A/B compare fallbacks (mood-matched until the real photo is added) */
-.hero-a .hero-media{background:radial-gradient(120% 120% at 50% 34%,#23262d 0%,#101116 62%,#08080a 100%)}
-.hero-a .hero-media img{object-position:center 60%}
 .hero-b .hero-media{background:radial-gradient(120% 130% at 82% 52%,#2a2320 0%,#121013 60%,#0a0a0c 100%)}
 .hero-c .hero-media{background:radial-gradient(120% 130% at 50% 50%,#26242a 0%,#131217 60%,#0a0a0c 100%)}
+.hero-b .hero-media img,.hero-c .hero-media img{object-position:center 34%}
 .hero-missing{margin-top:26px;display:inline-block;font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.05);border:1px dashed var(--line-2);border-radius:var(--r-pill);padding:8px 16px}
 /* Demo hero switcher (corner) */
 .hero-switch{position:absolute;right:clamp(16px,3vw,34px);bottom:26px;z-index:6;display:flex;align-items:center;gap:5px;padding:7px 9px 7px 15px;border-radius:var(--r-pill);background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 30px rgba(0,0,0,.35)}
@@ -635,7 +634,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   background:radial-gradient(circle at 50% 42%,rgba(225,29,42,.08),transparent 38%),
              radial-gradient(130% 100% at 50% 50%,transparent 42%,#050506 100%)}
 .splash-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:20px}
-.splash-logo{height:clamp(48px,8vw,78px);width:auto;opacity:0;
+.splash-logo{height:clamp(48px,8vw,78px);width:auto;max-width:min(72vw,300px);max-height:82px;opacity:0;
   clip-path:inset(0 100% 0 0);
   animation:splashReveal 1.05s var(--ease) .25s forwards, splashFadeIn .9s var(--ease) .25s forwards}
 .splash-line{width:0;height:2px;border-radius:2px;
@@ -652,3 +651,36 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .splash-logo{animation:splashFadeIn .3s forwards;clip-path:none}
   .splash-line,.splash::before{animation:none}
 }
+
+/* =========================================================================
+   Booking: step counter + service pills; carousel beam; services list
+   ========================================================================= */
+.wiz-head{display:flex;margin-bottom:12px}
+.wiz-count{font-family:"Space Grotesk";font-weight:500;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.wiz-pills{display:flex;flex-wrap:wrap;gap:8px}
+.wiz-pill{position:relative;display:inline-flex;cursor:pointer}
+.wiz-pill input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+.wiz-pill span{display:inline-flex;align-items:center;padding:10px 16px;border-radius:var(--r-pill);
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:var(--text);
+  font-family:"Space Grotesk";font-weight:500;font-size:.88rem;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:border-color .2s var(--ease),background .2s var(--ease),color .2s var(--ease)}
+.wiz-pill:hover span{border-color:rgba(255,255,255,.34)}
+.wiz-pill.checked span{border-color:var(--accent);background:var(--accent);color:#fff}
+.wiz-pill input:focus-visible + span{outline:2px solid var(--accent-hot);outline-offset:2px}
+.field.invalid .wiz-pills{outline:1.5px solid var(--accent);outline-offset:5px;border-radius:14px}
+
+/* carousel: animated beam outline on hover (only the hovered card animates) */
+@property --pbeam{syntax:'<angle>';initial-value:0deg;inherits:false}
+.pool-row:not(.dragging) .pool-card:hover{
+  background:linear-gradient(var(--bg-3),var(--bg-3)) padding-box,
+    conic-gradient(from var(--pbeam),transparent 0deg,transparent 296deg,var(--accent) 322deg,#fff 340deg,var(--accent) 352deg,transparent 360deg) border-box;
+  animation:poolBeam 4.5s linear infinite;
+}
+@keyframes poolBeam{to{--pbeam:360deg}}
+@media(prefers-reduced-motion:reduce){.pool-row .pool-card:hover{animation:none}}
+
+/* services dot-point list (replaces the stat tiles) */
+.svc-list-head{margin-bottom:clamp(24px,4vw,40px)}
+.svc-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2px 44px}
+.svc-list li{display:flex;align-items:center;gap:13px;font-family:"Space Grotesk";font-weight:500;font-size:clamp(1rem,1.3vw,1.12rem);color:var(--text);padding-block:15px;border-bottom:1px solid var(--line)}
+.svc-list li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;box-shadow:0 0 12px rgba(225,29,42,.7)}

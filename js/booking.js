@@ -34,6 +34,8 @@
     var last = i === steps.length - 1;
     nextBtn.hidden = last;
     subBtn.hidden = !last;
+    var cnt = form.querySelector("[data-wiz-count]");
+    if (cnt) cnt.textContent = "Step " + (i + 1) + " of " + steps.length;
     var first = steps[i].querySelector("input,select,textarea");
     if (first) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
   }
@@ -54,13 +56,15 @@
   nextBtn.addEventListener("click", function () { if (validStep(cur)) show(Math.min(cur + 1, steps.length - 1)); });
   backBtn.addEventListener("click", function () { show(Math.max(cur - 1, 0)); });
 
-  // highlight selected format choice (no :has() dependency)
-  form.querySelectorAll('input[name="format"]').forEach(function (r) {
-    r.addEventListener("change", function () {
-      form.querySelectorAll(".wiz-choice").forEach(function (c) {
-        c.classList.toggle("checked", c.contains(r) && r.checked);
+  // highlight the selected radio (service pills + format choices), no :has() needed
+  form.addEventListener("change", function (e) {
+    var el = e.target;
+    if (el && el.type === "radio") {
+      form.querySelectorAll('input[name="' + el.name + '"]').forEach(function (r) {
+        var label = r.closest(".wiz-pill, .wiz-choice");
+        if (label) label.classList.toggle("checked", r.checked);
       });
-    });
+    }
   });
 
   form.addEventListener("submit", function (e) {
