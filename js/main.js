@@ -32,7 +32,7 @@
   /* ---------- Hero A/B/C demo switcher (corner buttons + ?hero=) ---------- */
   var heroEl = document.querySelector(".hero");
   var heroImg = document.querySelector(".hero-media img");
-  var heroSrc = { a: "assets/img/hero-a.png", b: "assets/img/hero-b.png", c: "assets/img/hero-c.png", d: "assets/img/garage-2.png" };
+  var heroSrc = { a: "assets/img/garage-2.png", b: "assets/img/hero-b.png", c: "assets/img/hero-c.png" };
   var heroDefaultSrc = heroImg ? heroImg.getAttribute("src") : "";
   function applyHero(key) {
     if (!heroImg) return;
