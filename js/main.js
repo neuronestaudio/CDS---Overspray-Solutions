@@ -8,6 +8,18 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var qaMode = /[?&]qa\b/.test(location.search); // reveals everything up-front for QA/screenshots
 
+  /* ---------- Landing splash ---------- */
+  var splash = document.getElementById("splash");
+  if (splash) {
+    if (qaMode) { splash.classList.add("done"); }
+    else {
+      document.documentElement.style.overflow = "hidden";
+      var killSplash = function () { splash.classList.add("done"); document.documentElement.style.overflow = ""; };
+      var splashT = setTimeout(killSplash, reduceMotion ? 650 : 2600);
+      splash.addEventListener("click", function () { clearTimeout(splashT); killSplash(); });
+    }
+  }
+
   /* ---------- Nav glass on scroll (sentinel, not scroll listener) ---------- */
   var nav = document.getElementById("nav");
   var sentinel = document.createElement("div");

@@ -389,29 +389,31 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .area-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .area-tags span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);padding:5px 11px;border-radius:var(--r-pill)}
 
-/* Contact: white trust card floating on a dark studio image with a shadow scrim */
+/* Contact: high-end frosted-glass booking card over a dark studio image */
 .contact-section{position:relative;isolation:isolate;border-top:1px solid var(--line)}
 .contact-section::before{
   content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(8,8,10,.8),rgba(8,8,10,.9)),url("../assets/gallery/31.jpg") center/cover;
+  background:linear-gradient(180deg,rgba(8,8,10,.72),rgba(8,8,10,.88)),url("../assets/gallery/31.jpg") center/cover;
 }
 .contact-card{
-  background:#fbfbfc;color:#17171d;border-radius:22px;padding:clamp(26px,4vw,58px);
-  box-shadow:0 50px 120px -34px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06);
+  position:relative;color:var(--text);border-radius:22px;padding:clamp(26px,4vw,54px);
+  background:linear-gradient(155deg,rgba(255,255,255,.12),rgba(255,255,255,.045));
+  border:1px solid rgba(255,255,255,.17);
+  -webkit-backdrop-filter:blur(28px) saturate(155%);backdrop-filter:blur(28px) saturate(155%);
+  box-shadow:0 50px 120px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.26),inset 0 -1px 0 rgba(255,255,255,.05);
 }
-.contact-card h2{color:#111116}
-.contact-card .eyebrow{color:#70707a}
-.contact-card .lede{color:#55555e}
-.contact-card .field label{color:#55555e}
-.contact-card .field input,.contact-card .field select,.contact-card .field textarea{background:#fff;border-color:#d7d7de;color:#17171d}
-.contact-card .field input::placeholder,.contact-card .field textarea::placeholder{color:#a0a0a8}
-.contact-card .field input:focus,.contact-card .field select:focus,.contact-card .field textarea:focus{border-color:var(--accent);background:#fff}
-.contact-card .form-note{color:#8b8b93}
-.contact-card .c-block{background:#f3f3f6;border-color:#e6e6ec}
-.contact-card .c-block .lbl{color:#8b8b93}
-.contact-card .c-block .val{color:#17171d}
-.contact-card .c-block .sub{color:#6a6a73}
-.contact-card .area-tags span{color:#55555e;border-color:#d7d7de}
+.contact-card .field input,.contact-card .field select,.contact-card .field textarea{
+  background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:var(--text);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+.contact-card .field input::placeholder,.contact-card .field textarea::placeholder{color:var(--muted-2)}
+.contact-card .field input:focus,.contact-card .field select:focus,.contact-card .field textarea:focus{border-color:var(--accent);background:rgba(255,255,255,.1)}
+.contact-card .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c8c8d0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
+.contact-card .c-block{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+@media(prefers-reduced-transparency:reduce){
+  .contact-card{background:rgba(17,17,22,.97);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .contact-card .field input,.contact-card .field select,.contact-card .field textarea{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--bg-3)}
+}
 
 /* ---------- Footer ---------- */
 .footer{border-top:1px solid var(--line);background:#08080a;padding-block:clamp(56px,7vw,84px) 30px}
@@ -604,17 +606,48 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    Booking wizard (multi-step) — lives inside the white .contact-card
    ========================================================================= */
 .wiz-progress{display:flex;gap:6px;margin-bottom:26px}
-.wiz-progress span{height:5px;flex:1;border-radius:99px;background:#e3e3e9;transition:background .35s var(--ease)}
+.wiz-progress span{height:5px;flex:1;border-radius:99px;background:rgba(255,255,255,.13);transition:background .35s var(--ease)}
 .wiz-progress span.on{background:var(--accent)}
 .wiz-step{border:0;padding:0;margin:0;min-width:0}
-.wiz-step legend{font-family:"Space Grotesk";font-weight:500;font-size:1.15rem;color:#141419;margin:0 0 16px;padding:0}
+.wiz-step legend{font-family:"Space Grotesk";font-weight:500;font-size:1.15rem;color:var(--text);margin:0 0 16px;padding:0}
 .wiz-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.wiz-choice{display:flex;align-items:center;gap:10px;padding:14px 15px;border:1px solid #d7d7de;border-radius:var(--r-sm);
-  cursor:pointer;font-size:.94rem;color:#2a2a31;transition:border-color .2s var(--ease),background .2s var(--ease)}
+.wiz-choice{display:flex;align-items:center;gap:10px;padding:14px 15px;border:1px solid rgba(255,255,255,.18);border-radius:var(--r-sm);
+  background:rgba(255,255,255,.05);cursor:pointer;font-size:.94rem;color:var(--text);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:border-color .2s var(--ease),background .2s var(--ease)}
 .wiz-choice input{accent-color:var(--accent);width:16px;height:16px;flex:none}
-.wiz-choice:hover{border-color:#b9b9c2}
-.wiz-choice.checked{border-color:var(--accent);background:var(--accent-soft);color:#141419}
+.wiz-choice:hover{border-color:rgba(255,255,255,.32)}
+.wiz-choice.checked{border-color:var(--accent);background:var(--accent-soft);color:var(--text)}
 .wiz-nav{display:flex;align-items:center;gap:12px;margin-top:24px}
 .wiz-step .field.invalid input,.wiz-step .field.invalid select,.wiz-step .field.invalid textarea{border-color:var(--accent)}
 .wiz-choices.invalid{outline:1.5px solid var(--accent);outline-offset:3px;border-radius:var(--r-sm)}
 @media(max-width:460px){.wiz-choices{grid-template-columns:1fr}}
+
+/* =========================================================================
+   Landing splash — carbon-fibre + logo, left-to-right reveal
+   ========================================================================= */
+.splash{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:#08080a;overflow:hidden;
+  animation:splashOut .7s var(--ease) 1.75s forwards}
+.splash::before{content:"";position:absolute;inset:0;
+  background:url("../assets/img/carbon-mesh.png") repeat;background-size:28px 48px;opacity:.6;
+  animation:splashBg 1.4s var(--ease) both}
+.splash::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 42%,rgba(225,29,42,.08),transparent 38%),
+             radial-gradient(130% 100% at 50% 50%,transparent 42%,#050506 100%)}
+.splash-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:20px}
+.splash-logo{height:clamp(48px,8vw,78px);width:auto;opacity:0;
+  clip-path:inset(0 100% 0 0);
+  animation:splashReveal 1.05s var(--ease) .25s forwards, splashFadeIn .9s var(--ease) .25s forwards}
+.splash-line{width:0;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--accent) 40%,var(--accent-hot) 60%,transparent);
+  animation:splashLine 1s var(--ease) .55s forwards}
+@keyframes splashReveal{to{clip-path:inset(0 0 0 0)}}
+@keyframes splashFadeIn{to{opacity:1}}
+@keyframes splashLine{to{width:clamp(160px,26vw,260px)}}
+@keyframes splashBg{from{opacity:0;transform:translateX(-4%)}to{opacity:.6;transform:none}}
+@keyframes splashOut{to{opacity:0;visibility:hidden}}
+.splash.done{display:none}
+@media(prefers-reduced-motion:reduce){
+  .splash{animation:splashOut .3s .3s forwards}
+  .splash-logo{animation:splashFadeIn .3s forwards;clip-path:none}
+  .splash-line,.splash::before{animation:none}
+}
