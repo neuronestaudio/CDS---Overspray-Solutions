@@ -536,3 +536,65 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .page-cta .actions{display:flex;flex-wrap:wrap;gap:12px}
 
 @media(max-width:640px){.cover-cols{grid-template-columns:1fr}}
+
+/* =========================================================================
+   Interactive coating-level Hilux (coat3d)
+   ========================================================================= */
+.coat3d-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px;align-items:stretch}
+.coat3d-stage{position:relative;border:1px solid var(--line-2);border-radius:var(--r-card);overflow:hidden;min-height:460px;
+  background:radial-gradient(120% 90% at 50% 10%,#181a20 0%,#0b0b0e 62%,#070709 100%);cursor:grab;touch-action:pan-y}
+.coat3d-stage:active{cursor:grabbing}
+.coat3d-stage canvas{display:block;width:100%;height:100%}
+.coat3d-loading{position:absolute;inset:0;display:grid;place-items:center;background:#0b0b0e;z-index:2}
+.coat3d-loading[hidden]{display:none}
+.coat3d-loading .spin{width:42px;height:42px;border-radius:50%;border:2px solid rgba(255,255,255,.14);border-top-color:var(--accent);animation:coatSpin .9s linear infinite}
+@keyframes coatSpin{to{transform:rotate(360deg)}}
+.coat3d-hint{position:absolute;left:16px;bottom:14px;z-index:1;font-family:"Space Grotesk";font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);pointer-events:none;display:inline-flex;align-items:center;gap:7px}
+.coat3d-hint svg{width:15px;height:15px}
+.coat3d-fail{position:absolute;inset:0;z-index:3;display:none;place-items:center;text-align:center;padding:2rem;color:var(--muted);font-size:.9rem}
+[data-coat3d][data-failed] .coat3d-fail{display:grid}
+[data-coat3d][data-failed] .coat3d-loading{display:none}
+
+.coat3d-panel{display:flex;flex-direction:column;gap:14px;min-width:0}
+.coat3d-levels{display:flex;flex-direction:column;gap:8px}
+.coat3d-level{display:flex;align-items:center;gap:13px;text-align:left;width:100%;padding:13px 15px;border-radius:var(--r-sm);
+  border:1px solid var(--line);background:rgba(255,255,255,.028);color:var(--text);font-family:inherit;cursor:pointer;
+  transition:border-color .22s var(--ease),background .22s var(--ease),transform .18s var(--ease)}
+.coat3d-level:hover{background:rgba(255,255,255,.055);border-color:var(--line-2)}
+.coat3d-level.active{background:var(--accent-soft);border-color:rgba(225,29,42,.5)}
+.coat3d-level b{font-family:"Space Grotesk";font-weight:700;font-size:.82rem;color:var(--muted-2);font-variant-numeric:tabular-nums}
+.coat3d-level.active b{color:var(--accent)}
+.coat3d-level span{font-family:"Space Grotesk";font-weight:500;font-size:.98rem}
+.coat3d-level .yr{margin-left:auto;font-size:.74rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.coat3d-level.active .yr{color:var(--accent)}
+
+.coat3d-card{border:1px solid var(--line);border-radius:var(--r-card);background:var(--bg-2);padding:22px;margin-top:auto}
+.coat3d-card .coat3d-years{font-family:"Space Grotesk";font-weight:700;font-size:2.3rem;line-height:1;display:block;letter-spacing:-.02em}
+.coat3d-card .coat3d-years i{font-style:normal;font-size:.55em;color:var(--accent);vertical-align:.55em;margin-left:2px}
+.coat3d-card h3{margin:12px 0 4px;font-size:1.25rem}
+.coat3d-card [data-field="name"]{font-family:"Space Grotesk";font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block}
+.coat3d-card p{color:var(--muted);font-size:.9rem;margin:8px 0 16px;line-height:1.5}
+@media(max-width:900px){.coat3d-grid{grid-template-columns:1fr}.coat3d-stage{min-height:380px;order:-1}}
+
+/* coat3d: 4-stage stepper, stage badge, gloss meter */
+.coat3d-badge{position:absolute;top:18px;left:20px;z-index:1;display:flex;align-items:baseline;gap:9px;pointer-events:none}
+.coat3d-badge .l{font-family:"Space Grotesk";font-weight:500;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.coat3d-badge .n{font-family:"Space Grotesk";font-weight:700;font-size:3rem;line-height:.8;color:#fff;text-shadow:0 3px 24px rgba(0,0,0,.65);letter-spacing:-.02em}
+.coat3d-steps{list-style:none;margin:0;padding:0;position:relative}
+.coat3d-steps::before{content:"";position:absolute;left:14px;top:24px;bottom:24px;width:2px;background:var(--line)}
+.coat3d-step{position:relative;display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:0;color:var(--muted);font-family:inherit;padding:9px 0;cursor:pointer;transition:color .25s var(--ease)}
+.coat3d-step .sn{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:"Space Grotesk";font-weight:700;font-size:.8rem;background:var(--bg-3);border:1px solid var(--line-2);color:var(--muted);transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease);z-index:1}
+.coat3d-step .sl{font-family:"Space Grotesk";font-weight:500;font-size:1rem}
+.coat3d-step:hover{color:var(--text)}
+.coat3d-step.done .sn{border-color:rgba(225,29,42,.55);color:var(--accent)}
+.coat3d-step.active{color:var(--text)}
+.coat3d-step.active .sn{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 4px var(--accent-soft)}
+.coat3d-meter{margin:4px 0}
+.coat3d-meter .ml{font-family:"Space Grotesk";font-weight:500;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:9px}
+.coat3d-meter .mbar{height:8px;border-radius:99px;background:var(--bg-3);border:1px solid var(--line);overflow:hidden}
+.coat3d-meter .mbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-hot));transition:width .6s var(--ease)}
+.coat3d-product{font-size:.9rem;color:var(--muted);margin:14px 0 2px}
+.coat3d-product b{color:var(--text);font-family:"Space Grotesk";font-weight:500}
+.coat3d-card h3{margin:0 0 8px;font-size:1.3rem}
+.coat3d-card p[data-field="desc"]{color:var(--muted);font-size:.94rem;line-height:1.55;margin-bottom:18px}
+.coat3d-card .btn{margin-top:16px}

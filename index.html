@@ -51,7 +51,7 @@
     </button>
   </div>
   <a class="d-link" href="#services">Services</a>
-  <a class="d-link" href="ceramic.html">Ceramic in 3D</a>
+  <a class="d-link" href="#protection">Coating builder (3D)</a>
   <a class="d-link" href="#overspray">Overspray Removal</a>
   <a class="d-link" href="warranties.html">Warranties</a>
   <a class="d-link" href="product-tds.html">Product TDS</a>
@@ -171,7 +171,7 @@
       </article>
     </div>
     <div class="reveal" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px">
-      <a href="ceramic.html" class="btn btn-primary">Watch the ceramic process in 3D
+      <a href="#protection" class="btn btn-primary">Build your protection in 3D
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a href="warranties.html" class="btn btn-ghost">Coating warranties, up to 10 years</a>
@@ -394,6 +394,46 @@
   </div>
 </section>
 
+<!-- ============ THE CERAMIC PROCESS (interactive 3D) ============ -->
+<section class="section textured" id="protection" data-coat3d data-model="assets/rover.glb">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The ceramic process</span>
+      <h2 class="h-sec">Four stages to a<br>coated finish.</h2>
+      <p class="lede">Watch it come together on a Range Rover. Drag to spin it, or let it walk through each stage. This is exactly how a proper ceramic job is built.</p>
+    </div>
+    <div class="coat3d-grid reveal">
+      <div class="coat3d-stage">
+        <div class="coat3d-loading"><div class="spin"></div></div>
+        <div class="coat3d-fail">3D view is unavailable in this browser. The ceramic process still runs the same way in the workshop.</div>
+        <div class="coat3d-badge"><span class="l">Stage</span><span class="n" data-field="num">01</span></div>
+        <span class="coat3d-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4M17 12h4M12 3v4M12 17v4"/><circle cx="12" cy="12" r="3"/></svg>
+          Drag to spin
+        </span>
+      </div>
+      <aside class="coat3d-panel">
+        <ol class="coat3d-steps" role="group" aria-label="Ceramic stage">
+          <li><button class="coat3d-step" data-stage="0"><span class="sn">01</span><span class="sl">Clean &amp; decontaminate</span></button></li>
+          <li><button class="coat3d-step" data-stage="1"><span class="sn">02</span><span class="sl">Paint correction</span></button></li>
+          <li><button class="coat3d-step" data-stage="2"><span class="sn">03</span><span class="sl">Panel prep</span></button></li>
+          <li><button class="coat3d-step" data-stage="3"><span class="sn">04</span><span class="sl">Ceramic coating</span></button></li>
+        </ol>
+        <div class="coat3d-card">
+          <h3 data-field="title">Deep clean &amp; decontaminate</h3>
+          <p data-field="desc">Strip-wash, an iron fallout remover and a clay bar pull embedded grime out of the pores of the paint.</p>
+          <div class="coat3d-meter">
+            <span class="ml">Gloss &amp; protection</span>
+            <div class="mbar"><i data-field="meter" style="width:16%"></i></div>
+          </div>
+          <p class="coat3d-product" data-field="product-wrap" hidden>Coating: <b data-field="product"></b></p>
+          <a href="warranties.html" class="btn btn-ghost">See coating warranties</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="wrap">
@@ -423,7 +463,7 @@
       </div>
       <div class="foot-col">
         <h4>Coatings &amp; specialty</h4>
-        <a href="ceramic.html">Ceramic in 3D</a>
+        <a href="#protection">Coating builder (3D)</a>
         <a href="warranties.html">Coating warranties</a>
         <a href="product-tds.html">Product TDS</a>
         <a href="#overspray">Overspray removal</a>
@@ -459,5 +499,9 @@
 </div>
 
 <script src="js/main.js"></script>
+<script type="importmap">
+{"imports":{"three":"./assets/vendor/three.module.js","three/addons/":"./assets/vendor/addons/"}}
+</script>
+<script type="module" src="js/coat3d.js"></script>
 </body>
 </html>
