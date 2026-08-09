@@ -84,7 +84,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="hero-media"><img src="assets/img/garage-2.png" alt="The CDS detailing studio" fetchpriority="high"></div>
+  <div class="hero-media"><img src="assets/img/garage.png" alt="The CDS detailing studio" fetchpriority="high"></div>
   <div class="hero-switch" role="group" aria-label="Demo: switch hero background">
     <span>Hero</span>
     <button type="button" data-hero="default" aria-label="Studio">S</button>
@@ -469,25 +469,22 @@
   </div>
 </section>
 
-<!-- ============ THE CERAMIC PROCESS (interactive 3D) ============ -->
-<section class="section textured" id="protection" data-coat3d data-model="assets/rover.glb">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">The ceramic process</span>
-      <h2 class="h-sec">Four stages to a<br>coated finish.</h2>
-      <p class="lede">Watch it come together on a Range Rover. Drag to spin it, or let it walk through each stage. This is exactly how a proper ceramic job is built.</p>
-    </div>
-    <div class="coat3d-grid reveal">
+<!-- ============ THE CERAMIC PROCESS (cinematic scroll) ============ -->
+<section class="ceramic-scroll" id="protection" data-coat3d data-model="assets/rover.glb">
+  <div class="ceramic-sticky textured">
+    <div class="wrap coat3d-grid">
       <div class="coat3d-stage">
         <div class="coat3d-loading"><div class="spin"></div></div>
         <div class="coat3d-fail">3D view is unavailable in this browser. The ceramic process still runs the same way in the workshop.</div>
         <div class="coat3d-badge"><span class="l">Stage</span><span class="n" data-field="num">01</span></div>
         <span class="coat3d-hint">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4M17 12h4M12 3v4M12 17v4"/><circle cx="12" cy="12" r="3"/></svg>
-          Drag to spin
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          Scroll through the process
         </span>
+        <div class="coat3d-tune"></div>
       </div>
       <aside class="coat3d-panel">
+        <span class="eyebrow" style="margin-bottom:22px">The ceramic process</span>
         <ol class="coat3d-steps" role="group" aria-label="Ceramic stage">
           <li><button class="coat3d-step" data-stage="0"><span class="sn">01</span><span class="sl">Clean &amp; decontaminate</span></button></li>
           <li><button class="coat3d-step" data-stage="1"><span class="sn">02</span><span class="sl">Paint correction</span></button></li>

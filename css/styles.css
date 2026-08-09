@@ -147,7 +147,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ---------- Hero ---------- */
 .hero{position:relative;min-height:100dvh;display:flex;align-items:center;overflow:hidden;padding-top:74px}
 .hero-media{position:absolute;inset:0;z-index:0}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 58%;transform:scale(1.06);animation:heroZoom 18s var(--ease) forwards}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 48%;transform:scale(1.06);animation:heroZoom 18s var(--ease) forwards}
 @keyframes heroZoom{to{transform:scale(1)}}
 .hero-media::after{
   content:"";position:absolute;inset:0;
@@ -684,3 +684,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .svc-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2px 44px}
 .svc-list li{display:flex;align-items:center;gap:13px;font-family:"Space Grotesk";font-weight:500;font-size:clamp(1rem,1.3vw,1.12rem);color:var(--text);padding-block:15px;border-bottom:1px solid var(--line)}
 .svc-list li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;box-shadow:0 0 12px rgba(225,29,42,.7)}
+
+/* =========================================================================
+   Ceramic cinematic: pinned scroll section
+   ========================================================================= */
+.ceramic-scroll{position:relative;height:360vh;background:#08080a}
+.ceramic-sticky{position:sticky;top:0;height:100dvh;display:grid;place-items:center;overflow:hidden;isolation:isolate}
+.ceramic-sticky .coat3d-grid{width:100%;align-items:center;margin:0}
+.ceramic-sticky .coat3d-stage{height:min(76vh,660px);min-height:0}
+.coat3d-tune{position:absolute;left:12px;bottom:44px;z-index:6;font:11px/1.5 monospace;color:#4ade80;background:rgba(0,0,0,.72);padding:8px 10px;border-radius:8px;white-space:pre;display:none;pointer-events:none}
+.coat3d-tune.on{display:block}
+@media(max-width:900px){
+  .ceramic-scroll{height:300vh}
+  .ceramic-sticky .coat3d-stage{height:min(56vh,460px)}
+}
