@@ -216,20 +216,5 @@
     if (heroEl) heroEl.style.minHeight = "720px"; // let full page stack for tall screenshots
   }
 
-  /* ---------- Quote form (demo, no backend) ---------- */
-  var form = document.getElementById("quoteForm");
-  var ok = document.getElementById("formOk");
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var name = form.querySelector("#name");
-    var phone = form.querySelector("#phone");
-    var valid = true;
-    [name, phone].forEach(function (f) {
-      if (!f.value.trim()) { f.style.borderColor = "var(--accent)"; valid = false; }
-      else { f.style.borderColor = ""; }
-    });
-    if (!valid) return;
-    ok.classList.add("show");
-    form.querySelector('button[type="submit"]').textContent = "Details captured";
-  });
+  /* ---------- Booking wizard lives in js/booking.js ---------- */
 })();

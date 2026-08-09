@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Tag Manager (replace GTM-XXXXXXX with the real CDS container ID) -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+<!-- End Google Tag Manager -->
 <title>CDS · Overspray Solutions - Premium Car Detailing & Overspray Removal, Melbourne</title>
 <meta name="description" content="Melbourne's specialist in premium car detailing, 10H graphene ceramic coating, paint correction and non-abrasive overspray removal. Owner-operated, mobile, 7 days. Call Andy on 0410 939 700.">
 <meta name="theme-color" content="#0a0a0c">
@@ -15,6 +18,10 @@
 <meta property="og:type" content="website">
 </head>
 <body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
@@ -274,7 +281,7 @@
       <div class="stat reveal"><b>5.0<span class="u">★</span></b><span>Average owner rating</span></div>
       <div class="stat reveal" data-d="1"><b>10<span class="u">H</span></b><span>Graphene coating hardness</span></div>
       <div class="stat reveal" data-d="2"><b>7<span class="u">/7</span></b><span>Days a week, 7am to 7pm</span></div>
-      <div class="stat reveal" data-d="3"><b>30<span class="u">+</span></b><span>Years of overspray experience</span></div>
+      <div class="stat reveal" data-d="3"><b>30<span class="u">+</span></b><span>Years of hands-on experience</span></div>
     </div>
   </div>
 </section>
@@ -320,48 +327,97 @@
     <div class="contact-card reveal">
       <div class="contact-grid">
       <div>
-        <span class="eyebrow">Get a quote</span>
-        <h2 class="h-sec" style="margin:18px 0 16px">Tell us about<br>your car.</h2>
-        <p class="lede" style="margin-bottom:30px">Send a few details and Andy will get back to you with an honest quote. Mobile service across Melbourne, 7 days a week.</p>
-        <form id="quoteForm" novalidate>
-          <div class="form-row">
-            <div class="field">
-              <label for="name">Your name</label>
-              <input id="name" name="name" type="text" placeholder="Full name" required>
-            </div>
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" placeholder="04__ ___ ___" required>
-            </div>
+        <span class="eyebrow">Book online</span>
+        <h2 class="h-sec" style="margin:18px 0 12px">Book your<br>detail.</h2>
+        <p class="lede" style="margin-bottom:26px">A few quick questions and Andy will confirm your booking and price. Mobile across Melbourne or drop-off, 7 days a week.</p>
+        <form id="bookingForm" class="wiz" novalidate>
+          <div class="wiz-progress" aria-hidden="true">
+            <span data-step-dot="0" class="on"></span><span data-step-dot="1"></span><span data-step-dot="2"></span><span data-step-dot="3"></span><span data-step-dot="4"></span>
           </div>
-          <div class="form-row">
+
+          <fieldset class="wiz-step" data-step="0">
+            <legend>Which service?</legend>
             <div class="field">
-              <label for="vehicle">Vehicle</label>
-              <input id="vehicle" name="vehicle" type="text" placeholder="e.g. 2020 Ford Ranger">
-            </div>
-            <div class="field">
-              <label for="service">Service</label>
-              <select id="service" name="service">
+              <label for="b-service">Service</label>
+              <select id="b-service" name="service" required>
                 <option value="">Choose a service</option>
-                <option>Ceramic / Graphene coating</option>
+                <option>Ceramic / graphene coating</option>
                 <option>Paint correction</option>
                 <option>Full or deluxe detail</option>
                 <option>Interior detailing</option>
+                <option>Exterior detailing</option>
                 <option>Overspray removal</option>
                 <option>Truck / fleet detailing</option>
                 <option>Not sure yet</option>
               </select>
             </div>
+            <div class="field">
+              <label>How would you like it done?</label>
+              <div class="wiz-choices">
+                <label class="wiz-choice"><input type="radio" name="format" value="Mobile - at your door" required><span>Mobile, at your door</span></label>
+                <label class="wiz-choice"><input type="radio" name="format" value="Studio - drop off"><span>Studio, drop off</span></label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="wiz-step" data-step="1" hidden>
+            <legend>Where are you?</legend>
+            <div class="field">
+              <label for="b-postcode">Postcode</label>
+              <input id="b-postcode" name="postcode" inputmode="numeric" autocomplete="postal-code" placeholder="e.g. 3076" required>
+            </div>
+          </fieldset>
+
+          <fieldset class="wiz-step" data-step="2" hidden>
+            <legend>Your vehicle</legend>
+            <div class="field">
+              <label for="b-vehicle">Vehicle</label>
+              <input id="b-vehicle" name="vehicle" placeholder="e.g. 2020 Ford Ranger" required>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="b-paint">Paint condition</label>
+                <select id="b-paint" name="paint_condition" required><option value="">Select</option><option>New / excellent</option><option>Good</option><option>Fair</option><option>Poor</option></select>
+              </div>
+              <div class="field">
+                <label for="b-interior">Interior condition</label>
+                <select id="b-interior" name="interior_condition" required><option value="">Select</option><option>Clean / tidy</option><option>Lightly messy</option><option>Dirty</option><option>Full reset</option></select>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="wiz-step" data-step="3" hidden>
+            <legend>Budget</legend>
+            <div class="field">
+              <label for="b-budget">Roughly what are you looking to spend?</label>
+              <select id="b-budget" name="budget" required><option value="">Select</option><option>Entry level (under $500)</option><option>Standard ($500 to $1,500)</option><option>Premium / coating ($1,500+)</option><option>Not sure yet</option></select>
+            </div>
+          </fieldset>
+
+          <fieldset class="wiz-step" data-step="4" hidden>
+            <legend>Your details</legend>
+            <div class="field">
+              <label for="b-message">Anything else? (optional)</label>
+              <textarea id="b-message" name="message" placeholder="Marks, timing, where you are based..."></textarea>
+            </div>
+            <div class="form-row">
+              <div class="field"><label for="b-name">Name</label><input id="b-name" name="name" autocomplete="name" required></div>
+              <div class="field"><label for="b-mobile">Mobile</label><input id="b-mobile" name="mobile" type="tel" autocomplete="tel" placeholder="04__ ___ ___" required></div>
+            </div>
+            <div class="field"><label for="b-email">Email (optional)</label><input id="b-email" name="email" type="email" autocomplete="email" placeholder="you@email.com"></div>
+          </fieldset>
+
+          <div class="wiz-nav">
+            <button type="button" class="btn btn-ghost" data-wiz-back hidden>Back</button>
+            <button type="button" class="btn btn-primary" data-wiz-next style="margin-left:auto">Next
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <button type="submit" class="btn btn-primary" data-wiz-submit hidden style="margin-left:auto">Request my booking</button>
           </div>
-          <div class="field">
-            <label for="message">What does it need?</label>
-            <textarea id="message" name="message" placeholder="Tell us about the paint, the marks, and where you are based."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Send my details</button>
-          <p class="form-note">Prefer to talk? Call Andy directly on 0410 939 700.</p>
-          <p class="form-ok" id="formOk">
+          <p class="form-note">Prefer to talk? Call Andy on 0410 939 700.</p>
+          <p class="form-ok" id="bookOk">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-            Thanks, your details are ready. This demo form does not send yet, so please call or email to confirm your booking.
+            Thanks, your booking request is in. Andy will be in touch shortly to confirm the details and price.
           </p>
         </form>
       </div>
@@ -499,6 +555,7 @@
 </div>
 
 <script src="js/main.js"></script>
+<script src="js/booking.js"></script>
 <script type="importmap">
 {"imports":{"three":"./assets/vendor/three.module.js","three/addons/":"./assets/vendor/addons/"}}
 </script>

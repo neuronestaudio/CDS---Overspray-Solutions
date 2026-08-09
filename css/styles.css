@@ -89,6 +89,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   transition:transform .25s var(--ease),box-shadow .3s var(--ease),border-color .25s var(--ease);
 }
 .btn svg{width:18px;height:18px;flex:none}
+.btn[hidden]{display:none!important} /* [hidden] must beat .btn's display:inline-flex */
 /* primary: modern red gradient + hover sheen sweep */
 .btn-primary{background:linear-gradient(135deg,#ff3446 0%,var(--accent) 52%,#c1141f 100%);color:#fff;box-shadow:var(--shadow-red)}
 .btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.4) 50%,transparent 72%);transform:translateX(-130%);transition:transform .7s var(--ease);pointer-events:none}
@@ -598,3 +599,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .coat3d-card h3{margin:0 0 8px;font-size:1.3rem}
 .coat3d-card p[data-field="desc"]{color:var(--muted);font-size:.94rem;line-height:1.55;margin-bottom:18px}
 .coat3d-card .btn{margin-top:16px}
+
+/* =========================================================================
+   Booking wizard (multi-step) — lives inside the white .contact-card
+   ========================================================================= */
+.wiz-progress{display:flex;gap:6px;margin-bottom:26px}
+.wiz-progress span{height:5px;flex:1;border-radius:99px;background:#e3e3e9;transition:background .35s var(--ease)}
+.wiz-progress span.on{background:var(--accent)}
+.wiz-step{border:0;padding:0;margin:0;min-width:0}
+.wiz-step legend{font-family:"Space Grotesk";font-weight:500;font-size:1.15rem;color:#141419;margin:0 0 16px;padding:0}
+.wiz-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wiz-choice{display:flex;align-items:center;gap:10px;padding:14px 15px;border:1px solid #d7d7de;border-radius:var(--r-sm);
+  cursor:pointer;font-size:.94rem;color:#2a2a31;transition:border-color .2s var(--ease),background .2s var(--ease)}
+.wiz-choice input{accent-color:var(--accent);width:16px;height:16px;flex:none}
+.wiz-choice:hover{border-color:#b9b9c2}
+.wiz-choice.checked{border-color:var(--accent);background:var(--accent-soft);color:#141419}
+.wiz-nav{display:flex;align-items:center;gap:12px;margin-top:24px}
+.wiz-step .field.invalid input,.wiz-step .field.invalid select,.wiz-step .field.invalid textarea{border-color:var(--accent)}
+.wiz-choices.invalid{outline:1.5px solid var(--accent);outline-offset:3px;border-radius:var(--r-sm)}
+@media(max-width:460px){.wiz-choices{grid-template-columns:1fr}}
