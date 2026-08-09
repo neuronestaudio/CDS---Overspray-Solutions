@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ceramic Coating · CDS · Overspray Solutions</title>
+<meta name="description" content="Watch the ceramic coating process on a Hilux: prepared, corrected, coated and preserved. A cinematic look at how graphene ceramic protection is built, panel by panel.">
+<meta name="theme-color" content="#050506">
+<link rel="shortcut icon" href="assets/img/favicon.ico">
+<link rel="preload" href="assets/fonts/spacegrotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  /* ---- Cinematic ceramic film (page-specific) ---- */
+  body{background:#050506}
+  .cin-hero{position:relative;min-height:92vh;display:flex;align-items:center;isolation:isolate;overflow:hidden;padding-top:74px}
+  .cin-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+    radial-gradient(120% 90% at 78% 40%,#1a1216 0%,#0b0a0c 52%,#050506 100%)}
+  .cin-hero .wrap{position:relative}
+  .cin-hero h1{font-size:clamp(2.8rem,7.5vw,6.2rem);line-height:.98;margin:20px 0 22px;max-width:16ch}
+  .cin-hint{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-family:"Space Grotesk";font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;transition:opacity .5s var(--ease)}
+  .cin-hint svg{width:22px;height:22px;animation:cinBob 1.8s var(--ease) infinite}
+  @keyframes cinBob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  @media(prefers-reduced-motion:reduce){.cin-hint svg{animation:none}}
+
+  /* pinned film */
+  .film{position:relative;height:520vh;background:#050506}
+  .film-stage{position:sticky;top:0;height:100vh;overflow:hidden}
+  .film-canvas{position:absolute;inset:0}
+  .film-canvas canvas{display:block;width:100%;height:100%}
+  .film-stage::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+    background:radial-gradient(130% 120% at 50% 44%,transparent 46%,rgba(5,5,6,.55) 82%,rgba(5,5,6,.92) 100%)}
+  .film-loading{position:absolute;inset:0;z-index:4;display:grid;place-items:center;background:#050506;transition:opacity .6s var(--ease)}
+  .film-loading[hidden]{display:none}
+  .film-loading .spin{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.14);border-top-color:var(--accent);animation:cinSpin .9s linear infinite}
+  @keyframes cinSpin{to{transform:rotate(360deg)}}
+  .film-fail{position:absolute;inset:0;z-index:3;display:none;place-items:center;text-align:center;padding:2rem;color:var(--muted)}
+  .film[data-failed] .film-fail{display:grid}
+  .film[data-failed] .film-loading{display:none}
+
+  /* chapter overlays */
+  .chapters{position:absolute;inset:0;z-index:3;pointer-events:none}
+  .chapter{position:absolute;left:var(--gutter);bottom:clamp(60px,12vh,120px);max-width:min(560px,74vw);opacity:0;transform:translateY(26px);transition:opacity .6s var(--ease),transform .6s var(--ease);will-change:opacity,transform}
+  .chapter .cidx{font-family:"Space Grotesk";font-weight:500;font-size:.85rem;letter-spacing:.2em;color:var(--accent);display:block;margin-bottom:10px}
+  .chapter .cword{font-family:"Space Grotesk";font-weight:700;font-size:clamp(3rem,9vw,7rem);line-height:.9;letter-spacing:-.02em;margin-bottom:16px}
+  .chapter p{color:#cfcfd6;font-size:clamp(1rem,1.4vw,1.2rem);max-width:44ch;line-height:1.5}
+  .film-rail{position:absolute;right:clamp(16px,3vw,40px);top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;gap:14px;pointer-events:none}
+  .film-rail i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.22);transition:background .3s var(--ease),transform .3s var(--ease)}
+  .film-rail i.on{background:var(--accent);transform:scale(1.5)}
+  @media(max-width:700px){.film-rail{display:none}.chapter{bottom:90px}}
+
+  .cin-cta{border-top:1px solid var(--line);background:linear-gradient(180deg,#08080a,var(--bg))}
+  .cin-cta .inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:26px}
+  .cin-cta h2{font-size:clamp(1.8rem,3.4vw,2.8rem)}
+  .cin-cta .actions{display:flex;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" aria-label="CDS Overspray Solutions home">
+      <img class="brand-mark" src="assets/img/logo-mark.png" alt="CDS - Car Detailing Solutions">
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#services">Services</a>
+      <a href="ceramic.html" aria-current="page">Ceramic in 3D</a>
+      <a href="index.html#overspray">Overspray Removal</a>
+      <a href="warranties.html">Warranties</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:0410939700" class="nav-phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        0410 939 700
+      </a>
+      <a href="index.html#contact" class="btn btn-primary">Book a Detail</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- DRAWER -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-top">
+    <a href="index.html" class="brand"><img class="brand-mark" src="assets/img/logo-mark.png" alt="CDS"></a>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <a class="d-link" href="index.html#services">Services</a>
+  <a class="d-link" href="ceramic.html">Ceramic in 3D</a>
+  <a class="d-link" href="index.html#overspray">Overspray Removal</a>
+  <a class="d-link" href="warranties.html">Warranties</a>
+  <a class="d-link" href="product-tds.html">Product TDS</a>
+  <a class="d-link" href="index.html#contact">Contact</a>
+</div>
+
+<!-- INTRO HERO -->
+<section class="cin-hero">
+  <div class="wrap">
+    <span class="eyebrow">Graphene ceramic coating</span>
+    <h1>Protection you can<br><span class="accent">watch</span> being built.</h1>
+    <p class="lede" style="font-size:clamp(1.05rem,1.5vw,1.25rem);max-width:48ch">Scroll to move through the four stages of a proper ceramic job on a 4WD, from raw paint to a coated, protected finish.</p>
+  </div>
+  <div class="cin-hint" id="cinHint">
+    Scroll to begin
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+  </div>
+</section>
+
+<!-- CINEMATIC FILM -->
+<section class="film" id="film">
+  <div class="film-stage" id="filmStage">
+    <div class="film-canvas" id="filmCanvas"></div>
+    <div class="film-loading" id="filmLoading"><div class="spin"></div></div>
+    <div class="film-fail"><p>Your browser could not start the 3D view.<br>The ceramic process still runs the same way in the workshop.<br><a href="index.html#contact" class="btn btn-primary" style="margin-top:16px">Book a ceramic coating</a></p></div>
+
+    <div class="chapters" id="chapters">
+      <article class="chapter" data-center="0.10">
+        <span class="cidx">01 / Prepare</span>
+        <div class="cword">Prepared.</div>
+        <p>Stripped back, decontaminated and clayed. A coating is only ever as good as the surface underneath it.</p>
+      </article>
+      <article class="chapter" data-center="0.40">
+        <span class="cidx">02 / Correct</span>
+        <div class="cword">Corrected.</div>
+        <p>Staged machine polishing removes the swirls, haze and oxidation, bringing back the true depth of the paint.</p>
+      </article>
+      <article class="chapter" data-center="0.70">
+        <span class="cidx">03 / Coat</span>
+        <div class="cword">Coated.</div>
+        <p>A graphene ceramic layer bonds to the clear coat. Deeper gloss, water that sheets straight off, real protection.</p>
+      </article>
+      <article class="chapter" data-center="0.95">
+        <span class="cidx">04 / Preserve</span>
+        <div class="cword">Preserved.</div>
+        <p>Years of UV, chemical and contaminant resistance, backed by a manufacturer warranty. Washing gets easy.</p>
+      </article>
+    </div>
+
+    <div class="film-rail" id="filmRail" aria-hidden="true">
+      <i></i><i></i><i></i><i></i>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cin-cta">
+  <div class="wrap inner">
+    <div>
+      <h2>Give your 4WD the same treatment.</h2>
+      <p class="lede" style="margin-top:10px">Graphene ceramic coating up to 10H, with a manufacturer-backed warranty. Owner-operated by Andy.</p>
+    </div>
+    <div class="actions">
+      <a href="index.html#contact" class="btn btn-primary btn-lg">Book your ceramic coating</a>
+      <a href="warranties.html" class="btn btn-ghost btn-lg">View warranties</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand"><img class="brand-mark" src="assets/img/logo-mark.png" alt="CDS"></a>
+        <p>Premium car detailing, graphene ceramic coating and specialist overspray removal. Owner-operated in Melbourne.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <a href="index.html#services">Ceramic coating</a>
+        <a href="ceramic.html">Ceramic in 3D</a>
+        <a href="index.html#services">Paint correction</a>
+        <a href="index.html#services">Truck &amp; fleet</a>
+      </div>
+      <div class="foot-col">
+        <h4>Coatings</h4>
+        <a href="warranties.html">Warranties</a>
+        <a href="product-tds.html">Product TDS</a>
+        <a href="index.html#overspray">Overspray removal</a>
+        <a href="index.html#reviews">Reviews</a>
+      </div>
+      <div class="foot-col">
+        <h4>Get in touch</h4>
+        <a href="tel:0410939700">0410 939 700</a>
+        <a href="mailto:info@cardetailingsolutions.com.au">Email us</a>
+        <a href="index.html#contact">Book a detail</a>
+        <a href="index.html#contact">Epping VIC 3076</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Copyright CDS · Overspray Solutions 2026. All rights reserved.</span>
+      <span>Melbourne, Australia · Mobile detailing 7 days</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/page.js"></script>
+
+<!-- 3D FILM ENGINE -->
+<script type="importmap">
+{"imports":{"three":"./assets/vendor/three.module.js","three/addons/":"./assets/vendor/addons/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+const smooth = t=>t*t*(3-2*t);
+// QA-only: ?still=0.7 locks the film to a fixed progress and pins the stage at top
+const _stillRaw = new URLSearchParams(location.search).get('still');
+const STILL = _stillRaw!==null ? clamp(parseFloat(_stillRaw)||0,0,1) : null;
+if (STILL!==null){ const h=document.querySelector('.cin-hero'); if(h) h.style.display='none'; }
+
+const filmEl = document.getElementById('film');
+const stageEl = document.getElementById('filmStage');
+const canvasWrap = document.getElementById('filmCanvas');
+const loadingEl = document.getElementById('filmLoading');
+const chapterEls = [...document.querySelectorAll('.chapter')];
+const railEls = [...document.querySelectorAll('#filmRail i')];
+
+function fail(){ filmEl.dataset.failed='1'; if(loadingEl) loadingEl.hidden=true; }
+
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true, powerPreference:'high-performance' }); }
+catch(e){ fail(); }
+
+if (renderer){
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 0.32;
+  canvasWrap.appendChild(renderer.domElement);
+
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.03).texture;
+
+  const target = new THREE.Vector3(0, 0.95, 0);
+  const key  = new THREE.DirectionalLight(0xffffff, 0.5); scene.add(key);
+  const rim  = new THREE.DirectionalLight(0xbcd0ff, 0.2); rim.position.set(-6,4,-6); scene.add(rim);
+  const amb  = new THREE.AmbientLight(0xffffff, 0.08); scene.add(amb);
+  // a bright "softbox" that sweeps a specular highlight across panels
+  const soft = new THREE.DirectionalLight(0xffffff, 0.0); soft.position.set(0, 9, 3); scene.add(soft);
+
+  // --- cinematic keyframes across scroll progress p (0..1) ---
+  const KF = [
+    { p:0.00, theta: 0.62, phi:1.42, radius:9.4, exp:0.30, keyI:0.45, rimI:0.18, ambI:0.07, softI:0.0, rough:0.66, env:0.45, keyAng:0.95 },
+    { p:0.34, theta:-0.42, phi:1.24, radius:6.6, exp:0.74, keyI:1.9,  rimI:0.9,  ambI:0.18, softI:0.6, rough:0.30, env:1.05, keyAng:0.30 },
+    { p:0.70, theta: 1.90, phi:1.12, radius:7.9, exp:1.02, keyI:2.9,  rimI:1.7,  ambI:0.22, softI:1.8, rough:0.10, env:1.7,  keyAng:-0.5 },
+    { p:1.00, theta: 0.72, phi:1.26, radius:9.0, exp:1.08, keyI:2.6,  rimI:1.4,  ambI:0.24, softI:0.8, rough:0.06, env:1.9,  keyAng:-0.9 },
+  ];
+  function kfVal(p, key){
+    for (let i=0;i<KF.length-1;i++){
+      const a=KF[i], b=KF[i+1];
+      if (p<=b.p || i===KF.length-2){ const t=smooth(clamp((p-a.p)/(b.p-a.p),0,1)); return a[key]+(b[key]-a[key])*t; }
+    }
+    return KF[KF.length-1][key];
+  }
+
+  const off = new THREE.Vector3();
+  function place(theta,phi,radius){ off.setFromSphericalCoords(radius,phi,theta); camera.position.copy(target).add(off); camera.lookAt(target); }
+
+  let paints = [];
+  function apply(p){
+    place(kfVal(p,'theta'), kfVal(p,'phi'), kfVal(p,'radius'));
+    renderer.toneMappingExposure = kfVal(p,'exp');
+    key.intensity = kfVal(p,'keyI');
+    rim.intensity = kfVal(p,'rimI');
+    amb.intensity = kfVal(p,'ambI');
+    soft.intensity = kfVal(p,'softI');
+    const a = kfVal(p,'keyAng');
+    key.position.set(Math.sin(a)*9, 7, Math.cos(a)*9);
+    // softbox travels the opposite way for the reflection sweep
+    soft.position.set(Math.sin(-a*1.4)*7, 9.5, Math.cos(-a*1.4)*4);
+    const rough = kfVal(p,'rough'), env = kfVal(p,'env');
+    for (const m of paints){ m.roughness = rough; m.envMapIntensity = env; }
+  }
+
+  function updateChapters(p){
+    chapterEls.forEach((el,i)=>{
+      const c = parseFloat(el.dataset.center);
+      const a = clamp(1 - Math.abs(p - c) / 0.15, 0, 1);
+      el.style.opacity = a.toFixed(3);
+      el.style.transform = `translateY(${(1-a)*26}px)`;
+    });
+    const idx = clamp(Math.round(p*3), 0, 3);
+    railEls.forEach((el,i)=> el.classList.toggle('on', i===idx));
+  }
+
+  function progress(){
+    const total = filmEl.offsetHeight - innerHeight;
+    if (total<=0) return 0;
+    return clamp(-filmEl.getBoundingClientRect().top / total, 0, 1);
+  }
+
+  let visible = STILL!==null;
+  new IntersectionObserver(es=>{ visible = STILL!==null || es[0].isIntersecting; }, { threshold:0 }).observe(stageEl);
+
+  function frame(){
+    if (visible){
+      const p = STILL!==null ? STILL : (REDUCED ? 0.82 : progress());
+      apply(p); updateChapters(p);
+      renderer.render(scene, camera);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function loadModel(){
+    new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).load('assets/hilux.glb', (gltf)=>{
+      const car = gltf.scene; scene.add(car);
+      const seen = new Set();
+      car.traverse(o=>{
+        if (!o.isMesh) return;
+        const m = o.material;
+        if (m && m.name === 'body_paint' && !seen.has(m)){
+          seen.add(m);
+          m.color.setHex(0x1c2026);   // deep graphite, premium and reflective
+          m.metalness = 0.6;
+          m.roughness = 0.66;
+          m.envMapIntensity = 0.45;
+          paints.push(m);
+        }
+      });
+      // ground shadow disc
+      const shadow = new THREE.Mesh(
+        new THREE.CircleGeometry(3.6, 64),
+        new THREE.MeshBasicMaterial({ color:0x000000, transparent:true, opacity:0.5 })
+      );
+      shadow.rotation.x = -Math.PI/2; shadow.position.y = 0.002; scene.add(shadow);
+
+      if (loadingEl) loadingEl.hidden = true;
+      resize();
+      apply(REDUCED ? 0.82 : progress());
+      requestAnimationFrame(frame);
+    }, undefined, ()=> fail());
+  }
+
+  // preload just before the film enters view
+  const armPreload = ()=>{
+    const pre = new IntersectionObserver((es)=>{ if (es[0].isIntersecting){ pre.disconnect(); loadModel(); } }, { rootMargin:'900px 0px' });
+    pre.observe(stageEl);
+  };
+  if (document.readyState === 'complete') armPreload();
+  else addEventListener('load', armPreload, { once:true });
+
+  function resize(){
+    const w = stageEl.clientWidth, h = stageEl.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h; camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(stageEl);
+  resize();
+}
+
+// fade the scroll hint away once the user moves
+const hint = document.getElementById('cinHint');
+if (hint){
+  const io = new IntersectionObserver(es=>{ hint.style.opacity = es[0].isIntersecting ? '0' : '1'; }, { threshold:0 });
+  io.observe(document.getElementById('film'));
+}
+</script>
+</body>
+</html>
