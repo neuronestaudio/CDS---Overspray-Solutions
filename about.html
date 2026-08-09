@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · CDS · Overspray Solutions</title>
+<meta name="description" content="Meet Andy and the CDS studio. Over 30 years of hands-on experience in detailing, ceramic coating and specialist overspray removal in Melbourne.">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="shortcut icon" href="assets/img/favicon.ico">
+<link rel="preload" href="assets/fonts/spacegrotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="assets/img/garage.png" fetchpriority="high">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  body{background:#0a0a0c}
+  .about-scroll{position:relative;height:400vh}
+  .about-sticky{position:sticky;top:0;height:100dvh;overflow:hidden;isolation:isolate}
+  .about-bg{position:absolute;inset:0;z-index:0}
+  .about-bg img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
+  .about-bg::after{content:"";position:absolute;inset:0;background:
+    linear-gradient(180deg,rgba(7,7,9,.6) 0,rgba(7,7,9,.28) 26%,rgba(7,7,9,.32) 56%,rgba(7,7,9,.86) 100%),
+    radial-gradient(140% 100% at 50% 40%,transparent 38%,rgba(7,7,9,.6) 100%)}
+  .about-canvas{position:absolute;inset:0;z-index:1}
+  .about-canvas canvas{display:block;width:100%;height:100%}
+  .about-loading{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:#0a0a0c;transition:opacity .6s var(--ease)}
+  .about-loading[hidden]{display:none}
+  .about-loading .spin{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.14);border-top-color:var(--accent);animation:aSpin .9s linear infinite}
+  @keyframes aSpin{to{transform:rotate(360deg)}}
+
+  .about-chapters{position:absolute;inset:0;z-index:2;pointer-events:none}
+  .ach{position:absolute;left:0;right:0;padding:44px var(--gutter);opacity:0;transform:translateY(26px);
+    transition:opacity .6s var(--ease),transform .6s var(--ease);will-change:opacity,transform}
+  .ach .wrap{max-width:var(--maxw);margin-inline:auto}
+  .ach .eyebrow{margin-bottom:14px}
+  .ach h2{font-size:clamp(2.2rem,6vw,4.6rem);line-height:.98;margin-bottom:16px}
+  .ach p{color:#e6e6ec;font-size:clamp(1.05rem,1.5vw,1.28rem);max-width:44ch;line-height:1.55}
+  .ach .eyebrow,.ach h2,.ach p{text-shadow:0 2px 30px rgba(0,0,0,.9),0 1px 4px rgba(0,0,0,.7)}
+  /* chapter positions / styles differ per page, each with its own soft scrim */
+  .ach-1{top:18%;background:linear-gradient(90deg,rgba(7,7,9,.62),rgba(7,7,9,.2) 46%,transparent 66%)}
+  .ach-2{top:18%;text-align:right;background:linear-gradient(270deg,rgba(7,7,9,.62),rgba(7,7,9,.2) 46%,transparent 66%)}
+  .ach-2 .wrap{margin-left:auto}.ach-2 p{margin-left:auto}
+  .ach-3{top:50%;transform:translateY(-30%);text-align:center;background:radial-gradient(70% 140% at 50% 50%,rgba(7,7,9,.6),transparent 72%)}
+  .ach-3 p{margin-inline:auto}
+  .ach-3 .about-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px;pointer-events:auto}
+  @media(max-width:700px){.ach-2{text-align:left}.ach-2 .wrap,.ach-2 p{margin-left:0}}
+
+  .about-rail{position:absolute;right:clamp(14px,3vw,34px);top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;gap:13px}
+  .about-rail i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.24);transition:.3s var(--ease)}
+  .about-rail i.on{background:var(--accent);transform:scale(1.5)}
+  @media(max-width:700px){.about-rail{display:none}}
+
+  .about-tune{position:absolute;left:12px;bottom:12px;z-index:5;font:12px/1.5 monospace;color:#0f0;background:rgba(0,0,0,.7);padding:8px 10px;border-radius:8px;white-space:pre;display:none}
+  .about-tune.on{display:block}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" aria-label="CDS Overspray Solutions home"><img class="brand-mark" src="assets/img/logo-mark.png" alt="CDS - Car Detailing Solutions"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#services">Services</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="index.html#overspray">Overspray Removal</a>
+      <a href="warranties.html">Warranties</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:0410939700" class="nav-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 0410 939 700</a>
+      <a href="index.html#contact" class="btn btn-primary">Book a Detail</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-top">
+    <a href="index.html" class="brand"><img class="brand-mark" src="assets/img/logo-mark.png" alt="CDS"></a>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <a class="d-link" href="index.html#services">Services</a>
+  <a class="d-link" href="about.html">About</a>
+  <a class="d-link" href="index.html#overspray">Overspray Removal</a>
+  <a class="d-link" href="warranties.html">Warranties</a>
+  <a class="d-link" href="product-tds.html">Product TDS</a>
+  <a class="d-link" href="index.html#contact">Contact</a>
+</div>
+
+<!-- ABOUT PINNED HERO: spinning Hilux composited into Andy's studio -->
+<section class="about-scroll" data-about3d>
+  <div class="about-sticky">
+    <div class="about-bg"><img src="assets/img/garage.png" alt="The CDS detailing studio"></div>
+    <div class="about-canvas" id="aboutCanvas"></div>
+    <div class="about-loading" id="aboutLoading"><div class="spin"></div></div>
+
+    <div class="about-chapters">
+      <article class="ach ach-1" data-center="0.0">
+        <div class="wrap">
+          <span class="eyebrow">About CDS</span>
+          <h2>Meet Andy.</h2>
+          <p>Owner-operated, with over 30 years of hands-on experience in auto paint. He is obsessed with the finish, and it shows on every car that comes through.</p>
+        </div>
+      </article>
+      <article class="ach ach-2" data-center="0.5">
+        <div class="wrap">
+          <span class="eyebrow">One studio, every service</span>
+          <h2>Built for the work.</h2>
+          <p>Detailing, ceramic coating and specialist overspray removal, from a purpose-built Melbourne studio, or mobile at your door.</p>
+        </div>
+      </article>
+      <article class="ach ach-3" data-center="1.0">
+        <div class="wrap">
+          <span class="eyebrow">The promise</span>
+          <h2>Treated like our own.</h2>
+          <p>Every job gets the same care, whether it is a daily driver or an elite build. That is the whole point.</p>
+          <div class="about-cta">
+            <a href="index.html#contact" class="btn btn-primary btn-lg">Book a detail</a>
+            <a href="index.html#work" class="btn btn-ghost btn-lg">See our work</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="about-rail" id="aboutRail" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="about-tune" id="aboutTune"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand"><img class="brand-mark" src="assets/img/logo-mark.png" alt="CDS"></a>
+        <p>Premium car detailing, graphene ceramic coating and specialist overspray removal. Owner-operated in Melbourne.</p>
+      </div>
+      <div class="foot-col"><h4>Services</h4><a href="index.html#services">Ceramic coating</a><a href="index.html#services">Paint correction</a><a href="index.html#services">Full &amp; deluxe detail</a><a href="index.html#services">Truck &amp; fleet</a></div>
+      <div class="foot-col"><h4>Coatings</h4><a href="warranties.html">Warranties</a><a href="product-tds.html">Product TDS</a><a href="index.html#overspray">Overspray removal</a><a href="index.html#reviews">Reviews</a></div>
+      <div class="foot-col"><h4>Get in touch</h4><a href="tel:0410939700">0410 939 700</a><a href="mailto:info@cardetailingsolutions.com.au">Email us</a><a href="index.html#contact">Book a detail</a><a href="index.html#contact">Epping VIC 3076</a></div>
+    </div>
+    <div class="foot-bottom"><span>Copyright CDS · Overspray Solutions 2026. All rights reserved.</span><span>Melbourne, Australia · Mobile detailing 7 days</span></div>
+  </div>
+</footer>
+
+<script src="js/page.js"></script>
+<script type="importmap">
+{"imports":{"three":"./assets/vendor/three.module.js","three/addons/":"./assets/vendor/addons/"}}
+</script>
+<script type="module" src="js/about3d.js"></script>
+</body>
+</html>
