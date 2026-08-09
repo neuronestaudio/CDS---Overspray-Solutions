@@ -603,7 +603,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .coat3d-card .btn{margin-top:16px}
 
 /* =========================================================================
-   Booking wizard (multi-step) — lives inside the white .contact-card
+   Booking wizard (multi-step) - lives inside the white .contact-card
    ========================================================================= */
 .wiz-progress{display:flex;gap:6px;margin-bottom:26px}
 .wiz-progress span{height:5px;flex:1;border-radius:99px;background:rgba(255,255,255,.13);transition:background .35s var(--ease)}
@@ -623,7 +623,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media(max-width:460px){.wiz-choices{grid-template-columns:1fr}}
 
 /* =========================================================================
-   Landing splash — carbon-fibre + logo, left-to-right reveal
+   Landing splash - carbon-fibre + logo, left-to-right reveal
    ========================================================================= */
 .splash{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:#08080a;overflow:hidden;
   animation:splashOut .7s var(--ease) 1.75s forwards}
