@@ -2,3 +2,6 @@
 Thumbs.db
 desktop.ini
 *.log
+
+# raw scraped source photos (not used by the live site)
+facebook-photos/

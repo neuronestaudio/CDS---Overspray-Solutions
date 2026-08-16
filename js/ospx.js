@@ -10,6 +10,8 @@
   if (!n) return;
   var REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var active = 0, timer = null, visible = false;
+  // default to the Paint Correction card (looks the strongest as the opener)
+  for (var di = 0; di < n; di++) { if (/paint correction/i.test(cards[di].textContent)) { active = di; break; } }
 
   var curEl = root.querySelector("[data-ospx-cur]");
   var totalEl = root.querySelector("[data-ospx-total]");
@@ -26,6 +28,20 @@
 
   function spacing() { return Math.min(innerWidth * 0.27, 330); }
   var SP = spacing();
+
+  // hero background mirrors the active card image (crossfade between two layers)
+  var bgLayers = Array.prototype.slice.call(root.querySelectorAll(".hero-bgimg"));
+  var bgFront = -1;
+  function setHeroBg(src) {
+    if (!bgLayers.length || !src) return;
+    var next = (bgFront + 1) % bgLayers.length;
+    if (bgLayers[next].dataset.src === src) return;
+    bgLayers[next].dataset.src = src;
+    bgLayers[next].style.backgroundImage = "url('" + src + "')";
+    bgLayers[next].style.opacity = "1";
+    if (bgFront >= 0) bgLayers[bgFront].style.opacity = "0";
+    bgFront = next;
+  }
 
   function layout() {
     var half = Math.floor(n / 2);
@@ -45,6 +61,8 @@
     });
     if (curEl) curEl.textContent = pad(active + 1);
     dots.forEach(function (d, i) { d.classList.toggle("on", i === active); });
+    var im = cards[active] && cards[active].querySelector("img");
+    if (im) setHeroBg(im.currentSrc || im.src);
   }
 
   function go(i) { active = ((i % n) + n) % n; layout(); restart(); }

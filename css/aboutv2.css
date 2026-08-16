@@ -1,0 +1,122 @@
+/* =========================================================================
+   CDS · About v2 — cinematic interactive Hilux page
+   Layered so the giant type sits BEHIND the 3D subject:
+   glow(0) < type(1) < transparent canvas(2) < fx overlays(3)
+   ========================================================================= */
+
+.av2-body { background: #060608; }
+
+/* darker, richer studio wash behind everything */
+.av2-hero-wrap { position: relative; background:
+  radial-gradient(120% 90% at 50% 8%, #14161c 0%, #0b0c10 46%, #060608 100%); }
+
+/* ---- the tall scroll track; the stage pins inside it ---- */
+.a3d { position: relative; height: 460vh; }
+@media (max-width: 760px){ .a3d { height: 420vh; } }
+
+.a3d-stage {
+  position: sticky; top: 0; height: 100vh; width: 100%;
+  overflow: hidden; isolation: isolate;
+  display: grid; place-items: center;
+}
+
+/* backlight glow so the dark truck separates from the ground */
+.a3d-glow { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 42% at 50% 42%, rgba(120,140,190,.16), transparent 70%),
+    radial-gradient(40% 30% at 30% 68%, rgba(225,29,42,.10), transparent 72%); }
+
+/* ---- giant type behind the subject ---- */
+.a3d-text { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.a3d-line {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(1180px, 92vw); text-align: center; opacity: 0; will-change: opacity, transform;
+}
+.a3d-kicker {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: "DM Sans", system-ui, sans-serif; font-weight: 500;
+  font-size: clamp(.7rem, 1.1vw, .82rem); letter-spacing: .32em; text-transform: uppercase;
+  color: var(--accent, #e11d2a); margin-bottom: clamp(14px, 2vw, 26px);
+}
+.a3d-kicker::before, .a3d-kicker::after { content: ""; width: 34px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent, #e11d2a)); }
+.a3d-kicker::after { background: linear-gradient(90deg, var(--accent, #e11d2a), transparent); }
+.a3d-big {
+  font-family: "DM Sans", system-ui, sans-serif; font-weight: 700;
+  font-size: clamp(2.9rem, 12vw, 11rem); line-height: .86; letter-spacing: -.035em;
+  color: #fff;
+  background: linear-gradient(180deg, #ffffff 0%, #cfd3dd 62%, #7f8593 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow: 0 30px 90px rgba(0,0,0,.55);
+}
+.a3d-big em { font-style: normal; -webkit-text-fill-color: initial; color: var(--accent, #e11d2a);
+  background: none; }
+.a3d-sub { margin: 0 auto; max-width: 46ch;
+  font-family: "DM Sans", system-ui, sans-serif; font-size: clamp(1rem, 1.35vw, 1.18rem);
+  line-height: 1.55; color: #c7cbd4; }
+.a3d-cta { margin-top: clamp(18px,2.4vw,26px); display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* foreground CTA layer for the final scene (above the canvas so it's clickable) */
+.a3d-final { position: absolute; left: 50%; bottom: clamp(72px, 12vh, 128px); transform: translate(-50%, 14px);
+  z-index: 6; width: min(680px, 90vw); text-align: center; opacity: 0; pointer-events: none;
+  transition: opacity .45s ease, transform .45s ease; }
+.a3d-final::before { content: ""; position: absolute; inset: -40px -60px; z-index: -1;
+  background: radial-gradient(70% 120% at 50% 60%, rgba(6,6,9,.82), rgba(6,6,9,.4) 60%, transparent 78%);
+  filter: blur(4px); }
+.a3d-final .a3d-sub { text-shadow: 0 2px 22px rgba(0,0,0,.85); }
+.a3d-final.show { transform: translate(-50%, 0); }
+.a3d-final .btn { pointer-events: auto; }
+
+/* ---- the WebGL canvas sits in front of the type, transparent ---- */
+.a3d-canvas { position: absolute; inset: 0; z-index: 2; display: block; width: 100% !important; height: 100% !important;
+  touch-action: pan-y; cursor: grab; }
+.a3d-canvas:active { cursor: grabbing; }
+
+/* ---- cinematic overlays ---- */
+.a3d-fx { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.a3d-fx::before { content: ""; position: absolute; inset: 0;
+  background: radial-gradient(130% 120% at 50% 46%, transparent 54%, rgba(4,4,6,.72) 100%); } /* vignette */
+.a3d-fx::after { content: ""; position: absolute; inset: 0; opacity: .05; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+
+/* progress scrubber + drag hint */
+.a3d-hint { position: absolute; left: 50%; bottom: clamp(22px, 4vh, 42px); transform: translateX(-50%);
+  z-index: 4; pointer-events: none; display: inline-flex; align-items: center; gap: 9px;
+  font-family: "DM Sans", sans-serif; font-weight: 500; font-size: .74rem; letter-spacing: .18em; text-transform: uppercase;
+  color: #b9bdc7; padding: 9px 16px; border-radius: 999px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  transition: opacity .5s ease, transform .5s ease; }
+.a3d-hint svg { width: 16px; height: 16px; }
+.a3d-hint.gone { opacity: 0; transform: translateX(-50%) translateY(10px); }
+@media (prefers-reduced-motion: reduce){ .a3d-hint { animation: none; } }
+
+.a3d-scrollcue { position: absolute; right: clamp(18px, 3vw, 40px); bottom: clamp(22px, 4vh, 42px);
+  z-index: 4; pointer-events: none; writing-mode: vertical-rl; font-family: "DM Sans", sans-serif; font-size: .68rem;
+  letter-spacing: .26em; text-transform: uppercase; color: #7c818d; }
+
+/* loader */
+.a3d-loading { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; background: #08090c;
+  transition: opacity .5s ease; }
+.a3d-loading[hidden] { display: none; }
+.a3d-loading .spin { width: 34px; height: 34px; border-radius: 50%;
+  border: 3px solid rgba(255,255,255,.16); border-top-color: var(--accent, #e11d2a); animation: a3dspin 1s linear infinite; }
+@keyframes a3dspin { to { transform: rotate(360deg); } }
+
+/* graceful fallback if WebGL is unavailable */
+[data-a3d][data-failed="1"] .a3d-canvas,
+[data-a3d][data-failed="1"] .a3d-loading { display: none; }
+[data-a3d][data-failed="1"] .a3d-line { opacity: 1 !important; }
+
+/* ---- editorial "about" content below the experience ---- */
+.av2-story { position: relative; z-index: 1; }
+.av2-lead { max-width: 22ch; font-family: "DM Sans", sans-serif; font-weight: 700;
+  font-size: clamp(1.7rem, 3.4vw, 2.8rem); line-height: 1.08; letter-spacing: -.02em; }
+.av2-figures { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(30px, 4vw, 52px); }
+.av2-fig b { display: block; font-family: "DM Sans", sans-serif; font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.02em; }
+.av2-fig span { color: var(--muted, #8b8f98); font-size: .92rem; }
+.av2-fig i { color: var(--accent, #e11d2a); font-style: normal; }
+@media (max-width: 720px){ .av2-figures { grid-template-columns: 1fr 1fr; } }

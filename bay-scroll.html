@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inside the bay | CDS · Overspray Solutions</title>
+<meta name="description" content="Walk through the CDS detailing bay. Premium detailing, 10H graphene ceramic coating and non-abrasive overspray removal across Melbourne. Call Andy on 0410 939 700.">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="shortcut icon" href="assets/img/favicon.ico">
+<link rel="preload" href="assets/fonts/spacegrotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-400.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:title" content="Inside the bay | CDS · Overspray Solutions">
+<meta property="og:description" content="A scroll through the CDS detailing bay: full-spectrum lighting, sealed floor, and 30+ years of overspray removal.">
+<meta property="og:type" content="website">
+
+<style>
+/* =========================================================================
+   Standalone scroll page. Tokens, type scale and accent are copied verbatim
+   from css/styles.css so this page matches the rest of the site without
+   inheriting the main stylesheet's layout rules.
+   Theme is locked dark, as the CDS brand is dark-only.
+   ========================================================================= */
+
+@font-face{font-family:"Space Grotesk";src:url("assets/fonts/spacegrotesk-500.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Space Grotesk";src:url("assets/fonts/spacegrotesk-700.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Manrope";src:url("assets/fonts/manrope-400.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Manrope";src:url("assets/fonts/manrope-500.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Manrope";src:url("assets/fonts/manrope-600.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Manrope";src:url("assets/fonts/manrope-700.woff2") format("woff2");font-weight:700;font-display:swap}
+
+:root{
+  --bg:#0a0a0c;
+  --bg-2:#111116;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.14);
+  --text:#f5f5f7;
+  --muted:#9c9ca8;
+  /* lifted from the site's #6f6f7b: that tone cannot reach WCAG AA at 13px
+     against any background, even pure black. Measured, not guessed. */
+  --muted-2:#94949f;
+  --accent:#e11d2a;
+  --accent-hot:#ff3141;
+  /* one radius rule for the page: pill for interactive, 16px for media, 10px for small */
+  --r-card:16px;
+  --r-sm:10px;
+  --r-pill:999px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --maxw:1240px;
+  --gutter:clamp(20px,5vw,64px);
+  --nav-h:68px;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:clamp(15px,1.05vw,17px);line-height:1.65;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2{font-family:"Space Grotesk",sans-serif;font-weight:700;line-height:1.04;letter-spacing:-.02em;margin:0}
+p{margin:0}
+::selection{background:var(--accent);color:#fff}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-hot);outline-offset:3px;border-radius:6px}
+
+/* ---------------- 3D stage, pinned behind everything ---------------- */
+#stage{position:fixed;inset:0;z-index:0;background:var(--bg)}
+#stage canvas{display:block;width:100%;height:100%}
+#fallback{
+  position:fixed;inset:0;z-index:0;display:none;
+  background:url("assets/img/garage.png") center/cover no-repeat var(--bg);
+}
+#fallback.on{display:block}
+/* Global veil: only enough to hold the nav. The heavy lifting is done
+   per-panel below, aimed at wherever that panel's copy actually sits, so the
+   bay stays visible where there is no text to protect. */
+#scrim{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(10,10,12,.80) 0,rgba(10,10,12,0) 16%);
+}
+
+/* ---------------- nav: one line, 68px ---------------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:6;height:var(--nav-h);
+  display:flex;align-items:center;
+  background:linear-gradient(to bottom,rgba(10,10,12,.92),rgba(10,10,12,0));
+  backdrop-filter:saturate(140%) blur(10px);
+}
+.nav-inner{
+  width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.brand-mark{height:26px;width:auto}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{
+  font-family:"Space Grotesk",sans-serif;font-size:13.5px;font-weight:500;
+  color:var(--muted);transition:color .25s var(--ease);white-space:nowrap;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-phone{
+  display:inline-flex;align-items:center;gap:8px;color:var(--text);
+  font-family:"Space Grotesk",sans-serif;font-size:13.5px;font-weight:500;white-space:nowrap;
+}
+.nav-phone svg{width:15px;height:15px}
+
+/* ---------------- buttons ---------------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:.95rem;
+  padding:14px 26px;border-radius:var(--r-pill);border:1px solid transparent;
+  cursor:pointer;white-space:nowrap;
+  transition:transform .25s var(--ease),box-shadow .3s var(--ease),background .25s var(--ease),border-color .25s var(--ease);
+}
+.btn svg{width:17px;height:17px;flex:none}
+/* hover deepens the red rather than brightening it: white on --accent-hot is
+   only 3.64:1, which fails AA at this label size. #c4141f measures 6.06:1. */
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 18px 50px -18px rgba(225,29,42,.55)}
+.btn-primary:hover{background:#c4141f;transform:translateY(-2px);box-shadow:0 22px 56px -18px rgba(225,29,42,.7)}
+.btn-primary:active{transform:translateY(0) scale(.98)}
+.btn-ghost{background:rgba(255,255,255,.04);border-color:var(--line-2);color:var(--text)}
+.btn-ghost:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+.btn-ghost:active{transform:translateY(0) scale(.98)}
+.btn-sm{padding:10px 20px;font-size:.86rem}
+
+/* ---------------- scroll panels ---------------- */
+#doc{position:relative;z-index:2}
+.panel{
+  position:relative;
+  min-height:100svh;display:grid;align-items:center;
+  padding-block:calc(var(--nav-h) + 24px) 72px;
+  padding-inline:var(--gutter);
+  pointer-events:none;
+}
+.panel > *{pointer-events:auto}
+/* per-panel scrim, shaped to that panel's copy placement (see #scrim note) */
+.panel::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none}
+.inner{position:relative;z-index:1;width:100%;max-width:var(--maxw);margin-inline:auto}
+
+.p-hero::before{background:linear-gradient(to right,
+  rgba(10,10,12,.94) 0%,rgba(10,10,12,.92) 48%,rgba(10,10,12,.86) 64%,
+  rgba(10,10,12,.30) 86%,rgba(10,10,12,.38) 100%)}
+.p-split::before{background:linear-gradient(to right,
+  rgba(10,10,12,.94) 0%,rgba(10,10,12,.92) 54%,rgba(10,10,12,.32) 72%,
+  rgba(10,10,12,.26) 86%,rgba(10,10,12,.40) 100%)}
+.p-stack::before{background:linear-gradient(to left,
+  rgba(10,10,12,.94) 0%,rgba(10,10,12,.92) 62%,rgba(10,10,12,.86) 72%,
+  rgba(10,10,12,.30) 88%,rgba(10,10,12,.26) 100%)}
+.p-close::before{background:linear-gradient(to bottom,
+  rgba(10,10,12,.26) 0%,rgba(10,10,12,.28) 18%,rgba(10,10,12,.90) 44%,
+  rgba(10,10,12,.95) 62%,rgba(10,10,12,.97) 100%)}
+@media(max-width:900px){
+  /* single column: copy spans the width, so veil the whole panel evenly */
+  .p-hero::before,.p-split::before,.p-stack::before{background:linear-gradient(to bottom,
+    rgba(10,10,12,.90) 0%,rgba(10,10,12,.86) 50%,rgba(10,10,12,.92) 100%)}
+  .p-close::before{background:linear-gradient(to bottom,
+    rgba(10,10,12,.34) 0%,rgba(10,10,12,.42) 24%,rgba(10,10,12,.90) 46%,rgba(10,10,12,.95) 100%)}
+}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:12px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;
+}
+.eyebrow::before{content:"";width:28px;height:1px;background:linear-gradient(90deg,var(--accent),rgba(225,29,42,0))}
+h1{font-size:clamp(2.4rem,6vw,4.6rem)}
+h2{font-size:clamp(1.9rem,4.2vw,3.25rem)}
+/* accent-hot for accent TEXT (the darker --accent is for button fills, where
+   it carries white type). Both are the site's own tokens. */
+.accent{color:var(--accent-hot)}
+.lede{color:var(--muted);font-size:clamp(1rem,1.3vw,1.15rem);max-width:52ch;margin-top:22px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+
+/* panel 1: hero, left aligned over the bay */
+.p-hero .inner{max-width:min(var(--maxw),980px)}
+
+/* panel 2: copy left, single tall image right */
+.p-split .inner{
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(28px,5vw,72px);align-items:center;
+}
+.shot{
+  border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 30px 70px -28px rgba(0,0,0,.85);background:var(--bg-2);
+}
+.shot img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
+.facts{display:flex;flex-wrap:wrap;gap:26px 40px;margin-top:32px}
+.fact b{
+  display:block;font-family:"Space Grotesk",sans-serif;font-size:1.5rem;
+  font-weight:700;letter-spacing:-.02em;line-height:1.1;
+}
+.fact span{display:block;color:var(--muted-2);font-size:13px;margin-top:4px}
+
+/* panel 3: right-weighted stack, so the bay stays open on the left.
+   Top-aligned: this panel's content is taller than a short viewport, and
+   centring it tucks the eyebrow up behind the fixed nav. */
+.p-stack{align-items:start}
+.p-stack .inner{display:grid;gap:clamp(18px,2.6vw,30px);max-width:min(720px,100%);margin-left:auto;margin-right:0}
+.p-stack .lede{max-width:52ch}
+.caps{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;
+  border-top:1px solid var(--line);padding-top:22px;
+}
+.caps div{font-family:"Space Grotesk",sans-serif;font-size:.95rem;font-weight:500}
+.caps span{display:block;color:var(--muted-2);font-size:13px;font-family:"Manrope",sans-serif;margin-top:5px}
+.plate{
+  border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 30px 70px -28px rgba(0,0,0,.85);
+}
+.plate img{width:100%;aspect-ratio:21/6;object-fit:cover;object-position:center 58%}
+.line{color:var(--muted);font-size:.95rem}
+.line a{color:var(--text);border-bottom:1px solid var(--line-2);padding-bottom:2px}
+.line a:hover{border-color:var(--accent)}
+
+/* panel 4: close. Bottom-aligned on purpose, so the logo wall reads clean
+   above the copy and the vertical scrim below can be strong. */
+.p-close{align-items:end}
+.p-close .inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:clamp(28px,5vw,72px);align-items:end}
+blockquote{
+  margin:0;font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.5;
+  font-family:"Space Grotesk",sans-serif;font-weight:500;letter-spacing:-.01em;
+}
+/* 20px/700 puts the stars in WCAG's large-text band, where the brand red clears 3:1 */
+.stars{color:var(--accent-hot);letter-spacing:.18em;font-size:20px;font-weight:700;display:block;margin-bottom:16px}
+.who{margin-top:20px;color:var(--muted-2);font-size:13.5px}
+.who b{color:var(--text);font-weight:600;display:block;font-size:14.5px}
+
+/* ---------------- progress + loading ---------------- */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:7}
+#loading{
+  position:fixed;inset:0;z-index:9;display:grid;place-content:center;justify-items:center;gap:22px;
+  background:var(--bg);transition:opacity .7s var(--ease);
+}
+#loading.done{opacity:0;pointer-events:none}
+#loading img{height:30px;opacity:.9}
+.bar{width:180px;height:2px;background:rgba(255,255,255,.12);overflow:hidden;border-radius:var(--r-pill)}
+.bar i{display:block;height:100%;width:40%;background:var(--accent);animation:slide 1.15s var(--ease) infinite}
+@keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+
+/* ---------------- reveals ---------------- */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv[data-d="1"]{transition-delay:.1s}
+.rv[data-d="2"]{transition-delay:.2s}
+
+/* ---------------- responsive ---------------- */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .p-split .inner,.p-close .inner{grid-template-columns:1fr;align-items:start}
+  .p-stack .inner{max-width:100%;margin-inline:0}
+  .p-split .shot{order:-1}
+  .shot img{aspect-ratio:16/10}
+  .caps{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+  .plate img{aspect-ratio:16/9}
+  .panel{padding-block:calc(var(--nav-h) + 20px) 56px}
+}
+@media(max-width:560px){
+  .nav-phone span{display:none}
+  .facts{gap:20px 28px}
+  .actions .btn{flex:1 1 auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .rv{transition:none;opacity:1;transform:none}
+  .bar i{animation:none;width:100%}
+  .btn{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div id="stage" aria-hidden="true"></div>
+<div id="fallback" aria-hidden="true"></div>
+<div id="scrim" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" aria-label="CDS Overspray Solutions home">
+      <img class="brand-mark" src="assets/img/logo-mark.png" alt="CDS Car Detailing Solutions">
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#overspray">Overspray Removal</a>
+      <a href="index.html#work">Our Work</a>
+    </nav>
+    <div class="nav-right">
+      <a href="tel:0410939700" class="nav-phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>0410 939 700</span>
+      </a>
+      <a href="index.html#contact" class="btn btn-primary btn-sm">Get a free quote</a>
+    </div>
+  </div>
+</header>
+
+<main id="doc">
+
+  <!-- 1 / at the roller door -->
+  <section class="panel p-hero">
+    <div class="inner rv in">
+      <span class="eyebrow">Owner-operated · Melbourne</span>
+      <h1>Detailed properly.<br><span class="accent">Protected</span> for years.</h1>
+      <p class="lede">Premium detailing, 10H graphene ceramic coating and specialist overspray removal across Melbourne.</p>
+      <div class="actions">
+        <a href="index.html#contact" class="btn btn-primary">Get a free quote
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="index.html#work" class="btn btn-ghost">See our work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 / down the bay -->
+  <section class="panel p-split">
+    <div class="inner">
+      <div class="rv">
+        <h2>Detailing done to a standard,<br>not a shortcut.</h2>
+        <p class="lede">Professional abrasive polishing systems and nano-technology coatings. Paint brought back to life, then sealed under a 10H graphene shell.</p>
+        <div class="facts">
+          <div class="fact"><b>30+ years</b><span>Hands-on experience</span></div>
+          <div class="fact"><b>10H</b><span>Graphene coating hardness</span></div>
+          <div class="fact"><b>7 days</b><span>7am to 7pm, we come to you</span></div>
+        </div>
+      </div>
+      <figure class="shot rv" data-d="1" style="margin:0">
+        <img src="assets/img/headlight.jpg" alt="Snow foam rinsing off the front wheel and bumper of a black sports car" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <!-- 3 / the specialty -->
+  <section class="panel p-stack">
+    <div class="inner">
+      <div class="rv">
+        <span class="eyebrow">The specialty</span>
+        <h2>Overspray and industrial<br>fallout removal.</h2>
+        <p class="lede">Overspray travels hundreds of metres on the wind and settles on your duco. We lift it by hand, non-abrasively. The factory finish stays untouched.</p>
+      </div>
+      <div class="caps rv" data-d="1">
+        <div>Vehicles and trucks<span>Cars, 4x4s, fleets, machinery</span></div>
+        <div>Boats and marine<span>Hulls, decks and fittings</span></div>
+        <div>Aircraft<span>Fuselage and painted surfaces</span></div>
+        <div>Buildings and glass<span>Windows, cladding, surfaces</span></div>
+      </div>
+      <figure class="plate rv" data-d="2" style="margin:0">
+        <img src="assets/gallery/27.jpg" alt="A detailed cream LandCruiser ute with bullbar, parked at a Melbourne industrial estate" loading="lazy" decoding="async">
+      </figure>
+      <p class="line rv" data-d="2">We also lift epoxy, urethane, soot, iron filings, cement splatter and graffiti. Overspray line <a href="tel:0412107464">0412 107 464</a>.</p>
+    </div>
+  </section>
+
+  <!-- 4 / the logo wall -->
+  <section class="panel p-close">
+    <div class="inner">
+      <div class="rv">
+        <h2>Book your detail.</h2>
+        <p class="lede">A few quick questions and Andy will confirm your booking and price. Mobile across Melbourne or drop-off, 7 days a week.</p>
+        <div class="actions">
+          <a href="index.html#contact" class="btn btn-primary">Get a free quote
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="tel:0410939700" class="btn btn-ghost">0410 939 700</a>
+        </div>
+      </div>
+      <figure class="rv" data-d="1" style="margin:0">
+        <span class="stars" aria-label="Rated five out of five">★★★★★</span>
+        <blockquote>The Onyx Graphene Pro coating he put on my RAV4 is amazing. The service is top notch and goes above and beyond.</blockquote>
+        <figcaption class="who"><b>Marcus D.</b>Toyota RAV4, ceramic coating</figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<div id="loading">
+  <img src="assets/img/logo-mark.png" alt="">
+  <div class="bar" role="progressbar" aria-label="Loading the bay"><i></i></div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"./assets/vendor/three.module.js","three/addons/":"./assets/vendor/addons/"}}
+</script>
+
+<script type="module">
+/* =========================================================================
+   Scroll-scrubbed walk through the CDS bay. Vanilla three.js, rAF scroll
+   sampling (no scroll listener), matching the approach in js/coat3d.js.
+   Four scroll panels map to four camera keyframes.
+   ========================================================================= */
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const stage    = document.getElementById('stage');
+const loading  = document.getElementById('loading');
+const fallback = document.getElementById('fallback');
+const progress = document.getElementById('progress');
+
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MOBILE  = matchMedia('(max-width: 760px)').matches;
+const clamp   = (v, a, b) => Math.max(a, Math.min(b, v));
+
+/* Look calibration, measured off the rendered frame rather than guessed.
+   RIG scales every light; the LED strips are emissive so they ignore it, which
+   is what lets the bloom threshold sit above the walls and catch only the
+   strips. At RIG 1.0 the bay blows out to 247/255 and everything blooms into
+   haze. These values land the back wall near 180 and the floor near 145. */
+const EXPOSURE   = 0.75;
+const RIG        = 0.12;
+const BLOOM      = { strength: MOBILE ? 0.22 : 0.30, radius: 0.40, threshold: 1.0 };
+
+/* --- copy reveals: IntersectionObserver, not a scroll handler --- */
+const io = new IntersectionObserver(
+  (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.25 }
+);
+document.querySelectorAll('.rv').forEach((el) => io.observe(el));
+
+/* --- if WebGL is unavailable, show the real studio photo and stop --- */
+function bail(err) {
+  if (err) console.warn('[bay-scroll]', err);
+  fallback.classList.add('on');
+  stage.style.display = 'none';
+  loading.classList.add('done');
+  if (renderer) renderer.setAnimationLoop(null);   // stop burning frames on a hidden canvas
+}
+
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: !MOBILE, powerPreference: 'high-performance' });
+} catch (e) { bail(e); }
+
+if (renderer) init();
+
+function init() {
+  renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.4 : 1.75));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = EXPOSURE;
+  renderer.shadowMap.enabled = !MOBILE;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  stage.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x06070a);
+
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  // sigma 0.04 is the largest PMREM accepts without clipping its sample budget
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environmentIntensity = 0.5;
+
+  const camera = new THREE.PerspectiveCamera(46, innerWidth / innerHeight, 0.05, 120);
+
+  /* ---- light rig: the GLB carries geometry and emissive surfaces only,
+         glTF has no standard for lights, so the fit-out is rebuilt here ---- */
+  const RIDGE = 3.92;
+  const rig = new THREE.Group();
+  rig.add(new THREE.HemisphereLight(0xf2f6ff, 0x9ea3ab, 1.15 * RIG));
+  for (const z of [-8.4, -6.2, -4.0, -1.9]) {
+    const l = new THREE.PointLight(0xfff4e8, 42 * RIG, 13, 2);
+    l.position.set(0, RIDGE - 0.55, z);
+    rig.add(l);
+  }
+  for (const [x, z] of [[-2.9, -7.4], [-2.9, -3.1], [2.9, -7.4], [2.9, -3.1]]) {
+    const l = new THREE.PointLight(0xffffff, 14 * RIG, 7.5, 2);
+    l.position.set(x, 1.55, z);
+    rig.add(l);
+  }
+  const door = new THREE.PointLight(0xdce9ff, 16 * RIG, 12, 2);
+  door.position.set(0, 2.0, 1.2);
+  rig.add(door);
+  if (!MOBILE) {
+    const key = new THREE.SpotLight(0xfff6ec, 110 * RIG, 16, Math.PI / 3.1, 0.55, 2);
+    key.position.set(0.4, RIDGE - 0.25, -5.2);
+    key.target.position.set(0.2, 0, -8.2);
+    key.castShadow = true;
+    key.shadow.mapSize.set(1024, 1024);
+    key.shadow.bias = -0.0009;
+    key.shadow.normalBias = 0.02;
+    key.shadow.camera.near = 0.5;
+    key.shadow.camera.far = 18;
+    rig.add(key, key.target);
+  }
+  scene.add(rig);
+
+  /* ---- post: bloom is what makes the LED runs read as light, not paint ---- */
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight),
+                                    BLOOM.strength, BLOOM.radius, BLOOM.threshold);
+  composer.addPass(bloom);
+  composer.addPass(new OutputPass());
+
+  /* ---- camera keyframes: one per scroll panel.
+         getPoint (not getPointAt) so t = 0, 1/3, 2/3, 1 land exactly on the
+         four control points, giving each panel a settled pose. ---- */
+  const V = (x, y, z) => new THREE.Vector3(x, y, z);
+  const path = new THREE.CatmullRomCurve3([
+    V( 0.00, 1.62,  0.30),   // 1 just inside the roller door
+    V(-0.95, 1.52, -2.10),   // 2 drifting down the left of the bay
+    V( 1.70, 1.22, -2.60),   // 3 low and right, roof battens filling the top
+    V( 0.30, 1.72, -5.30),   // 4 settled on the logo wall
+  ], false, 'catmullrom', 0.4);
+  const aim = new THREE.CatmullRomCurve3([
+    V( 0.10, 1.45, -6.50),
+    V( 1.50, 1.35, -7.80),
+    V(-0.60, 2.05, -8.90),
+    V( 0.45, 2.28, -9.60),
+  ], false, 'catmullrom', 0.4);
+
+  const cPos = new THREE.Vector3();
+  const cAim = new THREE.Vector3();
+  let t = 0, smooth = 0;
+  const ptr = { x: 0, y: 0, tx: 0, ty: 0 };
+
+  addEventListener('pointermove', (e) => {
+    ptr.tx = (e.clientX / innerWidth  - 0.5) * 2;
+    ptr.ty = (e.clientY / innerHeight - 0.5) * 2;
+  }, { passive: true });
+
+  /* ---- model ---- */
+  new GLTFLoader().load('assets/models/cds-detail-bay.glb', (gltf) => {
+    const root = gltf.scene;
+    root.traverse((o) => {
+      if (!o.isMesh) return;
+      o.castShadow = o.receiveShadow = !MOBILE;
+      if (/LED|Batten|Reflection/.test(o.material?.name || '')) o.castShadow = false;
+    });
+    scene.add(root);
+
+    // take the reflection probe off the bay itself, so the polished floor
+    // reflects these white walls and LED runs rather than a generic studio
+    try {
+      root.position.set(0, -1.45, 4.80);
+      scene.environment = pmrem.fromScene(scene, 0.04, 0.4, 40).texture;
+      scene.environmentIntensity = 0.75;
+      root.position.set(0, 0, 0);
+    } catch (e) { console.warn('[bay-scroll] scene probe failed', e); }
+
+    loading.classList.add('done');
+  }, undefined, (e) => bail(e));
+
+  addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    composer.setSize(innerWidth, innerHeight);
+  });
+
+  renderer.setAnimationLoop(() => {
+    // scroll is sampled here, inside the frame we already render, so there is
+    // no per-event scroll handler fighting the compositor
+    const max = document.documentElement.scrollHeight - innerHeight;
+    t = max > 0 ? clamp(scrollY / max, 0, 1) : 0;
+    progress.style.width = (t * 100) + '%';
+
+    smooth += (t - smooth) * (REDUCED ? 1 : 0.075);
+    ptr.x  += (ptr.tx - ptr.x) * 0.06;
+    ptr.y  += (ptr.ty - ptr.y) * 0.06;
+
+    path.getPoint(smooth, cPos);
+    aim.getPoint(smooth, cAim);
+
+    camera.position.copy(cPos);
+    if (!REDUCED) {
+      camera.position.x += ptr.x * 0.15;
+      camera.position.y += -ptr.y * 0.08;
+    }
+    camera.lookAt(cAim);
+
+    composer.render();
+  });
+}
+</script>
+</body>
+</html>

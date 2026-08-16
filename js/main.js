@@ -8,16 +8,11 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var qaMode = /[?&]qa\b/.test(location.search); // reveals everything up-front for QA/screenshots
 
-  /* ---------- Landing splash ---------- */
-  var splash = document.getElementById("splash");
-  if (splash) {
-    if (qaMode) { splash.classList.add("done"); }
-    else {
-      document.documentElement.style.overflow = "hidden";
-      var killSplash = function () { splash.classList.add("done"); document.documentElement.style.overflow = ""; };
-      var splashT = setTimeout(killSplash, reduceMotion ? 650 : 2600);
-      splash.addEventListener("click", function () { clearTimeout(splashT); killSplash(); });
-    }
+  /* ---------- Entry splash cleanup (fade handled in CSS) ---------- */
+  var splash2 = document.getElementById("splash2");
+  if (splash2) {
+    if (qaMode) splash2.classList.add("done");
+    else setTimeout(function () { splash2.classList.add("done"); }, 3400);
   }
 
   /* ---------- Nav glass on scroll (sentinel, not scroll listener) ---------- */
@@ -124,7 +119,7 @@
     track.querySelectorAll("img").forEach(function (im) { im.addEventListener("load", measure); });
     window.addEventListener("resize", measure);
 
-    var seeded = false, dragging = false, startX = 0, startScroll = 0, moved = 0, speed = 0.5;
+    var seeded = false, dragging = false, startX = 0, startScroll = 0, moved = 0, speed = 1.05;
     function wrap() {
       if (seg <= 0) return;
       if (row.scrollLeft >= 2 * seg) row.scrollLeft -= seg;
@@ -227,6 +222,92 @@
     var heroEl = document.querySelector(".hero");
     if (heroEl) heroEl.style.minHeight = "720px"; // let full page stack for tall screenshots
   }
+
+  /* ---------- CDS parallax band ---------- */
+  (function () {
+    var band = document.querySelector("[data-parallax]");
+    if (!band || reduceMotion) return;
+    var word = band.querySelector(".cds-para-word");
+    if (!word) return;
+    var letters = Array.prototype.slice.call(word.querySelectorAll("i")); // C, D, S
+    var vis = false, raf = 0;
+    new IntersectionObserver(function (e) {
+      vis = e[0].isIntersecting;
+      if (vis && !raf) raf = requestAnimationFrame(loop);
+    }, { threshold: 0 }).observe(band);
+    function bell(x, c, w) { return Math.max(0, 1 - Math.abs(x - c) / w); } // triangle peak at c
+    function loop() {
+      if (!vis) { raf = 0; return; }
+      var r = band.getBoundingClientRect();
+      // p = 0 as the band enters from the bottom, 1 as it exits the top
+      var p = Math.max(0, Math.min(1, (innerHeight - r.top) / (innerHeight + r.height)));
+      var d = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      word.style.transform = "translateY(" + (Math.max(-1, Math.min(1, d)) * -70).toFixed(1) + "px)"; // parallax drift
+      // C / D / S fade in then out in sequence, keyed to scroll position
+      if (letters.length) {
+        var centres = [0.34, 0.5, 0.66];
+        for (var i = 0; i < letters.length; i++) {
+          letters[i].style.opacity = (0.06 + 0.94 * bell(p, centres[i] || 0.5, 0.2)).toFixed(3);
+        }
+      } else {
+        word.style.opacity = (0.12 + 0.88 * Math.max(0, 1 - Math.abs(d) / 0.7)).toFixed(3);
+      }
+      raf = requestAnimationFrame(loop);
+    }
+  })();
+
+  /* ---------- Reviews carousel ---------- */
+  (function () {
+    var rev = document.querySelector("[data-rev]");
+    if (!rev) return;
+    var track = rev.querySelector(".rev-track");
+    var cards = track.children;
+    var total = cards.length;
+    if (total <= 1) { var nav = rev.querySelector(".rev-nav"); if (nav) nav.style.display = "none"; return; }
+    var dotsWrap = rev.querySelector(".rev-dots");
+    var idx = 0, timer = null;
+
+    for (var d = 0; d < total; d++) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Go to review " + (d + 1));
+      (function (i) { b.addEventListener("click", function () { go(i, true); }); })(d);
+      dotsWrap.appendChild(b);
+    }
+    var dots = dotsWrap.children;
+
+    function render() {
+      track.style.transform = "translateX(" + (-idx * 100) + "%)";
+      for (var i = 0; i < total; i++) dots[i].classList.toggle("on", i === idx);
+    }
+    function go(n, user) {
+      idx = (n + total) % total;
+      render();
+      if (user) restart();
+    }
+    function restart() {
+      if (reduceMotion) return;
+      clearInterval(timer);
+      timer = setInterval(function () { go(idx + 1); }, 6500);
+    }
+
+    rev.querySelector(".rev-prev").addEventListener("click", function () { go(idx - 1, true); });
+    rev.querySelector(".rev-next").addEventListener("click", function () { go(idx + 1, true); });
+    rev.addEventListener("mouseenter", function () { clearInterval(timer); });
+    rev.addEventListener("mouseleave", restart);
+
+    // basic swipe on touch
+    var sx = 0, sactive = false;
+    rev.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; sactive = true; }, { passive: true });
+    rev.addEventListener("touchend", function (e) {
+      if (!sactive) return; sactive = false;
+      var dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1), true);
+    });
+
+    render();
+    restart();
+  })();
 
   /* ---------- Booking wizard lives in js/booking.js ---------- */
 })();

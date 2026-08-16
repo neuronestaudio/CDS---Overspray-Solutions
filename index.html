@@ -10,8 +10,8 @@
 <meta name="description" content="Melbourne's specialist in premium car detailing, 10H graphene ceramic coating, paint correction and non-abrasive overspray removal. Owner-operated, mobile, 7 days. Call Andy on 0410 939 700.">
 <meta name="theme-color" content="#0a0a0c">
 <link rel="shortcut icon" href="assets/img/favicon.ico">
-<link rel="preload" href="assets/fonts/spacegrotesk-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/manrope-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="css/styles.css">
 <meta property="og:title" content="CDS · Overspray Solutions - Premium Detailing & Overspray Removal">
 <meta property="og:description" content="Ceramic coating, paint correction, detailing and non-abrasive overspray removal across Melbourne.">
@@ -23,11 +23,12 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<!-- ============ LANDING SPLASH ============ -->
-<div class="splash" id="splash">
-  <div class="splash-inner">
-    <img class="splash-logo" src="assets/img/logo-mark.png" alt="CDS">
-    <span class="splash-line"></span>
+<!-- ============ ENTRY SPLASH (CDS · Car Detailing Solutions reveal) ============ -->
+<div class="splash2" id="splash2" aria-hidden="true">
+  <div class="splash2-inner">
+    <img class="splash2-logo" src="assets/img/logo-mark.png" alt="CDS" style="width:215px;max-width:52vw;height:auto">
+    <div class="splash2-word"><span>Car</span> <span>Detailing</span> <span>Solutions</span></div>
+    <span class="splash2-bar"></span>
   </div>
 </div>
 
@@ -68,7 +69,6 @@
   </div>
   <a class="d-link" href="#services">Services</a>
   <a class="d-link" href="about.html">About</a>
-  <a class="d-link" href="#protection">Coating builder (3D)</a>
   <a class="d-link" href="#overspray">Overspray Removal</a>
   <a class="d-link" href="warranties.html">Warranties</a>
   <a class="d-link" href="product-tds.html">Product TDS</a>
@@ -82,36 +82,71 @@
 
 <span id="top"></span>
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="hero-media"><img src="assets/img/garage.png" alt="The CDS detailing studio" fetchpriority="high"></div>
-  <div class="hero-switch" role="group" aria-label="Demo: switch hero background">
-    <span>Hero</span>
-    <button type="button" data-hero="default" aria-label="Studio">S</button>
-    <button type="button" data-hero="b" aria-label="Option B">B</button>
-    <button type="button" data-hero="c" aria-label="Option C">C</button>
-  </div>
-  <div class="hero-inner">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="hero-copy reveal in">
-          <span class="eyebrow">Owner-operated · 30+ years · Melbourne</span>
-          <h1>Detailed properly.<span><span class="accent">Protected</span> for years.</span></h1>
-          <p class="lede">Premium detailing, 10H graphene ceramic coating and specialist overspray removal. Owner-operated by Andy, with 30+ years of hands-on experience.</p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary btn-lg">Get a free quote
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a href="#work" class="btn btn-ghost btn-lg">See our work</a>
-          </div>
-          <div class="hero-trust">
-            <div class="trust-item"><span class="stars">★★★★★</span><span>Rated 5.0 by owners</span></div>
-            <div class="trust-item"><b>10H</b><span>Graphene coating hardness</span></div>
-            <div class="trust-item"><b>7 days</b><span>7am to 7pm, we come to you</span></div>
-            <div class="trust-item"><b>All makes</b><span>Daily drivers to commercial fleets</span></div>
-          </div>
-        </div>
+<!-- ============ HERO (coverflow) ============ -->
+<section class="ospx hero-cf" id="hero" data-ospx>
+  <div class="ospx-bg"><span class="hero-bgimg" aria-hidden="true"></span><span class="hero-bgimg" aria-hidden="true"></span></div>
+  <div class="wrap">
+    <div class="ospx-hero-copy reveal in">
+      <h1 class="hero-mono">Servicing Melbourne for<br>over thirty plus years.</h1>
+      <p class="hero-redsub">Ceramic coating &amp; auto detailing specialist</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary btn-lg">Get a free quote
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#work" class="btn btn-ghost btn-lg">See our work</a>
       </div>
+      <p class="hero-cf-trust"><span class="stars">★★★★★</span> Rated 5.0 by owners · 10H graphene coating · Mobile 7 days · All makes</p>
+    </div>
+
+    <div class="ospx-flow">
+      <button class="ospx-arrow ospx-prev" aria-label="Previous example"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="ospx-track" id="ospxTrack">
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/cards/card-ceramic.jpg" alt="Miami-blue Porsche after ceramic coating"></div>
+          <div class="ospx-body"><span class="ospx-num">01 / 10</span><h3 class="ospx-title">Ceramic &amp; Graphene</h3><p class="ospx-desc"><b>Onyx 10H graphene.</b> A nano-ceramic shell bonded to your clear coat &mdash; deeper gloss, easier washing and years of protection from sun, salt and road grime.</p><a href="#contact" class="btn btn-primary ospx-cta">Get a quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/img/detail-polish.jpg" alt="Machine paint correction on red paint"></div>
+          <div class="ospx-body"><span class="ospx-num">02 / 10</span><h3 class="ospx-title">Paint Correction</h3><p class="ospx-desc"><b>Swirls &amp; scratches, gone.</b> Multi-stage machine cutting and polishing pulls the true depth back out of tired, hazy paint before we lock it in.</p><a href="#contact" class="btn btn-primary ospx-cta">Get a quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/gallery/30.jpg" alt="Freshly detailed high-gloss SUV"></div>
+          <div class="ospx-body"><span class="ospx-num">03 / 10</span><h3 class="ospx-title">Full &amp; Deluxe Detail</h3><p class="ospx-desc"><b>Showroom, inside &amp; out.</b> Deep clean, decontaminate, polish and dress every surface &mdash; that brand-new feeling, top to bottom.</p><a href="#contact" class="btn btn-primary ospx-cta">Get a quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/gallery/01.jpg" alt="Detailed Mercedes prime mover truck"></div>
+          <div class="ospx-body"><span class="ospx-num">04 / 10</span><h3 class="ospx-title">Truck, Ute &amp; Fleet</h3><p class="ospx-desc"><b>Built for work.</b> Mobile detailing and pre-delivery for utes, prime movers, vans and whole fleets &mdash; sharp on the road or at your yard.</p><a href="#contact" class="btn btn-primary ospx-cta">Get a quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/cards/card-mould.jpg" alt="Interior deep clean and mould remediation"></div>
+          <div class="ospx-body"><span class="ospx-num">05 / 10</span><h3 class="ospx-title">Mould Remediation</h3><p class="ospx-desc"><b>A fresh, healthy cabin.</b> Steam, extraction and an anti-microbial treatment lift mould, damp and odour out of carpets, seats and vents.</p><a href="#contact" class="btn btn-primary ospx-cta">Get a quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/beforeafter/overspray-blue-before.jpg" alt="Blue Holden ute covered in gold industrial overspray"></div>
+          <div class="ospx-body"><span class="ospx-num">06 / 10</span><h3 class="ospx-title">Industrial Fallout</h3><p class="ospx-desc"><b>Blue Holden ute.</b> Gold industrial overspray drifted across every panel. Decontaminated by hand &mdash; the factory paint never touched.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/beforeafter/overspray-corolla-before.jpg" alt="White Toyota Corolla with overspray fallout"></div>
+          <div class="ospx-body"><span class="ospx-num">07 / 10</span><h3 class="ospx-title">Fallout on White</h3><p class="ospx-desc"><b>Toyota Corolla.</b> Overspray always shows worst on white. Lifted panel by panel &mdash; no respray, no abrasives.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/cards/card-graffiti.jpg" alt="Silver sedan with red spray-paint graffiti"></div>
+          <div class="ospx-body"><span class="ospx-num">08 / 10</span><h3 class="ospx-title">Graffiti Removal</h3><p class="ospx-desc"><b>Audi A6.</b> Red aerosol scrawled over silver duco. Removed cleanly, without ever touching the clear coat.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/beforeafter/overspray-red-before.jpg" alt="Red Holden Commodore with white paint overspray"></div>
+          <div class="ospx-body"><span class="ospx-num">09 / 10</span><h3 class="ospx-title">Paint Overspray</h3><p class="ospx-desc"><b>Red Holden Commodore.</b> White industrial paint splattered down the side. Safely dissolved and lifted straight off the duco.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+
+        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/beforeafter/graffiti-commodore-before.jpg" alt="Holden Commodore sprayed with stray paint"></div>
+          <div class="ospx-body"><span class="ospx-num">10 / 10</span><h3 class="ospx-title">Spray Splatter</h3><p class="ospx-desc"><b>Holden Commodore.</b> Caught in the spray from a nearby paint job. Every speck removed &mdash; back to clean, glossy duco.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
+      </div>
+      <button class="ospx-arrow ospx-next" aria-label="Next example"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+
+    <div class="ospx-foot reveal">
+      <div class="ospx-count"><b data-ospx-cur>01</b> / <span data-ospx-total>10</span></div>
+      <div class="ospx-dots" id="ospxDots"></div>
     </div>
   </div>
 </section>
@@ -119,8 +154,8 @@
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Ceramic Coating</span><span>Paint Correction</span><span>Overspray Removal</span><span>Full Detail</span><span>Interior Restoration</span><span>Fleet &amp; Trucks</span><span>Graphene 10H</span>
-    <span>Ceramic Coating</span><span>Paint Correction</span><span>Overspray Removal</span><span>Full Detail</span><span>Interior Restoration</span><span>Fleet &amp; Trucks</span><span>Graphene 10H</span>
+    <span>Ceramic Coating</span><span>Graphene 10H</span><span>Paint Correction</span><span>Deluxe Detailing</span><span>Full Detail</span><span>Overspray Removal</span><span>Interior Restoration</span><span>Paint Protection</span><span>Fleet &amp; Trucks</span>
+    <span>Ceramic Coating</span><span>Graphene 10H</span><span>Paint Correction</span><span>Deluxe Detailing</span><span>Full Detail</span><span>Overspray Removal</span><span>Interior Restoration</span><span>Paint Protection</span><span>Fleet &amp; Trucks</span>
   </div>
 </div>
 
@@ -136,7 +171,7 @@
       <!-- feature photo -->
       <article class="card card-photo col-4 reveal">
         <span class="feature-tag">Signature · 10H Graphene</span>
-        <img src="assets/gallery/32.jpg" alt="High-gloss coated Porsche paint and wheel">
+        <img src="assets/gallery/27.jpg" alt="Ceramic-coated Toyota LandCruiser">
         <div class="card-body">
           <h3>Ceramic &amp; Graphene Coating</h3>
           <p>Advanced nano-technology fused with graphene for an ultra-hard 10H shell. Deeper gloss, easier washing and years of protection against the Australian sun, bird mess and road grime.</p>
@@ -174,7 +209,7 @@
 
       <!-- wide fleet / commercial banner -->
       <article class="card card-photo col-6 reveal" style="min-height:300px">
-        <img src="assets/gallery/27.jpg" alt="Machine polishing a fleet van panel">
+        <img src="assets/cards/fleet-composite.jpg" alt="Truck, ute and construction fleet detailing">
         <div class="card-body">
           <span class="feature-tag" style="position:static;display:inline-flex;margin-bottom:14px">Commercial &amp; Fleet</span>
           <h3>Trucks, Utes &amp; Fleet</h3>
@@ -187,7 +222,7 @@
       </article>
     </div>
     <div class="reveal" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px">
-      <a href="#protection" class="btn btn-primary">Build your protection in 3D
+      <a href="#contact" class="btn btn-primary">Get a free quote
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a href="warranties.html" class="btn btn-ghost">Coating warranties, up to 10 years</a>
@@ -196,14 +231,71 @@
   </div>
 </section>
 
+<!-- ============ BEFORE / AFTER GALLERY ============ -->
+<section class="section textured" id="before-after">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="h-sec">Before &amp; after.<br>Lifted by hand.</h2>
+      <p class="lede">Real overspray, fallout and graffiti jobs across Melbourne. Drag each slider to reveal the result — no respray, no abrasives, the factory paint left untouched.</p>
+    </div>
+    <div class="ba-grid">
+
+      <div class="ba reveal" data-ba>
+        <div class="ba-frame" role="slider" tabindex="0" aria-label="Before and after: gold industrial overspray removal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="ba-after" src="assets/beforeafter/overspray-blue-after.jpg" alt="Blue Holden SS ute after overspray removal — glossy factory paint restored" loading="lazy">
+          <img class="ba-before" src="assets/beforeafter/overspray-blue-before.jpg" alt="Blue Holden SS ute covered in gold industrial overspray before removal" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span>
+          <span class="ba-tag ba-tag-after">After</span>
+          <span class="ba-divider" aria-hidden="true"></span>
+          <span class="ba-knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span>
+        </div>
+        <p class="ba-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3m13 5h3a2 2 0 0 0 2-2v-3"/></svg>Holden SS ute · gold industrial overspray, lifted by hand — no respray.</p>
+      </div>
+
+      <div class="ba reveal" data-ba>
+        <div class="ba-frame" role="slider" tabindex="0" aria-label="Before and after: yellow spray-paint graffiti removal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="ba-after" src="assets/beforeafter/graffiti-commodore-after.jpg" alt="White Holden Commodore after yellow spray-paint graffiti removal" loading="lazy">
+          <img class="ba-before" src="assets/beforeafter/graffiti-commodore-before.jpg" alt="White Holden Commodore covered in yellow spray-paint graffiti" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span>
+          <span class="ba-tag ba-tag-after">After</span>
+          <span class="ba-divider" aria-hidden="true"></span>
+          <span class="ba-knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span>
+        </div>
+        <p class="ba-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3m13 5h3a2 2 0 0 0 2-2v-3"/></svg>Holden Commodore · yellow spray-paint graffiti, lifted by hand — no respray.</p>
+      </div>
+
+      <div class="ba reveal" data-ba data-d="1">
+        <div class="ba-frame" role="slider" tabindex="0" aria-label="Before and after: white paint overspray removal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="ba-after" src="assets/beforeafter/overspray-red-after.jpg" alt="Red Holden Commodore after paint overspray removal, glossy factory finish" loading="lazy">
+          <img class="ba-before" src="assets/beforeafter/overspray-red-before.jpg" alt="Red Holden Commodore covered in white industrial paint overspray" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span>
+          <span class="ba-tag ba-tag-after">After</span>
+          <span class="ba-divider" aria-hidden="true"></span>
+          <span class="ba-knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span>
+        </div>
+        <p class="ba-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3m13 5h3a2 2 0 0 0 2-2v-3"/></svg>Holden Commodore · industrial paint overspray removed, factory duco untouched.</p>
+      </div>
+
+      <div class="ba reveal" data-ba data-d="2">
+        <div class="ba-frame" role="slider" tabindex="0" aria-label="Before and after: black overspray fallout removal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="ba-after" src="assets/beforeafter/overspray-corolla-after.jpg" alt="White Toyota Corolla after black overspray fallout removal" loading="lazy">
+          <img class="ba-before" src="assets/beforeafter/overspray-corolla-before.jpg" alt="White Toyota Corolla covered in black overspray fallout" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span>
+          <span class="ba-tag ba-tag-after">After</span>
+          <span class="ba-divider" aria-hidden="true"></span>
+          <span class="ba-knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span>
+        </div>
+        <p class="ba-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3m13 5h3a2 2 0 0 0 2-2v-3"/></svg>Toyota Corolla · black overspray fallout, decontaminated panel by panel.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ============ OVERSPRAY (signature) ============ -->
 <section class="section overspray osp textured" id="overspray">
   <div class="wrap">
     <div class="osp-grid">
-      <div class="osp-media reveal">
-        <img src="assets/gallery/01.jpg" alt="Freshly detailed prime mover truck">
-        <img src="assets/img/headlight.jpg" alt="Careful hand detailing on dark paintwork">
-      </div>
       <div class="reveal" data-d="1">
         <span class="eyebrow">The specialty · 30+ years</span>
         <h2 class="h-sec">Overspray &amp; industrial<br>fallout removal.</h2>
@@ -212,15 +304,15 @@
         <div class="osp-industries">
           <div class="osp-ind">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6 17l1.5-4.5A2 2 0 0 1 9.4 11h5.2a2 2 0 0 1 1.9 1.5L18 17"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg>
-            <div><b>Vehicles &amp; trucks</b><span>Cars, 4x4s, fleets, machinery</span></div>
+            <div><b>Vehicles &amp; trucks</b><span>Cars, 4x4s, utes and fleets</span></div>
           </div>
           <div class="osp-ind">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18s2-1 4-1 3 1 5 1 3-1 5-1 4 1 4 1"/><path d="M4 14l8-2 8 2M12 4v8"/></svg>
             <div><b>Boats &amp; marine</b><span>Hulls, decks and fittings</span></div>
           </div>
           <div class="osp-ind">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l9-2 4-7 2 1-2 6 5 1v2l-5 1 2 6-2 1-4-7-9-2z"/></svg>
-            <div><b>Aircraft</b><span>Fuselage and painted surfaces</span></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <div><b>Machinery &amp; plant</b><span>Excavators, cranes, heavy equipment</span></div>
           </div>
           <div class="osp-ind">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/></svg>
@@ -238,50 +330,23 @@
         </div>
       </div>
     </div>
+
+    <!-- expanding panel gallery: real overspray, fallout & graffiti jobs -->
+    <div class="exp reveal">
+      <div class="exp-panel"><img loading="lazy" src="assets/overspray-panels/p1-ute-gold.jpg" alt="Blue Holden ute peppered with gold industrial overspray"><span class="exp-tag">Overspray</span><div class="exp-cap"><span class="t">Gold fallout</span><span class="s">Holden ute peppered with industrial overspray — lifted by hand, factory paint untouched.</span></div></div>
+      <div class="exp-panel"><img loading="lazy" src="assets/overspray-panels/p2-corolla.jpg" alt="White Toyota Corolla with black overspray fallout"><span class="exp-tag">Fallout</span><div class="exp-cap"><span class="t">Black fallout</span><span class="s">Toyota Corolla — overspray shows worst on white. Decontaminated panel by panel, no respray.</span></div></div>
+      <div class="exp-panel"><img loading="lazy" src="assets/overspray-panels/p3-commodore.jpg" alt="Red Holden Commodore drenched in white paint overspray"><span class="exp-tag">Overspray</span><div class="exp-cap"><span class="t">White overspray</span><span class="s">Holden Commodore drenched in industrial paint — safely dissolved and lifted off the duco.</span></div></div>
+      <div class="exp-panel"><img loading="lazy" src="assets/overspray-panels/p4-graffiti.jpg" alt="Silver Audi tagged with red aerosol graffiti"><span class="exp-tag">Graffiti</span><div class="exp-cap"><span class="t">Aerosol graffiti</span><span class="s">Audi A6 tagged in red aerosol — removed cleanly without ever touching the clear coat.</span></div></div>
+      <div class="exp-panel"><img loading="lazy" src="assets/overspray-panels/p5-truck.jpg" alt="Commercial box truck hit with spray-paint graffiti"><span class="exp-tag">Commercial</span><div class="exp-cap"><span class="t">Fleet &amp; commercial</span><span class="s">Box truck hit with spray-paint — brought back to a clean, presentable fleet finish.</span></div></div>
+      <div class="exp-panel"><img loading="lazy" src="assets/overspray-panels/p6-yellow.jpg" alt="Holden Commodore caught in stray yellow spray-paint"><span class="exp-tag">Graffiti</span><div class="exp-cap"><span class="t">Spray splatter</span><span class="s">Holden Commodore caught in stray yellow spray — every speck removed, back to glossy duco.</span></div></div>
+    </div>
   </div>
 </section>
 
-<!-- ============ OVERSPRAY WORK (coverflow) ============ -->
-<section class="ospx" id="overspray-work" data-ospx>
-  <div class="ospx-bg"></div>
-  <div class="wrap">
-    <div class="ospx-head reveal">
-      <img class="ospx-logo" src="assets/img/logo-mark.png" alt="CDS">
-      <p class="lede">Real overspray, fallout and graffiti jobs, lifted by hand. The factory paint stays untouched.</p>
-    </div>
-
-    <div class="ospx-flow">
-      <button class="ospx-arrow ospx-prev" aria-label="Previous example"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-      <div class="ospx-track" id="ospxTrack">
-        <!-- Placeholder photos are real CDS gallery shots; swap data for actual overspray before/after images. -->
-        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/gallery/07.jpg" alt="Industrial fallout removal"></div>
-          <div class="ospx-body"><span class="ospx-num">01 / 05</span><h3 class="ospx-title">Industrial fallout</h3><p class="ospx-desc"><b>Blue duco.</b> Industrial fallout embedded across the bonnet. Decontaminated panel by panel.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
-
-        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/gallery/11.jpg" alt="Fallout on white paint"></div>
-          <div class="ospx-body"><span class="ospx-num">02 / 05</span><h3 class="ospx-title">Fallout on white</h3><p class="ospx-desc"><b>Mercedes A-Class.</b> Fallout shows worst on white duco. Restored without a respray.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
-
-        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/gallery/19.jpg" alt="Graffiti removal"></div>
-          <div class="ospx-body"><span class="ospx-num">03 / 05</span><h3 class="ospx-title">Graffiti</h3><p class="ospx-desc"><b>Audi A6.</b> Red aerosol over silver. Removed without touching the clear coat.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
-
-        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/gallery/23.jpg" alt="Paint overspray removal"></div>
-          <div class="ospx-body"><span class="ospx-num">04 / 05</span><h3 class="ospx-title">Paint overspray</h3><p class="ospx-desc"><b>Toyota Tarago.</b> Overspray down the driver's side. Lifted by hand, no abrasives.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
-
-        <article class="ospx-card"><div class="ospx-img"><img loading="lazy" src="assets/gallery/29.jpg" alt="Paint splatter removal"></div>
-          <div class="ospx-body"><span class="ospx-num">05 / 05</span><h3 class="ospx-title">Paint splatter</h3><p class="ospx-desc"><b>Holden Caprice.</b> Industrial paint across the roof and glass. No respray, all on-panel.</p><a href="#contact" class="btn btn-primary ospx-cta">See the process <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <i class="ospx-corner c-tl"></i><i class="ospx-corner c-tr"></i><i class="ospx-corner c-bl"></i><i class="ospx-corner c-br"></i></article>
-      </div>
-      <button class="ospx-arrow ospx-next" aria-label="Next example"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
-    </div>
-
-    <div class="ospx-foot reveal">
-      <div class="ospx-count"><b data-ospx-cur>01</b> / <span data-ospx-total>05</span></div>
-      <div class="ospx-dots" id="ospxDots"></div>
-    </div>
-  </div>
+<!-- ============ CDS PARALLAX BAND ============ -->
+<section class="cds-para" data-parallax aria-hidden="true">
+  <span class="cds-para-word hero-mono"><i>C</i><i>D</i><i>S</i></span>
+  <span class="cds-para-sub">Car Detailing Solutions &middot; Protected for years</span>
 </section>
 
 <!-- ============ PROCESS ============ -->
@@ -354,26 +419,39 @@
     <div class="sec-head reveal">
       <h2 class="h-sec">Owners keep coming back.</h2>
     </div>
-    <div class="tst-grid">
-      <figure class="tst-main reveal">
-        <div class="qmark">&ldquo;</div>
-        <blockquote>Andy is nothing but professional all throughout the process. The Onyx Graphene Pro ceramic coating he put on my RAV4 is amazing. The service is top notch and goes above and beyond.</blockquote>
-        <figcaption class="tst-author">
-          <span class="av">M</span>
-          <span><b>Marcus D.</b><span>Toyota RAV4 · Ceramic coating</span></span>
-        </figcaption>
-      </figure>
-      <div class="tst-side">
-        <div class="tst-mini reveal" data-d="1">
+    <div class="rev-marquee reveal">
+      <div class="rev-loop">
+        <figure class="rev-card">
           <span class="stars">★★★★★</span>
-          <p>I highly recommend Andy. I booked my SUV in for a full detail. He did a magnificent job and I took up his offer of ceramic coating. My car looks and smells brand new.</p>
-          <div class="who">Patricia G. · Full detail + coating</div>
-        </div>
-        <div class="tst-mini reveal" data-d="2">
+          <blockquote>Andy is nothing but professional all throughout the process. The Onyx Graphene Pro ceramic coating he put on my RAV4 is amazing. The service is top notch and goes above and beyond.</blockquote>
+          <figcaption class="tst-author"><span class="av">M</span><span><b>Marcus D.</b><span>Toyota RAV4 · Ceramic coating</span></span></figcaption>
+        </figure>
+        <figure class="rev-card">
           <span class="stars">★★★★★</span>
-          <p>Full interior detail and mould remediation, done to extremely high standards. He even did some extras free of charge. I recommend Andy more than 100%.</p>
-          <div class="who">Jordan Parker · Interior detail</div>
-        </div>
+          <blockquote>I highly recommend Andy. I booked my SUV in for a full detail. He did a magnificent job and I took up his offer of ceramic coating. My car looks and smells brand new.</blockquote>
+          <figcaption class="tst-author"><span class="av">P</span><span><b>Patricia G.</b><span>SUV · Full detail + coating</span></span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <span class="stars">★★★★★</span>
+          <blockquote>Full interior detail and mould remediation, done to extremely high standards. He even did some extras free of charge. I recommend Andy more than 100%.</blockquote>
+          <figcaption class="tst-author"><span class="av">J</span><span><b>Jordan Parker</b><span>Interior detail + mould remediation</span></span></figcaption>
+        </figure>
+        <!-- duplicate set for a seamless infinite loop -->
+        <figure class="rev-card" aria-hidden="true">
+          <span class="stars">★★★★★</span>
+          <blockquote>Andy is nothing but professional all throughout the process. The Onyx Graphene Pro ceramic coating he put on my RAV4 is amazing. The service is top notch and goes above and beyond.</blockquote>
+          <figcaption class="tst-author"><span class="av">M</span><span><b>Marcus D.</b><span>Toyota RAV4 · Ceramic coating</span></span></figcaption>
+        </figure>
+        <figure class="rev-card" aria-hidden="true">
+          <span class="stars">★★★★★</span>
+          <blockquote>I highly recommend Andy. I booked my SUV in for a full detail. He did a magnificent job and I took up his offer of ceramic coating. My car looks and smells brand new.</blockquote>
+          <figcaption class="tst-author"><span class="av">P</span><span><b>Patricia G.</b><span>SUV · Full detail + coating</span></span></figcaption>
+        </figure>
+        <figure class="rev-card" aria-hidden="true">
+          <span class="stars">★★★★★</span>
+          <blockquote>Full interior detail and mould remediation, done to extremely high standards. He even did some extras free of charge. I recommend Andy more than 100%.</blockquote>
+          <figcaption class="tst-author"><span class="av">J</span><span><b>Jordan Parker</b><span>Interior detail + mould remediation</span></span></figcaption>
+        </figure>
       </div>
     </div>
     <div class="rating-badge reveal">
@@ -390,83 +468,91 @@
       <div class="contact-grid">
       <div>
         <span class="eyebrow">Book online</span>
-        <h2 class="h-sec" style="margin:18px 0 12px">Book your<br>detail.</h2>
+        <h2 class="h-sec" style="margin:18px 0 12px">Book your detail.</h2>
         <p class="lede" style="margin-bottom:26px">A few quick questions and Andy will confirm your booking and price. Mobile across Melbourne or drop-off, 7 days a week.</p>
-        <form id="bookingForm" class="wiz" novalidate>
+                <form id="bookingForm" class="wiz" novalidate>
           <div class="wiz-head"><span class="wiz-count" data-wiz-count>Step 1 of 5</span></div>
           <div class="wiz-progress" aria-hidden="true">
             <span data-step-dot="0" class="on"></span><span data-step-dot="1"></span><span data-step-dot="2"></span><span data-step-dot="3"></span><span data-step-dot="4"></span>
           </div>
-
+          <!-- Step 1 &middot; service (auto-advances on tap) -->
           <fieldset class="wiz-step" data-step="0">
             <legend>Which service?</legend>
             <div class="field">
-              <label>Service</label>
               <div class="wiz-pills">
-                <label class="wiz-pill"><input type="radio" name="service" value="Ceramic / graphene coating" required><span>Ceramic / graphene coating</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Paint correction"><span>Paint correction</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Full detail"><span>Full detail</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Deluxe detail"><span>Deluxe detail</span></label>
+                <label class="wiz-pill"><input type="radio" name="service" value="Ceramic / graphene coating" data-paint="1" required><span>Ceramic / graphene coating</span></label>
+                <label class="wiz-pill"><input type="radio" name="service" value="Paint correction" data-paint="1"><span>Paint correction</span></label>
+                <label class="wiz-pill"><input type="radio" name="service" value="Paint protection" data-paint="1"><span>Paint protection</span></label>
+                <label class="wiz-pill"><input type="radio" name="service" value="Exterior detail" data-paint="1"><span>Exterior detail</span></label>
+                <label class="wiz-pill"><input type="radio" name="service" value="Full &amp; deluxe detail"><span>Full &amp; deluxe detail</span></label>
                 <label class="wiz-pill"><input type="radio" name="service" value="Interior detail"><span>Interior detail</span></label>
+                <label class="wiz-pill"><input type="radio" name="service" value="Mould remediation"><span>Mould remediation</span></label>
                 <label class="wiz-pill"><input type="radio" name="service" value="Overspray removal"><span>Overspray removal</span></label>
                 <label class="wiz-pill"><input type="radio" name="service" value="Truck / fleet"><span>Truck / fleet</span></label>
                 <label class="wiz-pill"><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label>
               </div>
             </div>
+          </fieldset>
+
+          <!-- Step 2 &middot; how (mobile reveals address inline; studio auto-advances) -->
+          <fieldset class="wiz-step" data-step="1" hidden>
+            <legend>How would you like it?</legend>
             <div class="field">
-              <label>How would you like it done?</label>
               <div class="wiz-choices">
                 <label class="wiz-choice"><input type="radio" name="format" value="Mobile - at your door" required><span>Mobile, at your door</span></label>
                 <label class="wiz-choice"><input type="radio" name="format" value="Studio - drop off"><span>Studio, drop off</span></label>
               </div>
             </div>
-          </fieldset>
-
-          <fieldset class="wiz-step" data-step="1" hidden>
-            <legend>Where are you?</legend>
-            <div class="field">
-              <label for="b-postcode">Postcode</label>
-              <input id="b-postcode" name="postcode" inputmode="numeric" autocomplete="postal-code" placeholder="e.g. 3076" required>
+            <div class="field" data-loc="mobile" hidden>
+              <label for="b-address">Your address</label>
+              <input id="b-address" name="address" autocomplete="street-address" placeholder="Street, suburb, VIC">
             </div>
           </fieldset>
 
+          <!-- Step 3 &middot; budget (auto-advances) -->
           <fieldset class="wiz-step" data-step="2" hidden>
+            <legend>What&rsquo;s your budget?</legend>
+            <div class="field">
+              <div class="wiz-tiles">
+                <label class="wiz-tile"><input type="radio" name="budget" value="Entry (up to $1,000)" required><span><b>Entry</b><small>Up to $1,000</small></span></label>
+                <label class="wiz-tile"><input type="radio" name="budget" value="Standard protection ($1,000-$2,500)"><span><b>Standard protection</b><small>$1,000 &ndash; $2,500</small></span></label>
+                <label class="wiz-tile"><input type="radio" name="budget" value="Elite protection ($2,500+)"><span><b>Elite protection</b><small>$2,500+</small></span></label>
+                <label class="wiz-tile"><input type="radio" name="budget" value="Not sure yet"><span><b>Not sure yet</b><small>Andy will advise</small></span></label>
+              </div>
+            </div>
+          </fieldset>
+
+<!-- Step 4 &middot; vehicle + condition -->
+          <fieldset class="wiz-step" data-step="3" hidden>
             <legend>Your vehicle</legend>
             <div class="field">
               <label for="b-vehicle">Vehicle</label>
               <input id="b-vehicle" name="vehicle" placeholder="e.g. 2020 Ford Ranger" required>
             </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="b-paint">Paint condition</label>
-                <select id="b-paint" name="paint_condition" required><option value="">Select</option><option>New / excellent</option><option>Good</option><option>Fair</option><option>Poor</option></select>
-              </div>
-              <div class="field">
-                <label for="b-interior">Interior condition</label>
-                <select id="b-interior" name="interior_condition" required><option value="">Select</option><option>Clean / tidy</option><option>Lightly messy</option><option>Dirty</option><option>Full reset</option></select>
-              </div>
-            </div>
-          </fieldset>
-
-          <fieldset class="wiz-step" data-step="3" hidden>
-            <legend>Budget</legend>
             <div class="field">
-              <label for="b-budget">Roughly what are you looking to spend?</label>
-              <select id="b-budget" name="budget" required><option value="">Select</option><option>Entry level (under $500)</option><option>Standard ($500 to $1,500)</option><option>Premium / coating ($1,500+)</option><option>Not sure yet</option></select>
+              <label data-cond-label>Overall condition</label>
+              <div class="wiz-pills">
+                <label class="wiz-pill"><input type="radio" name="condition" value="Excellent" required><span>Excellent</span></label>
+                <label class="wiz-pill"><input type="radio" name="condition" value="Good"><span>Good</span></label>
+                <label class="wiz-pill"><input type="radio" name="condition" value="Fair"><span>Fair</span></label>
+                <label class="wiz-pill"><input type="radio" name="condition" value="Rough"><span>Rough</span></label>
+              </div>
             </div>
           </fieldset>
 
+          <!-- Step 5 &middot; details -->
           <fieldset class="wiz-step" data-step="4" hidden>
             <legend>Your details</legend>
+            <div class="field"><label for="b-name">Name</label><input id="b-name" name="name" autocomplete="name" required></div>
             <div class="field">
-              <label for="b-message">Anything else? (optional)</label>
-              <textarea id="b-message" name="message" placeholder="Marks, timing, where you are based..."></textarea>
+              <label for="b-mobile">Mobile</label>
+              <div class="tel-row">
+                <select id="b-cc" name="country_code" class="tel-cc" aria-label="Country dialling code"><option value="+61 AU" selected>AU +61</option><option value="+64 NZ">NZ +64</option><option value="+44 UK">UK +44</option><option value="+1 US/CA">US/CA +1</option><option value="+353 IE">IE +353</option><option value="+91 IN">IN +91</option><option value="+62 ID">ID +62</option><option value="+63 PH">PH +63</option><option value="+60 MY">MY +60</option><option value="+65 SG">SG +65</option><option value="+86 CN">CN +86</option><option value="+81 JP">JP +81</option><option value="+82 KR">KR +82</option><option value="+27 ZA">ZA +27</option><option value="+971 AE">AE +971</option><option value="+49 DE">DE +49</option><option value="+33 FR">FR +33</option><option value="+39 IT">IT +39</option><option value="+34 ES">ES +34</option><option value="+55 BR">BR +55</option></select>
+                <input id="b-mobile" name="mobile" type="tel" autocomplete="tel" placeholder="412 345 678" required>
+              </div>
             </div>
-            <div class="form-row">
-              <div class="field"><label for="b-name">Name</label><input id="b-name" name="name" autocomplete="name" required></div>
-              <div class="field"><label for="b-mobile">Mobile</label><input id="b-mobile" name="mobile" type="tel" autocomplete="tel" placeholder="04__ ___ ___" required></div>
-            </div>
-            <div class="field"><label for="b-email">Email (optional)</label><input id="b-email" name="email" type="email" autocomplete="email" placeholder="you@email.com"></div>
+            <div class="field"><label for="b-email">Email <span class="opt">(optional)</span></label><input id="b-email" name="email" type="email" autocomplete="email" placeholder="you@email.com"></div>
+            <div class="field"><label for="b-message">Anything else / special request <span class="opt">(optional)</span></label><textarea id="b-message" name="message" placeholder="Marks, timing, where you&rsquo;re based&hellip;"></textarea></div>
           </fieldset>
 
           <div class="wiz-nav">
@@ -484,67 +570,25 @@
         </form>
       </div>
 
-      <aside class="contact-side reveal" data-d="1">
-        <div class="c-block">
+      <div class="contact-strip reveal" data-d="1">
+        <a class="c-tile" href="tel:0410939700">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <div><div class="lbl">Call or text</div><div class="val"><a href="tel:0410939700">0410 939 700</a></div><div class="sub">Andy · detailing &amp; coating</div></div>
-        </div>
-        <div class="c-block">
+          <span><small>Call or text</small><b>0410 939 700</b></span>
+        </a>
+        <a class="c-tile" href="mailto:info@cardetailingsolutions.com.au">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-          <div><div class="lbl">Email</div><div class="val"><a href="mailto:info@cardetailingsolutions.com.au">info@cardetailingsolutions.com.au</a></div></div>
-        </div>
-        <div class="c-block">
+          <span><small>Email</small><b>info@cardetailingsolutions.com.au</b></span>
+        </a>
+        <a class="c-tile" href="https://www.google.com/maps/dir/?api=1&amp;destination=Epping%20VIC%203076" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div>
-            <div class="lbl">Based in</div>
-            <div class="val">Epping VIC 3076</div>
-            <div class="sub">Mobile service across greater Melbourne</div>
-            <div class="area-tags"><span>Northern suburbs</span><span>CBD</span><span>Eastern</span><span>Western</span><span>South-East</span></div>
-          </div>
-        </div>
-        <div class="c-block">
+          <span><small>Based in</small><b>Epping VIC 3076</b></span>
+        </a>
+        <div class="c-tile">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <div><div class="lbl">Hours</div><div class="val">7am to 7pm</div><div class="sub">7 days a week</div></div>
+          <span><small>Hours</small><b>7am&ndash;7pm &middot; 7 days</b></span>
         </div>
-      </aside>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ THE CERAMIC PROCESS (cinematic scroll) ============ -->
-<section class="ceramic-scroll" id="protection" data-coat3d data-model="assets/rover.glb">
-  <div class="ceramic-sticky textured">
-    <div class="wrap coat3d-grid">
-      <div class="coat3d-stage">
-        <div class="coat3d-loading"><div class="spin"></div></div>
-        <div class="coat3d-fail">3D view is unavailable in this browser. The ceramic process still runs the same way in the workshop.</div>
-        <div class="coat3d-badge"><span class="l">Stage</span><span class="n" data-field="num">01</span></div>
-        <span class="coat3d-hint">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-          Scroll through the process
-        </span>
-        <div class="coat3d-tune"></div>
       </div>
-      <aside class="coat3d-panel">
-        <span class="eyebrow" style="margin-bottom:22px">The ceramic process</span>
-        <ol class="coat3d-steps" role="group" aria-label="Ceramic stage">
-          <li><button class="coat3d-step" data-stage="0"><span class="sn">01</span><span class="sl">Clean &amp; decontaminate</span></button></li>
-          <li><button class="coat3d-step" data-stage="1"><span class="sn">02</span><span class="sl">Paint correction</span></button></li>
-          <li><button class="coat3d-step" data-stage="2"><span class="sn">03</span><span class="sl">Panel prep</span></button></li>
-          <li><button class="coat3d-step" data-stage="3"><span class="sn">04</span><span class="sl">Ceramic coating</span></button></li>
-        </ol>
-        <div class="coat3d-card">
-          <h3 data-field="title">Deep clean &amp; decontaminate</h3>
-          <p data-field="desc">Strip-wash, an iron fallout remover and a clay bar pull embedded grime out of the pores of the paint.</p>
-          <div class="coat3d-meter">
-            <span class="ml">Gloss &amp; protection</span>
-            <div class="mbar"><i data-field="meter" style="width:16%"></i></div>
-          </div>
-          <p class="coat3d-product" data-field="product-wrap" hidden>Coating: <b data-field="product"></b></p>
-          <a href="warranties.html" class="btn btn-ghost">See coating warranties</a>
-        </div>
-      </aside>
     </div>
   </div>
 </section>
@@ -578,7 +622,6 @@
       </div>
       <div class="foot-col">
         <h4>Coatings &amp; specialty</h4>
-        <a href="#protection">Coating builder (3D)</a>
         <a href="warranties.html">Coating warranties</a>
         <a href="product-tds.html">Product TDS</a>
         <a href="#overspray">Overspray removal</a>
@@ -600,10 +643,21 @@
 </footer>
 
 <!-- Mobile sticky call bar -->
-<div class="callbar">
-  <a href="tel:0410939700" class="btn btn-ghost">Call Andy</a>
-  <a href="#contact" class="btn btn-primary">Get a quote</a>
-</div>
+<!-- Mobile sticky contact bar -->
+<nav class="callbar" aria-label="Quick contact">
+  <a href="tel:0410939700" class="callbar-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <span>Call</span>
+  </a>
+  <a href="sms:0410939700" class="callbar-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    <span>Message</span>
+  </a>
+  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Epping%20VIC%203076" target="_blank" rel="noopener" class="callbar-btn callbar-btn-accent">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span>Directions</span>
+  </a>
+</nav>
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" aria-hidden="true">
@@ -616,9 +670,6 @@
 <script src="js/main.js"></script>
 <script src="js/booking.js"></script>
 <script src="js/ospx.js"></script>
-<script type="importmap">
-{"imports":{"three":"./assets/vendor/three.module.js","three/addons/":"./assets/vendor/addons/"}}
-</script>
-<script type="module" src="js/coat3d.js"></script>
+<script src="js/beforeafter.js"></script>
 </body>
 </html>
