@@ -46,7 +46,10 @@
   function show(i) {
     cur = i;
     steps.forEach(function (s, j) { s.hidden = j !== i; });
-    dots.forEach(function (d, j) { d.classList.toggle("on", j <= i); });
+    dots.forEach(function (d, j) {
+      d.classList.toggle("on", j === i);
+      d.classList.toggle("done", j < i);
+    });
     backBtn.hidden = i === 0;
     var last = i === steps.length - 1;
     nextBtn.hidden = last;

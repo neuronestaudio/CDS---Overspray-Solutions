@@ -680,9 +680,27 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* =========================================================================
    Booking wizard (multi-step) - lives inside the white .contact-card
    ========================================================================= */
-.wiz-progress{display:flex;gap:6px;margin-bottom:26px}
-.wiz-progress span{height:5px;flex:1;border-radius:99px;background:rgba(255,255,255,.13);transition:background .35s var(--ease)}
-.wiz-progress span.on{background:var(--accent)}
+/* Labelled rail: five unmarked bars tell you how far along you are but not
+   what is coming. Numbering and naming the steps sets the expectation. */
+.wiz-progress{display:flex;gap:8px;margin:0 0 26px;padding:0;list-style:none;flex-wrap:wrap}
+.wiz-progress li{
+  display:flex;align-items:center;gap:8px;flex:1 1 auto;min-width:104px;
+  padding-bottom:9px;border-bottom:2px solid rgba(255,255,255,.14);
+  font-family:"DM Sans";font-weight:700;font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+  transition:color .35s var(--ease),border-color .35s var(--ease);
+}
+.wiz-progress li b{
+  display:grid;place-items:center;width:21px;height:21px;flex:0 0 auto;
+  border:1px solid currentColor;border-radius:50%;font-size:.62rem;font-weight:700;
+}
+.wiz-progress li.on{color:var(--accent);border-bottom-color:var(--accent)}
+.wiz-progress li.done{color:var(--text);border-bottom-color:rgba(225,29,42,.5)}
+.wiz-progress li.done b{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (max-width:620px){
+  .wiz-progress li{min-width:0;font-size:0;gap:0;justify-content:center}
+  .wiz-progress li b{font-size:.62rem}
+}
 .wiz-step{border:0;padding:0;margin:0;min-width:0}
 .wiz-step legend{font-family:"DM Sans";font-weight:500;font-size:1.15rem;color:var(--text);margin:0 0 16px;padding:0}
 .wiz-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -1054,3 +1072,53 @@ html{overflow-x:hidden}
 .osp .osp-industries{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media(max-width:900px){.osp .osp-industries{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.osp .osp-industries{grid-template-columns:1fr}}
+
+/* ==========================================================================
+   Booking wizard — service tiles
+   Replaces the flat pill row on the service step. A pill gives a name and
+   nothing else; a tile carries the one line that tells someone whether the
+   service is the one they want. Names, values and data-paint are unchanged,
+   so booking.js and the paint-conditional logic are untouched.
+   ========================================================================== */
+.wiz-tiles{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:10px;
+}
+.wiz-tile{position:relative;display:block;cursor:pointer}
+/* The input stays visually hidden but focusable — validation here is custom
+   (booking.js checks by name), so it never hits Chrome's "invalid control is
+   not focusable" refusal. */
+.wiz-tile input{position:absolute;opacity:0;width:0;height:0}
+.wiz-tile__in{
+  display:block;height:100%;padding:14px 16px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.045);
+  -webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+  transition:border-color .24s var(--ease),background .24s var(--ease),transform .24s var(--ease);
+}
+.wiz-tile:hover .wiz-tile__in{background:rgba(255,255,255,.075);border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+.wiz-tile__t{display:block;font-family:"DM Sans";font-weight:700;font-size:.98rem;color:var(--text);margin-bottom:5px;line-height:1.2}
+.wiz-tile__d{display:block;font-size:.82rem;line-height:1.5;color:var(--muted)}
+
+.wiz-tile input:checked + .wiz-tile__in,
+.wiz-tile.checked .wiz-tile__in{
+  border-color:var(--accent);background:rgba(225,29,42,.14);
+  box-shadow:0 0 0 1px var(--accent),0 0 30px -10px var(--accent);
+}
+.wiz-tile input:focus-visible + .wiz-tile__in{outline:2px solid var(--accent-hot);outline-offset:3px}
+.field.invalid .wiz-tiles{outline:1.5px solid var(--accent);outline-offset:6px;border-radius:16px}
+
+@media (max-width:560px){
+  .wiz-tiles{grid-template-columns:1fr}
+  .wiz-tile__d{font-size:.8rem}
+}
+
+/* An earlier `.wiz-tile span` rule boxes EVERY span inside a tile, so the
+   title and description each rendered inside their own bordered card. Reset
+   the inner two; the wrapper keeps the card treatment. */
+.wiz-tile .wiz-tile__t,
+.wiz-tile .wiz-tile__d{
+  display:block;width:auto;padding:0;margin:0;border:0;background:none;
+  border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.wiz-tile .wiz-tile__t{font-weight:700;font-size:.98rem;color:var(--text);margin-bottom:5px;line-height:1.2}
+.wiz-tile .wiz-tile__d{font-size:.82rem;line-height:1.5;color:var(--muted)}

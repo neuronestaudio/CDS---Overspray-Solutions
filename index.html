@@ -472,24 +472,88 @@
         <p class="lede" style="margin-bottom:26px">A few quick questions and Andy will confirm your booking and price. Mobile across Melbourne or drop-off, 7 days a week.</p>
                 <form id="bookingForm" class="wiz" novalidate>
           <div class="wiz-head"><span class="wiz-count" data-wiz-count>Step 1 of 5</span></div>
-          <div class="wiz-progress" aria-hidden="true">
-            <span data-step-dot="0" class="on"></span><span data-step-dot="1"></span><span data-step-dot="2"></span><span data-step-dot="3"></span><span data-step-dot="4"></span>
-          </div>
+          <ol class="wiz-progress">
+            <li data-step-dot="0" class="on"><b>1</b><span>Service</span></li>
+            <li data-step-dot="1"><b>2</b><span>How</span></li>
+            <li data-step-dot="2"><b>3</b><span>Budget</span></li>
+            <li data-step-dot="3"><b>4</b><span>Vehicle</span></li>
+            <li data-step-dot="4"><b>5</b><span>Details</span></li>
+          </ol>
           <!-- Step 1 &middot; service (auto-advances on tap) -->
           <fieldset class="wiz-step" data-step="0">
             <legend>Which service?</legend>
             <div class="field">
-              <div class="wiz-pills">
-                <label class="wiz-pill"><input type="radio" name="service" value="Ceramic / graphene coating" data-paint="1" required><span>Ceramic / graphene coating</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Paint correction" data-paint="1"><span>Paint correction</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Paint protection" data-paint="1"><span>Paint protection</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Exterior detail" data-paint="1"><span>Exterior detail</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Full &amp; deluxe detail"><span>Full &amp; deluxe detail</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Interior detail"><span>Interior detail</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Mould remediation"><span>Mould remediation</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Overspray removal"><span>Overspray removal</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Truck / fleet"><span>Truck / fleet</span></label>
-                <label class="wiz-pill"><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label>
+              <div class="wiz-tiles">
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Ceramic / graphene coating" data-paint="1" required>
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Ceramic &amp; Graphene</span>
+                    <span class="wiz-tile__d">Onyx 10H graphene &mdash; a nano-ceramic shell bonded to your clear coat, for deeper gloss and years of protection.</span>
+                  </span>
+                </label>
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Paint correction" data-paint="1">
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Paint Correction</span>
+                    <span class="wiz-tile__d">Multi-stage cutting and polishing to remove swirls, scratches and oxidation, restoring the true depth of your paint.</span>
+                  </span>
+                </label>
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Paint protection" data-paint="1">
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Paint Protection</span>
+                    <span class="wiz-tile__d">Protective sealing that keeps the panels sparkling and shielded between visits.</span>
+                  </span>
+                </label>
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Exterior detail" data-paint="1">
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Exterior Detail</span>
+                    <span class="wiz-tile__d">Safe wash, decontamination and sealing that keeps the panels sparkling and shielded.</span>
+                  </span>
+                </label>
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Full &amp; deluxe detail">
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Full &amp; Deluxe Detail</span>
+                    <span class="wiz-tile__d">Interior and exterior, top to bottom. That brand-new feel back, whether you&rsquo;re selling or just love your car.</span>
+                  </span>
+                </label>
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Interior detail">
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Interior Detail</span>
+                    <span class="wiz-tile__d">Deep clean, steam, mould remediation and conditioning so the cabin feels as sharp as the outside.</span>
+                  </span>
+                </label>
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Mould remediation">
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Mould Remediation</span>
+                    <span class="wiz-tile__d">Steam, extraction and an anti-microbial treatment lift mould, damp and odour out of carpets and seats.</span>
+                  </span>
+                </label>
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Overspray removal">
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Overspray Removal</span>
+                    <span class="wiz-tile__d">Industrial fallout, overspray and graffiti lifted panel by panel &mdash; no respray, no abrasives.</span>
+                  </span>
+                </label>
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Truck / fleet">
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Truck, Ute &amp; Fleet</span>
+                    <span class="wiz-tile__d">Mobile detailing and pre-delivery built for working vehicles, contractors and dealerships.</span>
+                  </span>
+                </label>
+                <label class="wiz-tile">
+                  <input type="radio" name="service" value="Not sure yet">
+                  <span class="wiz-tile__in">
+                    <span class="wiz-tile__t">Not sure yet</span>
+                    <span class="wiz-tile__d">Tell us the vehicle and what&rsquo;s wrong with it &mdash; we&rsquo;ll point you at the right service.</span>
+                  </span>
+                </label>
               </div>
             </div>
           </fieldset>
