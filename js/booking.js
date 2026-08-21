@@ -43,9 +43,34 @@
     }
   }
 
+  /* Animate the panel between step heights. `transition:height` alone does
+     nothing — the height has to be an explicit value on both sides, so we pin
+     the outgoing height, swap, measure the incoming one, then release to auto
+     once the transition ends. Without this the panel snaps and the eye loses
+     its place between steps. */
+  function swapHeight(mutate) {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !form.getBoundingClientRect) { mutate(); return; }
+    var from = form.getBoundingClientRect().height;
+    mutate();
+    var to = form.getBoundingClientRect().height;
+    if (Math.abs(to - from) < 2) return;
+    form.style.height = from + "px";
+    void form.offsetHeight;                 // force the start frame
+    form.style.height = to + "px";
+    var done = function () {
+      form.style.height = "";
+      form.removeEventListener("transitionend", done);
+    };
+    form.addEventListener("transitionend", done);
+    setTimeout(done, 600);                  // belt and braces if the event is missed
+  }
+
   function show(i) {
     cur = i;
-    steps.forEach(function (s, j) { s.hidden = j !== i; });
+    swapHeight(function () {
+      steps.forEach(function (s, j) { s.hidden = j !== i; });
+    });
     dots.forEach(function (d, j) {
       d.classList.toggle("on", j === i);
       d.classList.toggle("done", j < i);
