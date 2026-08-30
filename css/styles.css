@@ -845,7 +845,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .ospx-hero-copy .hero-cf-trust{font-size:.78rem}
 }
 .hero-redsub{margin-top:10px;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:500;
-  text-transform:none;letter-spacing:.005em;font-size:clamp(19px,2.5vw,31px);line-height:1.12;color:var(--accent)}
+  text-transform:none;letter-spacing:.005em;font-size:clamp(19px,2.5vw,31px);line-height:1.12;
+  background-image:linear-gradient(100deg,#ff7a63 0%,#ff2f47 30%,#e11d2a 58%,#a80f18 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 10px rgba(225,29,42,.22))}
 
 /* HERO VARIANT B — the CDS splash wordmark replaces the headline (toggle with ?hero=b) */
 .hero-cds{display:none;position:relative;margin:2px 0 8px;padding-bottom:.16em;
@@ -896,7 +899,8 @@ body.hero-v-b .hero-cds{display:inline-flex}
 /* =========================================================================
    Entry splash — CDS logo fades in, then the overlay fades away
    ========================================================================= */
-.splash2{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#08080a;
+.splash2{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
+  background:linear-gradient(rgba(8,8,10,.5),rgba(8,8,10,.5)),url("../assets/img/carbon-fiber-3.jpg") center/cover no-repeat,#08080a;
   animation:splash2Out .7s var(--ease) 2.5s forwards}
 .splash2-inner{display:flex;flex-direction:column;align-items:center;gap:20px}
 .splash2-logo{opacity:0;filter:drop-shadow(0 20px 60px rgba(0,0,0,.6));
