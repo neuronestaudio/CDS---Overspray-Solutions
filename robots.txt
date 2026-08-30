@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cds-overspray-solutions.vercel.app/sitemap.xml
