@@ -5,3 +5,5 @@ desktop.ini
 
 # raw scraped source photos (not used by the live site)
 facebook-photos/
+
+.vercel

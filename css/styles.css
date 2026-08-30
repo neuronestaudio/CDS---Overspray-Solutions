@@ -401,10 +401,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 /* reviews — continuous infinite-loop marquee (testimonial card theme) */
 .rev-marquee{position:relative;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.rev-loop{display:flex;align-items:stretch;gap:20px;width:max-content;
-  animation:revScroll 46s linear infinite;will-change:transform}
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent)}
+.rev-loop{display:flex;align-items:stretch;gap:26px;width:max-content;
+  animation:revScroll 92s linear infinite;will-change:transform}
 .rev-marquee:hover .rev-loop{animation-play-state:paused}
 @keyframes revScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.rev-loop{animation:none;flex-wrap:wrap;width:auto;justify-content:center}}
@@ -847,6 +847,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .hero-redsub{margin-top:10px;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:500;
   text-transform:none;letter-spacing:.005em;font-size:clamp(19px,2.5vw,31px);line-height:1.12;color:var(--accent)}
 
+/* HERO VARIANT B — the CDS splash wordmark replaces the headline (toggle with ?hero=b) */
+.hero-cds{display:none;position:relative;margin:2px 0 8px;padding-bottom:.16em;
+  font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;line-height:.86;letter-spacing:.05em;
+  font-size:clamp(80px,17vw,220px)}
+.hero-cds i{font-style:normal;display:inline-block;
+  color:transparent;-webkit-text-fill-color:transparent;
+  background-image:linear-gradient(90deg,#bfc2c7 0%,#fff 5%,#fafbfc 15%,#cfd2d6 30%,#fff 65%,#bfc2c7 80%,#f8f9fa 90%,#fff 95%,#bfc2c7 100%);
+  background-repeat:repeat;background-size:200% 100%;-webkit-background-clip:text;background-clip:text;
+  animation:pmdShineSweep 6s ease-in-out infinite}
+.hero-cds::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  width:clamp(120px,42%,260px);height:4px;border-radius:3px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 22px rgba(225,29,42,.5)}
+body.hero-v-b .hero-mono[data-hero-a]{display:none}
+body.hero-v-b .hero-cds{display:inline-flex}
+
 /* shiny glare sweep overlay on the active tile */
 @keyframes pmdCtaShine{0%{left:-65%}22%,100%{left:150%}}
 .ospx-card.active .ospx-img::after{content:"";position:absolute;top:0;left:-65%;width:45%;height:100%;z-index:1;pointer-events:none;
@@ -912,13 +927,49 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    CDS parallax interstitial — giant metallic wordmark drifts on scroll
    ========================================================================= */
 .cds-para{position:relative;overflow:hidden;min-height:clamp(300px,44vh,480px);display:grid;place-items:center;
-  background:radial-gradient(130% 120% at 50% 45%,#101117 0%,#0a0a0c 62%,#08080a 100%);border-block:1px solid var(--line)}
-.cds-para-word{position:relative;z-index:1;font-size:clamp(30vw,33vw,38vw);line-height:.8;letter-spacing:-.03em;
-  will-change:transform;pointer-events:none;-webkit-user-select:none;user-select:none}
-.cds-para-word i{font-style:normal;display:inline-block;opacity:.06;will-change:opacity}
-.cds-para-sub{position:absolute;z-index:2;left:0;right:0;bottom:clamp(22px,5vh,52px);text-align:center;
-  font-family:"DM Sans";text-transform:uppercase;letter-spacing:.34em;font-size:clamp(.6rem,1.05vw,.78rem);color:var(--muted-2)}
-@media(prefers-reduced-motion:reduce){.cds-para-word{transform:none!important}}
+  background:#08080a;border-block:1px solid var(--line)}
+/* monochromatic workshop backdrop — desaturated + blacked-down so it reads cooler than flat black */
+.cds-para::before{content:"";position:absolute;inset:0;z-index:0;
+  background:url('../assets/img/hero-1.jpg') center 42%/cover no-repeat;
+  filter:grayscale(1) contrast(1.08) brightness(.4);transform:scale(1.08);will-change:transform}
+.cds-para::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(120% 100% at 50% 46%,rgba(8,8,10,.28) 0%,rgba(8,8,10,.72) 56%,rgba(8,8,10,.96) 100%),
+  linear-gradient(180deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.28) 30%,rgba(8,8,10,.28) 68%,rgba(8,8,10,.97) 100%)}
+/* the words spell out CAR DETAILING SOLUTIONS, each keyed off its metallic capital */
+.cds-words{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;
+  gap:clamp(12px,2.4vw,44px);padding:0 22px;max-width:1200px;text-align:center;
+  font-family:"Bebas Neue",Impact,sans-serif;line-height:.86;
+  pointer-events:none;-webkit-user-select:none;user-select:none}
+.cds-w{display:inline-flex;align-items:baseline;white-space:nowrap;
+  font-size:clamp(26px,4.6vw,66px);letter-spacing:.02em;
+  background-image:linear-gradient(180deg,#d6d9df 0%,#a9adb5 58%,#7b7f88 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  opacity:0;transform:translateY(28px);will-change:opacity,transform;
+  transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0) * .16s)}
+.cds-w b{font-weight:400;font-size:clamp(58px,11vw,148px);margin-right:.015em;
+  background-image:linear-gradient(180deg,#f4f5f7 0%,#d0d4da 52%,#8f949d 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.cds-para.lit .cds-w{opacity:1;transform:none}
+/* red splash underline draws in under the full lockup */
+.cds-words::after{content:"";position:absolute;left:50%;bottom:calc(-1 * clamp(12px,1.8vw,26px));
+  transform:translateX(-50%) scaleX(0);transform-origin:center;
+  width:clamp(140px,32%,360px);height:3px;border-radius:3px;
+  background:linear-gradient(90deg,transparent,var(--accent) 16%,var(--accent) 84%,transparent);
+  box-shadow:0 0 22px rgba(225,29,42,.5);transition:transform .8s var(--ease) .55s}
+.cds-para.lit .cds-words::after{transform:translateX(-50%) scaleX(1)}
+.cds-para-sub{position:absolute;z-index:2;left:0;right:0;bottom:clamp(20px,4.5vh,46px);text-align:center;
+  font-family:"DM Sans";text-transform:uppercase;letter-spacing:.34em;font-size:clamp(.6rem,1.05vw,.78rem);color:var(--muted-2);
+  opacity:0;transition:opacity .8s var(--ease) .7s}
+.cds-para.lit .cds-para-sub{opacity:1}
+@media(prefers-reduced-motion:reduce){.cds-w{opacity:1;transform:none;transition:none}}
+/* phones: stack the three words so nothing clips, keep the dramatic capitals */
+@media(max-width:600px){
+  .cds-para{min-height:clamp(360px,64vh,520px)}
+  .cds-words{flex-direction:column;gap:2px}
+  .cds-w{font-size:clamp(20px,5.2vw,30px)}
+  .cds-w b{font-size:clamp(46px,13.5vw,72px)}
+  .cds-para-sub{letter-spacing:.22em;padding:0 18px}
+}
 
 /* keep content clear of the mobile sticky contact bar */
 @media(max-width:540px){ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))} }
@@ -1034,7 +1085,10 @@ html{overflow-x:hidden}
 .bento .card:not(.card-photo):hover h3{color:#fff}
 
 /* --- expanding image panels (hover to expand, neighbours compress) --- */
-.exp{display:flex;gap:6px;height:clamp(320px,42vw,500px);margin-top:clamp(30px,4vw,52px);--sk:clamp(26px,3vw,48px)}
+/* --sk and --tilt are locked to the SAME angle (atan .112 ≈ 6.4°) so the label
+   stays parallel to the racing-stripe edge at every viewport width */
+.exp{display:flex;gap:6px;--exp-h:clamp(320px,42vw,500px);height:var(--exp-h);
+  margin-top:clamp(30px,4vw,52px);--sk:calc(var(--exp-h) * .112);--tilt:6.4deg}
 .exp-panel{position:relative;flex:1 1 0;min-width:0;overflow:hidden;cursor:pointer;isolation:isolate;
   transition:flex-grow .6s cubic-bezier(.16,1,.3,1);will-change:flex-grow;
   clip-path:polygon(var(--sk) 0, 100% 0, calc(100% - var(--sk)) 100%, 0 100%)} /* racing-stripe angle */
@@ -1045,14 +1099,20 @@ html{overflow-x:hidden}
 .exp-panel:hover img{filter:saturate(1.05) brightness(1);transform:scale(1)}
 .exp-panel::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(0deg,rgba(6,6,8,.9) 4%,rgba(6,6,8,.2) 50%,transparent 78%);transition:opacity .6s var(--ease)}
-.exp-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:clamp(14px,1.6vw,22px);pointer-events:none}
+/* collapsed: label centred in the panel, tilted parallel to the racing-stripe slope */
+.exp-cap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:clamp(14px,1.6vw,22px);pointer-events:none;
+  text-shadow:0 2px 18px rgba(0,0,0,.6)}
 .exp-cap .t{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;letter-spacing:.03em;
   font-size:clamp(1.3rem,2vw,1.9rem);line-height:1;color:#fff;white-space:nowrap;
-  writing-mode:vertical-rl;transform:rotate(180deg);transition:writing-mode 0s,transform .5s var(--ease)}
-.exp-panel:hover .exp-cap .t{writing-mode:horizontal-tb;transform:none}
-.exp-cap .s{display:block;margin-top:8px;max-width:34ch;color:#cfcfd6;font-size:.9rem;line-height:1.45;
-  opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease) .12s,transform .5s var(--ease) .12s}
-.exp-panel:hover .exp-cap .s{opacity:1;transform:none}
+  writing-mode:vertical-rl;transform:rotate(calc(180deg + var(--tilt,5deg)));
+  transition:writing-mode 0s,transform .5s var(--ease)}
+.exp-panel:hover .exp-cap{align-items:flex-start;justify-content:flex-end;text-shadow:none}
+.exp-panel:hover .exp-cap .t{writing-mode:horizontal-tb;transform:none;margin-bottom:8px}
+.exp-cap .s{display:block;max-width:34ch;color:#cfcfd6;font-size:.9rem;line-height:1.45;
+  max-height:0;overflow:hidden;opacity:0;transform:translateY(10px);
+  transition:max-height .5s var(--ease),opacity .5s var(--ease) .12s,transform .5s var(--ease) .12s}
+.exp-panel:hover .exp-cap .s{max-height:220px;opacity:1;transform:none}
 .exp-panel .exp-tag{position:absolute;top:12px;left:12px;z-index:2;font-family:"Space Grotesk",sans-serif;
   font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;padding:5px 10px;border-radius:999px;
   background:rgba(225,29,42,.8);opacity:0;transition:opacity .5s var(--ease)}
@@ -1062,8 +1122,9 @@ html{overflow-x:hidden}
   .exp{flex-direction:column;height:auto;gap:8px}
   .exp-panel{flex:none;height:200px;clip-path:none;border-radius:14px;border:1px solid var(--line-2)}
   .exp:hover .exp-panel{flex-grow:0}.exp-panel:hover{flex-grow:0}
-  .exp-cap .t{writing-mode:horizontal-tb;transform:none}
-  .exp-cap .s{opacity:1;transform:none}
+  .exp-cap{align-items:flex-start;justify-content:flex-end;text-shadow:none}
+  .exp-cap .t{writing-mode:horizontal-tb;transform:none;margin-bottom:8px}
+  .exp-cap .s{max-height:none;opacity:1;transform:none}
 }
 
 /* overspray restructure: 4 before/after sliders (2x2), full-width copy, 4-col industries */

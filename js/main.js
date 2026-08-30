@@ -223,37 +223,16 @@
     if (heroEl) heroEl.style.minHeight = "720px"; // let full page stack for tall screenshots
   }
 
-  /* ---------- CDS parallax band ---------- */
+  /* ---------- CDS band: keyframed word reveal (Car / Detailing / Solutions) ---------- */
   (function () {
-    var band = document.querySelector("[data-parallax]");
-    if (!band || reduceMotion) return;
-    var word = band.querySelector(".cds-para-word");
-    if (!word) return;
-    var letters = Array.prototype.slice.call(word.querySelectorAll("i")); // C, D, S
-    var vis = false, raf = 0;
-    new IntersectionObserver(function (e) {
-      vis = e[0].isIntersecting;
-      if (vis && !raf) raf = requestAnimationFrame(loop);
-    }, { threshold: 0 }).observe(band);
-    function bell(x, c, w) { return Math.max(0, 1 - Math.abs(x - c) / w); } // triangle peak at c
-    function loop() {
-      if (!vis) { raf = 0; return; }
-      var r = band.getBoundingClientRect();
-      // p = 0 as the band enters from the bottom, 1 as it exits the top
-      var p = Math.max(0, Math.min(1, (innerHeight - r.top) / (innerHeight + r.height)));
-      var d = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
-      word.style.transform = "translateY(" + (Math.max(-1, Math.min(1, d)) * -70).toFixed(1) + "px)"; // parallax drift
-      // C / D / S fade in then out in sequence, keyed to scroll position
-      if (letters.length) {
-        var centres = [0.34, 0.5, 0.66];
-        for (var i = 0; i < letters.length; i++) {
-          letters[i].style.opacity = (0.06 + 0.94 * bell(p, centres[i] || 0.5, 0.2)).toFixed(3);
-        }
-      } else {
-        word.style.opacity = (0.12 + 0.88 * Math.max(0, 1 - Math.abs(d) / 0.7)).toFixed(3);
-      }
-      raf = requestAnimationFrame(loop);
-    }
+    var band = document.querySelector(".cds-para[data-parallax]");
+    if (!band) return;
+    if (reduceMotion || qaMode) { band.classList.add("lit"); return; }
+    new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { band.classList.add("lit"); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.35 }).observe(band);
   })();
 
   /* ---------- Reviews carousel ---------- */

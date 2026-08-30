@@ -1,0 +1,13 @@
+facebook-photos
+.git
+*.log
+README.md
+.DS_Store
+Thumbs.db
+
+# 3D Hilux (removed from the About page) — keep the heavy model out of the deploy
+assets/hilux.glb
+assets/hilux_lite.glb
+js/aboutv2.js
+css/aboutv2.css
+js/about3d.js
