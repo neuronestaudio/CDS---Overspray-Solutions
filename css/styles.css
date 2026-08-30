@@ -122,6 +122,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .nav-cta{display:flex;align-items:center;gap:14px}
 .nav-phone{display:inline-flex;align-items:center;gap:8px;font-family:"DM Sans";font-weight:500;font-size:.95rem}
 .nav-phone svg{width:16px;height:16px;color:var(--accent)}
+/* header call button: icon only, circular */
+.nav-cta .nav-phone{width:42px;height:42px;padding:0;gap:0;justify-content:center;border-radius:50%;
+  border:1px solid var(--line-2);background:rgba(255,255,255,.03);
+  transition:border-color .2s var(--ease),background .2s var(--ease),transform .2s var(--ease)}
+.nav-cta .nav-phone svg{width:18px;height:18px}
+.nav-cta .nav-phone:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-1px)}
 .burger{display:none;background:none;border:0;color:var(--text);padding:8px;cursor:pointer}
 .burger svg{width:26px;height:26px}
 
