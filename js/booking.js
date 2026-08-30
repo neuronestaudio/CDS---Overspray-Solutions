@@ -9,7 +9,7 @@
    --------------------------------------------------------------------------- */
 (function () {
   "use strict";
-  var CONFIG = { GHL_ENDPOINT: "" };
+  var CONFIG = { GHL_ENDPOINT: "https://services.leadconnectorhq.com/hooks/l7a2YPCfWt2FBxHLseQ8/webhook-trigger/NdDTcJmDyHN7Mdki2rGE" };
 
   var form = document.getElementById("bookingForm");
   if (!form) return;
@@ -133,7 +133,7 @@
     e.preventDefault();
     if (!validStep(cur)) return;
 
-    var data = {};
+    var data = { lead_source: "website_booking", form_name: "booking", currency: "AUD" };
     new FormData(form).forEach(function (v, k) { data[k] = v; });
     for (var k in ATTR) data[k] = ATTR[k];
 
@@ -146,8 +146,8 @@
       try {
         fetch(CONFIG.GHL_ENDPOINT, {
           method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data), mode: "no-cors", keepalive: true
-        });
+          body: JSON.stringify(data), keepalive: true
+        }).catch(function () {});
       } catch (err) {}
     }
 
