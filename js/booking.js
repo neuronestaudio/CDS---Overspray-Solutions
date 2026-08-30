@@ -135,6 +135,13 @@
 
     var data = { lead_source: "website_booking", form_name: "booking", currency: "AUD" };
     new FormData(form).forEach(function (v, k) { data[k] = v; });
+    // single phone field (country code + mobile) so GHL can match/create the contact cleanly
+    if (data.mobile) {
+      var cc = (data.country_code || "").replace(/[^\d+]/g, "");
+      var num = data.mobile.replace(/[^\d]/g, "").replace(/^0/, "");
+      data.phone = (cc ? cc + num : data.mobile);
+      data.full_name = data.name || "";
+    }
     for (var k in ATTR) data[k] = ATTR[k];
 
     window.dataLayer = window.dataLayer || [];
