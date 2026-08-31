@@ -296,14 +296,23 @@
     var panels = Array.prototype.slice.call(cp.querySelectorAll(".cp-panel"));
     var prog = cp.querySelector(".cp-progress");
     var cur = 0, timer = null;
+    function playVid(pnl, on) {
+      var v = pnl.querySelector("video");
+      if (!v) return;
+      if (on && !reduceMotion) {
+        try { v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+      } else {
+        try { v.pause(); } catch (e) {}
+      }
+    }
     function go(i, user) {
       cur = (i + tabs.length) % tabs.length;
       tabs.forEach(function (t, j) { var on = j === cur; t.classList.toggle("is-on", on); t.setAttribute("aria-selected", on ? "true" : "false"); });
-      panels.forEach(function (pnl, j) { pnl.classList.toggle("is-on", j === cur); });
+      panels.forEach(function (pnl, j) { var on = j === cur; pnl.classList.toggle("is-on", on); playVid(pnl, on); });
       if (prog) prog.style.transform = "translateX(" + (cur * 100) + "%)";
       if (user) restart();
     }
-    function restart() { if (reduceMotion) return; clearInterval(timer); timer = setInterval(function () { go(cur + 1); }, 4800); }
+    function restart() { if (reduceMotion) return; clearInterval(timer); timer = setInterval(function () { go(cur + 1); }, 5600); }
     tabs.forEach(function (t, i) { t.addEventListener("click", function () { go(i, true); }); });
     cp.addEventListener("mouseenter", function () { clearInterval(timer); });
     cp.addEventListener("mouseleave", restart);
