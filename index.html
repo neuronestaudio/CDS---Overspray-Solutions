@@ -12,7 +12,7 @@
 <link rel="shortcut icon" href="assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/styles.css?v=22">
+<link rel="stylesheet" href="css/styles.css?v=23">
 <meta property="og:title" content="CDS · Overspray Solutions - Ceramic Coating & Paint Protection">
 <meta property="og:description" content="Ceramic coating, paint protection and paint correction across Melbourne.">
 <meta property="og:type" content="website">
@@ -199,32 +199,46 @@ try{if(new URLSearchParams(location.search).get('hero')==='b')document.body.clas
   <span class="cds-para-sub">Experts in paint correction &middot; Premium paint protection</span>
 </section>
 
-<!-- ============ PROCESS ============ -->
-<section class="section" id="process">
+<!-- ============ COATING PROCESS (four-stage, interactive) ============ -->
+<section class="section textured" id="process">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2 class="h-sec">Three steps to a<br>flawless finish.</h2>
-      <p class="lede">A methodical process, the same every time, so the result speaks for itself.</p>
+      <span class="eyebrow">The coating process</span>
+      <h2 class="h-sec">Four stages,<br>one flawless finish.</h2>
+      <p class="lede">A proper ceramic coating is a process, not a bottle in a box. Here is exactly how your car goes from tired paint to a sealed, mirror finish.</p>
     </div>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="st-n">01</div>
-        <h3>Assess</h3>
-        <p>We inspect the paint under proper lighting, listen to what you want, and give you an honest, fixed quote before we touch a thing.</p>
+
+    <div class="cp reveal" data-cp>
+      <div class="cp-rail" role="tablist" aria-label="Coating stages">
+        <button class="cp-tab is-on" type="button" role="tab" aria-selected="true" data-cp="0"><span class="cp-num">01</span><span class="cp-label">Decontaminate</span></button>
+        <button class="cp-tab" type="button" role="tab" aria-selected="false" data-cp="1"><span class="cp-num">02</span><span class="cp-label">Correct</span></button>
+        <button class="cp-tab" type="button" role="tab" aria-selected="false" data-cp="2"><span class="cp-num">03</span><span class="cp-label">Coat</span></button>
+        <button class="cp-tab" type="button" role="tab" aria-selected="false" data-cp="3"><span class="cp-num">04</span><span class="cp-label">Protect</span></button>
+        <span class="cp-progress" aria-hidden="true"></span>
       </div>
-      <div class="step reveal" data-d="1">
-        <div class="st-n">02</div>
-        <h3>Correct</h3>
-        <p>Safe wash, decontamination, then staged machine polishing to remove defects and reveal the true depth of your paint.</p>
-      </div>
-      <div class="step reveal" data-d="2">
-        <div class="st-n">03</div>
-        <h3>Protect</h3>
-        <p>We seal the work in with graphene ceramic coating, then walk you through how to keep it looking its best at home.</p>
+
+      <div class="cp-stage">
+        <div class="cp-panel is-on" data-panel="0">
+          <div class="cp-media"><img src="assets/img/clay-decon.jpg" alt="Clay-bar decontamination before ceramic coating" loading="lazy"></div>
+          <div class="cp-copy"><span class="cp-step">Stage 01</span><h3>Decontaminate</h3><p>Every coating starts on a spotless surface. A thorough wash, iron-fallout and tar removal, then a clay treatment strip out bonded contamination &mdash; so nothing is ever sealed in under the coating.</p></div>
+        </div>
+        <div class="cp-panel" data-panel="1">
+          <div class="cp-media"><img src="assets/img/hero-1.jpg" alt="Multi-stage machine paint correction" loading="lazy"></div>
+          <div class="cp-copy"><span class="cp-step">Stage 02</span><h3>Correct</h3><p>Multi-stage machine polishing removes swirls, scratches and oxidation, pulling the true depth and gloss back out of the paint &mdash; because a coating locks in whatever is underneath it.</p></div>
+        </div>
+        <div class="cp-panel" data-panel="2">
+          <div class="cp-media"><img src="assets/cards/card-ceramic.jpg" alt="GYEON and ONYX ceramic coating applied by hand" loading="lazy"></div>
+          <div class="cp-copy"><span class="cp-step">Stage 03</span><h3>Coat</h3><p>The GYEON or ONYX ceramic is applied by hand, panel by panel, and levelled &mdash; bonding a hard, hydrophobic, chemical-resistant layer to your clear coat for years of protection.</p></div>
+        </div>
+        <div class="cp-panel" data-panel="3">
+          <div class="cp-media"><img src="assets/gallery/30.jpg" alt="Freshly coated car, cured and protected" loading="lazy"></div>
+          <div class="cp-copy"><span class="cp-step">Stage 04</span><h3>Protect</h3><p>The coating cures in a clean, controlled, dust-free studio. You drive away with a written manufacturer warranty and a simple maintenance plan to keep it beading and glossy for the long haul.</p></div>
+        </div>
       </div>
     </div>
+
     <div class="reveal" style="margin-top:clamp(30px,4vw,48px)">
-      <a href="#contact" class="btn btn-primary btn-lg">Get your fixed quote
+      <a href="#contact" class="btn btn-primary btn-lg">Get your coating quote
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -236,7 +250,7 @@ try{if(new URLSearchParams(location.search).get('hero')==='b')document.body.clas
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 class="h-sec">Real cars. Real results.</h2>
-      <p class="lede">A drifting pool of recent jobs from the workshop and on the road, from daily drivers to Porsches and working fleets. Drag it, or just watch it float.</p>
+      <p class="lede">A drifting pool of recent jobs from the studio, from daily drivers to Porsches, Mercedes-AMGs and Teslas. Drag it, or just watch it float.</p>
     </div>
   </div>
   <div class="pool reveal" id="pool">
@@ -534,8 +548,8 @@ try{if(new URLSearchParams(location.search).get('hero')==='b')document.body.clas
   <button class="lb-btn lb-next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
 </div>
 
-<script src="js/main.js?v=22"></script>
-<script src="js/booking.js?v=22"></script>
+<script src="js/main.js?v=23"></script>
+<script src="js/booking.js?v=23"></script>
 <script src="js/ospx.js"></script>
 <script src="js/beforeafter.js"></script>
 </body>

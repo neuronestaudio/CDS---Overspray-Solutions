@@ -288,5 +288,27 @@
     restart();
   })();
 
+  /* ---------- Coating process (four-stage interactive stepper) ---------- */
+  (function () {
+    var cp = document.querySelector("[data-cp]");
+    if (!cp) return;
+    var tabs = Array.prototype.slice.call(cp.querySelectorAll(".cp-tab"));
+    var panels = Array.prototype.slice.call(cp.querySelectorAll(".cp-panel"));
+    var prog = cp.querySelector(".cp-progress");
+    var cur = 0, timer = null;
+    function go(i, user) {
+      cur = (i + tabs.length) % tabs.length;
+      tabs.forEach(function (t, j) { var on = j === cur; t.classList.toggle("is-on", on); t.setAttribute("aria-selected", on ? "true" : "false"); });
+      panels.forEach(function (pnl, j) { pnl.classList.toggle("is-on", j === cur); });
+      if (prog) prog.style.transform = "translateX(" + (cur * 100) + "%)";
+      if (user) restart();
+    }
+    function restart() { if (reduceMotion) return; clearInterval(timer); timer = setInterval(function () { go(cur + 1); }, 4800); }
+    tabs.forEach(function (t, i) { t.addEventListener("click", function () { go(i, true); }); });
+    cp.addEventListener("mouseenter", function () { clearInterval(timer); });
+    cp.addEventListener("mouseleave", restart);
+    go(0); restart();
+  })();
+
   /* ---------- Booking wizard lives in js/booking.js ---------- */
 })();
