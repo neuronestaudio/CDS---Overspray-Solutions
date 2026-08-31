@@ -25,17 +25,9 @@
   var ATTR = firstTouch();
 
   function checked(name) { return form.querySelector('input[name="' + name + '"]:checked'); }
-  function isMobile() { var f = checked("format"); return !!f && /mobile/i.test(f.value); }
 
-  // address (mobile only) + condition label depend on earlier answers
+  // condition label depends on the chosen service
   function syncConditional() {
-    var mf = form.querySelector('.field[data-loc="mobile"]');
-    if (mf) {
-      var mob = isMobile();
-      mf.hidden = !mob;
-      var mi = mf.querySelector("input");
-      if (mi) mi.required = mob;
-    }
     var lbl = form.querySelector("[data-cond-label]");
     if (lbl) {
       var s = checked("service");
@@ -109,9 +101,8 @@
   function maybeAutoNext() {
     if (advancing || cur >= steps.length - 1) return;
     var ready = false;
-    if (cur === 0) ready = !!checked("service");                                   // service
-    else if (cur === 1) { var f = checked("format"); ready = !!f && !/mobile/i.test(f.value); } // studio only
-    else if (cur === 2) ready = !!checked("budget");                               // budget
+    if (cur === 0) ready = !!checked("service");     // service
+    else if (cur === 1) ready = !!checked("budget"); // budget
     if (!ready) return;
     advancing = true;
     setTimeout(function () { advancing = false; if (validStep(cur)) show(cur + 1); }, 340);
