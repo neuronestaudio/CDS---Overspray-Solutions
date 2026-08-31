@@ -81,14 +81,14 @@
   drawer.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeDrawer); });
 
   /* ---------- Work pool (floating carousel) ---------- */
-  var cats = { coating: [15, 16, 24, 25, 31, 32], fleet: [26, 27, 28, 29, 30] };
-  function catLabel(c) { return c === "coating" ? "Coating" : c === "fleet" ? "Fleet" : "Detailing"; }
+  var cats = { coating: [1, 6, 14, 27, 30, 31], correction: [4, 8, 19, 20, 23] };
+  function catLabel(c) { return c === "coating" ? "Ceramic" : c === "correction" ? "Correction" : "Detailing"; }
   var items = [];
   for (var i = 1; i <= 32; i++) {
     var n = ("0" + i).slice(-2);
     var cat = "detail";
     if (cats.coating.indexOf(i) > -1) cat = "coating";
-    else if (cats.fleet.indexOf(i) > -1) cat = "fleet";
+    else if (cats.correction.indexOf(i) > -1) cat = "correction";
     items.push({ n: n, cat: cat });
   }
   var srcs = items.map(function (it) { return "assets/gallery/" + it.n + ".jpg"; }); // lightbox order
