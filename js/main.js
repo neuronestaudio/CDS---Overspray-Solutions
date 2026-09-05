@@ -31,7 +31,7 @@
       words[i].classList.remove("is-on");
       i = (i + 1) % words.length;
       words[i].classList.add("is-on");
-    }, 3800);
+    }, 4200);
   })();
 
   /* ---------- Nav glass on scroll (sentinel, not scroll listener) ---------- */

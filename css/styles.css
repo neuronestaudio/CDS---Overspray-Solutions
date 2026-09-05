@@ -1386,14 +1386,16 @@ html{overflow-x:hidden}
   padding:8px 16px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r-pill);
   background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);margin-bottom:clamp(20px,3vw,32px)}
 .vhero-kicker .stars{color:var(--accent);letter-spacing:.04em}
-.vhero-h{margin:0;min-height:clamp(184px,25vw,280px);position:relative}
+.vhero-h{margin:0;min-height:clamp(232px,31vw,360px);position:relative}
 .vhero-rot{display:grid}
-.vhero-word{grid-area:1 / 1;opacity:0;visibility:hidden;transform:translateY(16px);
-  transition:opacity .6s var(--ease),transform .6s var(--ease),visibility .6s;pointer-events:none}
-.vhero-word.is-on{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+.vhero-word{grid-area:1 / 1;opacity:0;transform:translateY(12px);pointer-events:none;
+  transition:opacity .22s var(--ease),transform .22s var(--ease)}                 /* quick fade OUT */
+.vhero-word.is-on{opacity:1;transform:none;pointer-events:auto;
+  transition:opacity .5s var(--ease) .26s,transform .5s var(--ease) .26s}         /* fade IN only after the old one has cleared -> no ghosting */
 .vhero-name{display:block;font-family:"DM Sans",sans-serif;font-weight:800;text-transform:uppercase;
-  font-size:clamp(2.7rem,7.4vw,6.1rem);line-height:.9;letter-spacing:-.022em;color:#fff;
+  font-size:clamp(2.4rem,6.6vw,5.5rem);line-height:.94;letter-spacing:-.022em;color:#fff;max-width:15ch;
   text-shadow:0 2px 34px rgba(0,0,0,.55)}
+.vhero-name em{color:var(--accent);font-style:normal}
 .vhero-sub{display:block;margin-top:clamp(14px,1.7vw,22px);font-family:"DM Sans",sans-serif;font-weight:500;
   font-size:clamp(1rem,1.7vw,1.35rem);line-height:1.42;color:#d0d3da;max-width:34ch;text-shadow:0 1px 20px rgba(0,0,0,.5)}
 .vhero-support{margin-top:clamp(16px,2vw,26px);max-width:52ch;font-family:"DM Sans",sans-serif;font-weight:400;
@@ -1426,8 +1428,7 @@ html{overflow-x:hidden}
    ========================================================================= */
 /* country dial-code: guarantee a single chevron on iOS */
 .tel-cc{-webkit-appearance:none;-moz-appearance:none;appearance:none}
-/* hero word swap: crisper crossfade so two services never ghost over each other */
-.vhero-word{transition:opacity .42s var(--ease),transform .42s var(--ease),visibility .42s}
+/* (hero word-swap timing is defined on .vhero-word / .is-on above — sequential, no ghosting) */
 @media(max-width:600px){
   /* coverflow: enlarge the active card so its copy fits — no cutoff, side cards stay clear of the text */
   .ospx-flow{height:clamp(520px,144vw,620px)}
