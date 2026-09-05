@@ -1405,10 +1405,10 @@ html{overflow-x:hidden}
 .vhero-kicker .stars{color:var(--accent);letter-spacing:.04em}
 .vhero-h{margin:0;min-height:clamp(232px,31vw,360px);position:relative}
 .vhero-rot{display:grid}
-.vhero-word{grid-area:1 / 1;opacity:0;transform:translateY(12px);pointer-events:none;
-  transition:opacity .22s var(--ease),transform .22s var(--ease)}                 /* quick fade OUT */
-.vhero-word.is-on{opacity:1;transform:none;pointer-events:auto;
-  transition:opacity .5s var(--ease) .26s,transform .5s var(--ease) .26s}         /* fade IN only after the old one has cleared -> no ghosting */
+.vhero-word{grid-area:1 / 1;opacity:0;pointer-events:none;
+  transition:opacity .55s var(--ease),transform .55s var(--ease)}                 /* smooth fade OUT */
+.vhero-word.is-on{opacity:1;pointer-events:auto;animation:vwordIn .7s var(--ease) both}  /* fade + swipe-up IN */
+@keyframes vwordIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 .vhero-name{display:block;font-family:"DM Sans",sans-serif;font-weight:800;text-transform:uppercase;
   font-size:clamp(2.4rem,6.6vw,5.5rem);line-height:.94;letter-spacing:-.022em;color:#fff;max-width:15ch;
   text-shadow:0 2px 34px rgba(0,0,0,.55)}
@@ -1429,7 +1429,7 @@ html{overflow-x:hidden}
   .vhero-scrim{background:linear-gradient(0deg,rgba(6,6,9,.94) 0%,rgba(6,6,9,.4) 46%,rgba(6,6,9,.58) 100%)}
   .vhero-sub{max-width:30ch}
 }
-@media(prefers-reduced-motion:reduce){.vhero-word{transition:none}.vhero-scroll svg{animation:none}}
+@media(prefers-reduced-motion:reduce){.vhero-word{transition:none}.vhero-word.is-on{animation:none}.vhero-scroll svg{animation:none}}
 
 /* services page: hero-style header above the coverflow */
 .svc-page-head{padding-top:clamp(120px,15vh,168px);padding-bottom:clamp(8px,2vw,20px)}
