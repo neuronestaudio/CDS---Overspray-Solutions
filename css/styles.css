@@ -1394,7 +1394,9 @@ html{overflow-x:hidden}
   text-shadow:0 2px 34px rgba(0,0,0,.55)}
 .vhero-sub{display:block;margin-top:clamp(14px,1.7vw,22px);font-family:"DM Sans",sans-serif;font-weight:500;
   font-size:clamp(1rem,1.7vw,1.35rem);line-height:1.42;color:#d0d3da;max-width:34ch;text-shadow:0 1px 20px rgba(0,0,0,.5)}
-.vhero .hero-actions{margin-top:clamp(28px,3.8vw,42px)}
+.vhero-support{margin-top:clamp(16px,2vw,26px);max-width:52ch;font-family:"DM Sans",sans-serif;font-weight:400;
+  font-size:clamp(.95rem,1.25vw,1.12rem);line-height:1.55;color:#b9bcc4;text-shadow:0 1px 16px rgba(0,0,0,.5)}
+.vhero .hero-actions{margin-top:clamp(24px,3vw,36px)}
 .vhero-scroll{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:2;
   display:inline-flex;flex-direction:column;align-items:center;gap:7px;color:#c9ccd3;text-decoration:none;
   font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:.62rem}

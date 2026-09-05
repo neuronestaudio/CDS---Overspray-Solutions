@@ -249,11 +249,12 @@
     var band = document.querySelector(".cds-para[data-parallax]");
     if (!band) return;
     if (reduceMotion || qaMode) { band.classList.add("lit"); return; }
-    new IntersectionObserver(function (entries, obs) {
+    // two-way parallax reveal: light up on the way in, fall back out on scroll-up
+    new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { band.classList.add("lit"); obs.unobserve(e.target); }
+        band.classList.toggle("lit", e.isIntersecting && e.intersectionRatio >= 0.35);
       });
-    }, { threshold: 0.35 }).observe(band);
+    }, { threshold: [0, 0.35, 0.6] }).observe(band);
   })();
 
   /* ---------- Reviews carousel ---------- */
