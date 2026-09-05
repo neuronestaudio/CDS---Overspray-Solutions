@@ -1473,7 +1473,7 @@ html{overflow-x:hidden}
 @media(max-width:900px){
   .nav .brand{display:none}          /* naked header over the video on mobile */
   .vhero-place{display:none}
-  .vhero-brand{display:flex}
+  .vhero-brand{display:flex;align-items:center;text-align:center;width:100%}  /* centre the CDS logo */
 }
 
 /* footer: trusted-coating brand logos (GYEON + ONYX) */
