@@ -240,6 +240,8 @@
   if (qaMode) {
     var heroEl = document.querySelector(".hero");
     if (heroEl) heroEl.style.minHeight = "720px"; // let full page stack for tall screenshots
+    var vheroEl = document.querySelector(".vhero");
+    if (vheroEl) vheroEl.style.minHeight = "760px"; // same, for the video hero (100svh would eat tall windows)
   }
 
   /* ---------- CDS band: keyframed word reveal (Car / Detailing / Solutions) ---------- */
