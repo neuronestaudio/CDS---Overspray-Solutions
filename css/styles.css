@@ -927,6 +927,7 @@ body.hero-v-b .hero-cds{display:inline-flex}
 @keyframes splashBar{to{width:clamp(180px,32vw,280px)}}
 @keyframes splash2Out{to{opacity:0;visibility:hidden}}
 .splash2.done{display:none}
+html.splash-off .splash2{display:none}   /* return visit within the session: no splash */
 @media(prefers-reduced-motion:reduce){
   .splash2{animation:splash2Out .3s .6s forwards}
   .splash2-logo{animation:splash2In .3s forwards}
@@ -1361,3 +1362,53 @@ html{overflow-x:hidden}
   .cp-panel{grid-template-columns:1fr;gap:20px}
 }
 @media(prefers-reduced-motion:reduce){.cp-panel{transition:none}}
+
+/* =========================================================================
+   Video hero (landing) + services page header
+   ========================================================================= */
+.vhero{position:relative;min-height:100svh;display:grid;align-items:center;overflow:hidden;isolation:isolate}
+.vhero-media{position:absolute;inset:0;z-index:-1}
+.vhero-vid{width:100%;height:100%;object-fit:cover;object-position:center 56%;display:block}
+.vhero-scrim{position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(6,6,9,.92) 0%,rgba(6,6,9,.66) 40%,rgba(6,6,9,.3) 72%,rgba(6,6,9,.52) 100%),
+    linear-gradient(0deg,rgba(6,6,9,.9) 0%,rgba(6,6,9,0) 32%,rgba(6,6,9,0) 64%,rgba(6,6,9,.66) 100%)}
+.vhero-inner{position:relative;width:100%;padding-block:clamp(130px,20vh,210px)}
+.vhero-copy{max-width:800px}
+.vhero-kicker{display:inline-flex;align-items:center;gap:10px;font-family:"DM Sans",sans-serif;font-weight:600;
+  text-transform:uppercase;letter-spacing:.15em;font-size:clamp(.64rem,1.05vw,.78rem);color:#d8dae0;
+  padding:8px 16px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r-pill);
+  background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);margin-bottom:clamp(20px,3vw,32px)}
+.vhero-kicker .stars{color:var(--accent);letter-spacing:.04em}
+.vhero-h{margin:0;min-height:clamp(184px,25vw,280px);position:relative}
+.vhero-rot{display:grid}
+.vhero-word{grid-area:1 / 1;opacity:0;visibility:hidden;transform:translateY(16px);
+  transition:opacity .6s var(--ease),transform .6s var(--ease),visibility .6s;pointer-events:none}
+.vhero-word.is-on{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+.vhero-name{display:block;font-family:"DM Sans",sans-serif;font-weight:800;text-transform:uppercase;
+  font-size:clamp(2.7rem,7.4vw,6.1rem);line-height:.9;letter-spacing:-.022em;color:#fff;
+  text-shadow:0 2px 34px rgba(0,0,0,.55)}
+.vhero-sub{display:block;margin-top:clamp(14px,1.7vw,22px);font-family:"DM Sans",sans-serif;font-weight:500;
+  font-size:clamp(1rem,1.7vw,1.35rem);line-height:1.42;color:#d0d3da;max-width:34ch;text-shadow:0 1px 20px rgba(0,0,0,.5)}
+.vhero .hero-actions{margin-top:clamp(28px,3.8vw,42px)}
+.vhero-scroll{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:2;
+  display:inline-flex;flex-direction:column;align-items:center;gap:7px;color:#c9ccd3;text-decoration:none;
+  font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:.62rem}
+.vhero-scroll svg{width:20px;height:20px;animation:vheroBob 1.9s var(--ease) infinite}
+@keyframes vheroBob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@media(max-width:720px){
+  .vhero{min-height:90svh}
+  .vhero-copy{max-width:100%}
+  .vhero-scrim{background:linear-gradient(0deg,rgba(6,6,9,.94) 0%,rgba(6,6,9,.4) 46%,rgba(6,6,9,.58) 100%)}
+  .vhero-sub{max-width:30ch}
+}
+@media(prefers-reduced-motion:reduce){.vhero-word{transition:none}.vhero-scroll svg{animation:none}}
+
+/* services page: hero-style header above the coverflow */
+.svc-page-head{padding-top:clamp(120px,15vh,168px);padding-bottom:clamp(8px,2vw,20px)}
+.svc-page-head .wb-kicker{margin-bottom:16px}
+.svc-page-head h1{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;letter-spacing:.01em;line-height:.9;
+  font-size:clamp(2.6rem,6.4vw,5rem);margin:0 0 14px}
+.svc-page-head h1 em{font-style:italic;color:var(--accent)}
+.svc-page-head .lede{max-width:60ch}
+.svc-page .ospx{min-height:auto}

@@ -11,9 +11,28 @@
   /* ---------- Entry splash cleanup (fade handled in CSS) ---------- */
   var splash2 = document.getElementById("splash2");
   if (splash2) {
-    if (qaMode) splash2.classList.add("done");
-    else setTimeout(function () { splash2.classList.add("done"); }, 3400);
+    var splashOff = document.documentElement.classList.contains("splash-off");
+    if (qaMode || splashOff) {
+      splash2.classList.add("done"); // already hidden (return visit) or QA: no animation
+    } else {
+      try { sessionStorage.setItem("cds_splash_seen", "1"); } catch (e) {} // seen this session
+      setTimeout(function () { splash2.classList.add("done"); }, 3400);
+    }
   }
+
+  /* ---------- Video hero: cycling blocky service headline ---------- */
+  (function () {
+    var rot = document.querySelector("[data-vrot]");
+    if (!rot) return;
+    var words = Array.prototype.slice.call(rot.querySelectorAll(".vhero-word"));
+    if (words.length < 2 || reduceMotion) return; // reduced motion: keep the first word static
+    var i = 0;
+    setInterval(function () {
+      words[i].classList.remove("is-on");
+      i = (i + 1) % words.length;
+      words[i].classList.add("is-on");
+    }, 3800);
+  })();
 
   /* ---------- Nav glass on scroll (sentinel, not scroll listener) ---------- */
   var nav = document.getElementById("nav");
