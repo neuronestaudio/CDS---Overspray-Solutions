@@ -1,13 +1,5 @@
-facebook-photos
-.git
-*.log
-README.md
-.DS_Store
-Thumbs.db
-
-# 3D Hilux (removed from the About page) — keep the heavy model out of the deploy
-assets/hilux.glb
-assets/hilux_lite.glb
-js/aboutv2.js
-css/aboutv2.css
-js/about3d.js
+assets/video/NO LOGO.mp4
+assets/video/CDS.mp4
+assets/video/HERO ANIMATION - cds.mp4
+assets/video/HERO V2.mp4
+assets/video/Hero animation.mp4
