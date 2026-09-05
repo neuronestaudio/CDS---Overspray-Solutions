@@ -476,7 +476,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .contact-section{position:relative;isolation:isolate;border-top:1px solid var(--line)}
 .contact-section::before{
   content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(8,8,10,.72),rgba(8,8,10,.88)),url("../assets/gallery/31.jpg") center/cover;
+  background:
+    radial-gradient(120% 92% at 50% 52%,rgba(8,8,10,.9),rgba(8,8,10,.74) 68%,rgba(8,8,10,.6) 100%),
+    url("../assets/img/garage.png") center/cover;
 }
 .contact-card{
   position:relative;color:var(--text);border-radius:22px;padding:clamp(26px,4vw,54px);
@@ -1437,3 +1439,19 @@ html{overflow-x:hidden}
   /* bento feature badge sits above the title instead of overlapping it */
   .card-photo .feature-tag{position:relative;top:auto;left:auto;align-self:flex-start;margin:0 0 12px}
 }
+
+/* hero: small bold specialist title above the rating pill */
+.vhero-eyebrow{display:block;font-family:"DM Sans",sans-serif;font-weight:700;
+  font-size:clamp(.92rem,1.45vw,1.14rem);letter-spacing:.005em;color:#f1f2f5;
+  margin-bottom:15px;text-shadow:0 1px 14px rgba(0,0,0,.55)}
+.vhero-eyebrow b{color:var(--accent)}
+
+/* footer: trusted-coating brand logos (GYEON + ONYX) */
+.foot-brands{display:flex;align-items:center;gap:clamp(20px,4vw,44px);flex-wrap:wrap;
+  padding-bottom:clamp(28px,3.5vw,40px);margin-bottom:clamp(30px,4vw,44px);border-bottom:1px solid var(--line)}
+.foot-brands-label{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;
+  letter-spacing:.2em;font-size:.7rem;color:var(--muted-2)}
+.foot-brands-row{display:flex;align-items:center;gap:clamp(26px,4vw,48px)}
+.foot-brand-logo{height:clamp(22px,3vw,30px);width:auto;opacity:.82;transition:opacity .3s var(--ease)}
+.foot-brand-logo:hover{opacity:1}
+@media(max-width:600px){.foot-brands{gap:14px}.foot-brands-row{gap:26px}}
