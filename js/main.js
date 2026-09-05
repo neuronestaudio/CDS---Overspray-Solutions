@@ -20,6 +20,17 @@
     }
   }
 
+  /* ---------- Hero video variant preview: ?herovid=a|b|c|d ---------- */
+  (function () {
+    var hv = (new URLSearchParams(location.search).get("herovid") || "").toLowerCase();
+    if (!/^[a-d]$/.test(hv)) return;
+    var v = document.querySelector(".vhero-vid");
+    if (!v) return;
+    v.setAttribute("src", "assets/video/hero-" + hv + ".mp4");
+    v.load();
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+  })();
+
   /* ---------- Video hero: cycling blocky service headline ---------- */
   (function () {
     var rot = document.querySelector("[data-vrot]");

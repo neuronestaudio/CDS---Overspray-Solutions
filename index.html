@@ -12,7 +12,7 @@
 <link rel="shortcut icon" href="assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/styles.css?v=43">
+<link rel="stylesheet" href="css/styles.css?v=45">
 <meta property="og:title" content="CDS · Overspray Solutions - Ceramic Coating & Paint Protection">
 <meta property="og:description" content="Ceramic coating, paint protection and paint correction across Melbourne.">
 <meta property="og:type" content="website">
@@ -92,7 +92,7 @@ if(_p.get('qa')!=='1'&&sessionStorage.getItem('cds_splash_seen'))document.docume
   <div class="wrap vhero-inner">
     <div class="vhero-copy reveal in">
       <div class="vhero-brand" aria-hidden="true">
-        <img class="vhero-logo" src="assets/img/logo-mark.png" alt="">
+        <span class="vhero-logo" role="img" aria-label="CDS"></span>
         <span class="vhero-brand-sub">Car Detailing Solutions</span>
       </div>
       <span class="vhero-place">Car Detailing Solutions &middot; Melbourne</span>
@@ -419,40 +419,22 @@ if(_p.get('qa')!=='1'&&sessionStorage.getItem('cds_splash_seen'))document.docume
     <div class="sec-head reveal">
       <h2 class="h-sec">Owners keep coming back.</h2>
     </div>
-    <div class="rev-marquee reveal">
-      <div class="rev-loop">
-        <figure class="rev-card">
-          <span class="stars">★★★★★</span>
-          <blockquote>Andy is nothing but professional all throughout the process. The Onyx Graphene Pro ceramic coating he put on my RAV4 is amazing. The service is top notch and goes above and beyond.</blockquote>
-          <figcaption class="tst-author"><span class="av">M</span><span><b>Marcus D.</b><span>Toyota RAV4 · Ceramic coating</span></span></figcaption>
-        </figure>
-        <figure class="rev-card">
-          <span class="stars">★★★★★</span>
-          <blockquote>I highly recommend Andy. I booked my SUV in for a full detail. He did a magnificent job and I took up his offer of ceramic coating. My car looks and smells brand new.</blockquote>
-          <figcaption class="tst-author"><span class="av">P</span><span><b>Patricia G.</b><span>SUV · Full detail + coating</span></span></figcaption>
-        </figure>
-        <figure class="rev-card">
-          <span class="stars">★★★★★</span>
-          <blockquote>Full interior detail and mould remediation, done to extremely high standards. He even did some extras free of charge. I recommend Andy more than 100%.</blockquote>
-          <figcaption class="tst-author"><span class="av">J</span><span><b>Jordan Parker</b><span>Interior detail + mould remediation</span></span></figcaption>
-        </figure>
-        <!-- duplicate set for a seamless infinite loop -->
-        <figure class="rev-card" aria-hidden="true">
-          <span class="stars">★★★★★</span>
-          <blockquote>Andy is nothing but professional all throughout the process. The Onyx Graphene Pro ceramic coating he put on my RAV4 is amazing. The service is top notch and goes above and beyond.</blockquote>
-          <figcaption class="tst-author"><span class="av">M</span><span><b>Marcus D.</b><span>Toyota RAV4 · Ceramic coating</span></span></figcaption>
-        </figure>
-        <figure class="rev-card" aria-hidden="true">
-          <span class="stars">★★★★★</span>
-          <blockquote>I highly recommend Andy. I booked my SUV in for a full detail. He did a magnificent job and I took up his offer of ceramic coating. My car looks and smells brand new.</blockquote>
-          <figcaption class="tst-author"><span class="av">P</span><span><b>Patricia G.</b><span>SUV · Full detail + coating</span></span></figcaption>
-        </figure>
-        <figure class="rev-card" aria-hidden="true">
-          <span class="stars">★★★★★</span>
-          <blockquote>Full interior detail and mould remediation, done to extremely high standards. He even did some extras free of charge. I recommend Andy more than 100%.</blockquote>
-          <figcaption class="tst-author"><span class="av">J</span><span><b>Jordan Parker</b><span>Interior detail + mould remediation</span></span></figcaption>
-        </figure>
-      </div>
+    <div class="rev-grid reveal">
+      <figure class="rev-card">
+        <span class="stars">★★★★★</span>
+        <blockquote>Andy is nothing but professional all throughout the process. The Onyx Graphene Pro ceramic coating he put on my RAV4 is amazing. The service is top notch and goes above and beyond.</blockquote>
+        <figcaption class="tst-author"><span class="av">M</span><span><b>Marcus D.</b><span>Toyota RAV4 · Ceramic coating</span></span></figcaption>
+      </figure>
+      <figure class="rev-card">
+        <span class="stars">★★★★★</span>
+        <blockquote>I highly recommend Andy. I booked my SUV in for a full detail. He did a magnificent job and I took up his offer of ceramic coating. My car looks and smells brand new.</blockquote>
+        <figcaption class="tst-author"><span class="av">P</span><span><b>Patricia G.</b><span>SUV · Full detail + coating</span></span></figcaption>
+      </figure>
+      <figure class="rev-card">
+        <span class="stars">★★★★★</span>
+        <blockquote>Full interior detail and mould remediation, done to extremely high standards. He even did some extras free of charge. I recommend Andy more than 100%.</blockquote>
+        <figcaption class="tst-author"><span class="av">J</span><span><b>Jordan Parker</b><span>Interior detail + mould remediation</span></span></figcaption>
+      </figure>
     </div>
     <div class="rating-badge reveal">
       <span>Rated 5.0 from happy Melbourne owners</span>
@@ -660,13 +642,13 @@ if(_p.get('qa')!=='1'&&sessionStorage.getItem('cds_splash_seen'))document.docume
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     <span>Call</span>
   </a>
-  <a href="sms:0410939700" class="callbar-btn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-    <span>Message</span>
-  </a>
-  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Epping%20VIC%203076" target="_blank" rel="noopener" class="callbar-btn callbar-btn-accent">
+  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Epping%20VIC%203076" target="_blank" rel="noopener" class="callbar-btn">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
     <span>Directions</span>
+  </a>
+  <a href="#contact" class="callbar-btn callbar-btn-accent">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+    <span>Quote</span>
   </a>
 </nav>
 
@@ -678,7 +660,7 @@ if(_p.get('qa')!=='1'&&sessionStorage.getItem('cds_splash_seen'))document.docume
   <button class="lb-btn lb-next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
 </div>
 
-<script src="js/main.js?v=41"></script>
+<script src="js/main.js?v=45"></script>
 <script src="js/booking.js?v=30"></script>
 <script src="js/ospx.js"></script>
 <script src="js/beforeafter.js"></script>
