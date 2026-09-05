@@ -953,14 +953,25 @@ html.splash-off .splash2{display:none}   /* return visit within the session: no 
 .cds-para{position:relative;overflow:hidden;min-height:clamp(300px,44vh,480px);display:grid;place-items:center;
   background:#08080a;border-block:1px solid var(--line)}
 /* monochromatic workshop backdrop — desaturated + blacked-down so it reads cooler than flat black */
+/* scratched (before) base layer */
 .cds-para::before{content:"";position:absolute;inset:0;z-index:0;
-  background:url('../assets/img/hero-1.jpg') center 42%/cover no-repeat;
-  filter:grayscale(1) contrast(1.08) brightness(.4);transform:scale(1.08);will-change:transform}
-.cds-para::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:
+  background:url('../assets/beforeafter/cc-black-hood-before.jpg') center/cover no-repeat;
+  filter:grayscale(1) contrast(1.08) brightness(.42);transform:scale(1.06);will-change:transform}
+/* clean (after) layer, revealed left-to-right by the scroll-driven --wipe */
+.cds-clean{position:absolute;inset:0;z-index:1;
+  background:url('../assets/beforeafter/cc-black-hood-after.jpg') center/cover no-repeat;
+  filter:grayscale(1) contrast(1.06) brightness(.5);transform:scale(1.06);
+  clip-path:inset(0 calc(100% - var(--wipe,0%)) 0 0)}
+/* the wiping edge — a bright squeegee line at the reveal boundary */
+.cds-wipe-line{position:absolute;top:0;bottom:0;left:var(--wipe,0%);z-index:2;width:3px;transform:translateX(-1.5px);
+  pointer-events:none;opacity:var(--wipe-op,0);transition:opacity .3s var(--ease);
+  background:linear-gradient(180deg,transparent,rgba(225,29,42,.85) 22%,#fff 50%,rgba(225,29,42,.85) 78%,transparent);
+  box-shadow:0 0 26px 5px rgba(225,29,42,.5)}
+.cds-para::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:
   radial-gradient(120% 100% at 50% 46%,rgba(8,8,10,.28) 0%,rgba(8,8,10,.72) 56%,rgba(8,8,10,.96) 100%),
   linear-gradient(180deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.28) 30%,rgba(8,8,10,.28) 68%,rgba(8,8,10,.97) 100%)}
 /* the words spell out CAR DETAILING SOLUTIONS, each keyed off its metallic capital */
-.cds-words{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;
+.cds-words{position:relative;z-index:4;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;
   gap:clamp(12px,2.4vw,44px);padding:0 22px;max-width:1200px;text-align:center;
   font-family:"Bebas Neue",Impact,sans-serif;line-height:.86;
   pointer-events:none;-webkit-user-select:none;user-select:none}
@@ -981,7 +992,7 @@ html.splash-off .splash2{display:none}   /* return visit within the session: no 
   background:linear-gradient(90deg,transparent,var(--accent) 16%,var(--accent) 84%,transparent);
   box-shadow:0 0 22px rgba(225,29,42,.5);transition:transform .8s var(--ease) .55s}
 .cds-para.lit .cds-words::after{transform:translateX(-50%) scaleX(1)}
-.cds-para-sub{position:absolute;z-index:2;left:0;right:0;bottom:clamp(20px,4.5vh,46px);text-align:center;
+.cds-para-sub{position:absolute;z-index:4;left:0;right:0;bottom:clamp(20px,4.5vh,46px);text-align:center;
   font-family:"DM Sans";text-transform:uppercase;letter-spacing:.34em;font-size:clamp(.6rem,1.05vw,.78rem);color:var(--muted-2);
   opacity:0;transition:opacity .8s var(--ease) .7s}
 .cds-para.lit .cds-para-sub{opacity:1}

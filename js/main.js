@@ -244,17 +244,34 @@
     if (vheroEl) vheroEl.style.minHeight = "760px"; // same, for the video hero (100svh would eat tall windows)
   }
 
-  /* ---------- CDS band: keyframed word reveal (Car / Detailing / Solutions) ---------- */
+  /* ---------- CDS band: word reveal + scroll-driven scratched->clean wipe ---------- */
   (function () {
     var band = document.querySelector(".cds-para[data-parallax]");
     if (!band) return;
-    if (reduceMotion || qaMode) { band.classList.add("lit"); return; }
-    // two-way parallax reveal: light up on the way in, fall back out on scroll-up
+    function setWipe(pct) {
+      band.style.setProperty("--wipe", pct + "%");
+      band.style.setProperty("--wipe-op", pct > 1 && pct < 99 ? "1" : "0");
+    }
+    if (reduceMotion) { band.classList.add("lit"); setWipe(100); return; } // show clean, no motion
+    if (qaMode) { band.classList.add("lit"); setWipe(55); return; }        // mid-wipe for screenshots
+    // two-way word reveal: light up on the way in, fall back out on scroll-up
     new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         band.classList.toggle("lit", e.isIntersecting && e.intersectionRatio >= 0.35);
       });
     }, { threshold: [0, 0.35, 0.6] }).observe(band);
+    // scroll-driven wipe: rAF only runs while the band is on screen
+    var running = false;
+    function tick() {
+      var r = band.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
+      var p = (vh - r.top) / (vh + r.height);              // 0 entering from bottom -> 1 leaving top
+      var w = Math.max(0, Math.min(1, (p - 0.12) / 0.62)); // do the wipe through the middle of the pass
+      setWipe(+(w * 100).toFixed(1));
+      if (r.bottom > 0 && r.top < vh) requestAnimationFrame(tick); else running = false;
+    }
+    new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting && !running) { running = true; requestAnimationFrame(tick); }
+    }, { threshold: 0 }).observe(band);
   })();
 
   /* ---------- Reviews carousel ---------- */
