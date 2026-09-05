@@ -1418,3 +1418,22 @@ html{overflow-x:hidden}
 .svc-page-head h1 em{font-style:italic;color:var(--accent)}
 .svc-page-head .lede{max-width:60ch}
 .svc-page .ospx{min-height:auto}
+
+/* =========================================================================
+   Mobile polish (QA pass)
+   ========================================================================= */
+/* country dial-code: guarantee a single chevron on iOS */
+.tel-cc{-webkit-appearance:none;-moz-appearance:none;appearance:none}
+/* hero word swap: crisper crossfade so two services never ghost over each other */
+.vhero-word{transition:opacity .42s var(--ease),transform .42s var(--ease),visibility .42s}
+@media(max-width:600px){
+  /* coverflow: enlarge the active card so its copy fits — no cutoff, side cards stay clear of the text */
+  .ospx-flow{height:clamp(520px,144vw,620px)}
+  .ospx-card{width:min(88vw,360px);height:clamp(500px,142vw,600px)}
+  .ospx-title{font-size:1.55rem;margin:8px 0 7px}
+  .ospx-desc{font-size:.87rem;line-height:1.46;max-width:none;margin-bottom:14px}
+  .ospx-body{padding:18px 20px 20px}
+  .ospx-card::after{background:linear-gradient(0deg,rgba(6,6,8,.98) 16%,rgba(6,6,8,.6) 52%,rgba(6,6,8,.12) 78%)}
+  /* bento feature badge sits above the title instead of overlapping it */
+  .card-photo .feature-tag{position:relative;top:auto;left:auto;align-self:flex-start;margin:0 0 12px}
+}

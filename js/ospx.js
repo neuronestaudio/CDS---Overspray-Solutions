@@ -26,7 +26,7 @@
     dotsWrap.appendChild(d); return d;
   });
 
-  function spacing() { return Math.min(innerWidth * 0.27, 330); }
+  function spacing() { return innerWidth < 620 ? innerWidth * 0.8 : Math.min(innerWidth * 0.27, 330); }
   var SP = spacing();
 
   // hero background mirrors the active card image (crossfade between two layers)
@@ -50,10 +50,11 @@
       var abs = Math.abs(off);
       var isActive = off === 0;
       card.classList.toggle("active", isActive);
+      var mob = innerWidth < 620;
       var x = off * SP;
-      var rot = -off * 22;
-      var sc = isActive ? 1 : Math.max(0.66, 0.82 - (abs - 1) * 0.07);
-      var op = abs > half ? 0 : (isActive ? 1 : 0.55 - (abs - 1) * 0.12);
+      var rot = mob ? 0 : -off * 22;                                  // flat single-card slider on phones
+      var sc = isActive ? 1 : (mob ? 0.86 : Math.max(0.66, 0.82 - (abs - 1) * 0.07));
+      var op = abs > half ? 0 : (isActive ? 1 : (mob ? 0.24 : 0.55 - (abs - 1) * 0.12)); // dim side peeks, no text jumble
       card.style.transform = "translate(-50%,-50%) translateX(" + x + "px) rotateY(" + rot + "deg) scale(" + sc + ")";
       card.style.opacity = op;
       card.style.zIndex = 100 - abs;
