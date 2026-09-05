@@ -1454,6 +1454,16 @@ html{overflow-x:hidden}
   font-size:clamp(.9rem,1.4vw,1.1rem);letter-spacing:.03em;color:#f1f2f5;
   margin-bottom:15px;text-shadow:0 1px 14px rgba(0,0,0,.55)}
 .vhero-eyebrow b{color:var(--accent)}
+/* mobile hero brand lockup (enlarged logo + subtitle; header goes logo-less) */
+.vhero-brand{display:none;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:20px}
+.vhero-logo{width:clamp(190px,58vw,280px);height:auto;filter:drop-shadow(0 8px 26px rgba(0,0,0,.55))}
+.vhero-brand-sub{font-family:"DM Sans",sans-serif;font-weight:500;text-transform:uppercase;
+  letter-spacing:.24em;font-size:clamp(.62rem,2.6vw,.78rem);color:var(--muted-2)}
+@media(max-width:900px){
+  .nav .brand{display:none}          /* naked header over the video on mobile */
+  .vhero-place{display:none}
+  .vhero-brand{display:flex}
+}
 
 /* footer: trusted-coating brand logos (GYEON + ONYX) */
 .foot-brands{display:flex;align-items:center;gap:clamp(20px,4vw,44px);flex-wrap:wrap;
