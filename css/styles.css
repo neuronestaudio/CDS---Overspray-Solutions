@@ -1354,6 +1354,19 @@ html{overflow-x:hidden}
 /* =========================================================================
    Coating process - four-stage interactive stepper
    ========================================================================= */
+/* Coating process — frosted glass panel (glassmorphism over the honeycomb texture) */
+.cp-glass{position:relative;border-radius:clamp(20px,2.6vw,30px);padding:clamp(24px,4vw,54px);overflow:hidden;
+  background:
+    radial-gradient(120% 82% at 12% 0%,rgba(225,29,42,.11),transparent 55%),
+    radial-gradient(90% 70% at 100% 100%,rgba(255,255,255,.05),transparent 60%),
+    linear-gradient(158deg,rgba(255,255,255,.075) 0%,rgba(255,255,255,.022) 46%,rgba(255,255,255,.055) 100%);
+  border:1px solid rgba(255,255,255,.12);
+  -webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);
+  box-shadow:0 40px 90px -50px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.15)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .cp-glass{background:rgba(18,18,22,.74)}   /* no backdrop-filter support: solid frosted fallback */
+}
+@media(max-width:600px){.cp-glass{padding:clamp(18px,5vw,26px);border-radius:18px}}
 .cp{margin-top:clamp(34px,4vw,58px)}
 .cp-rail{position:relative;display:grid;grid-template-columns:repeat(4,1fr);
   border-top:1px solid var(--line);margin-bottom:clamp(28px,3.5vw,46px)}
@@ -1408,6 +1421,7 @@ html{overflow-x:hidden}
   padding:8px 16px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r-pill);
   background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);margin-bottom:clamp(20px,3vw,32px)}
 .vhero-kicker .stars{color:var(--accent);letter-spacing:.04em}
+.vhero-kicker .k-seg{white-space:nowrap}   /* keep each phrase intact so it wraps as a unit */
 .vhero-h{margin:0;min-height:clamp(150px,16.5vw,232px);position:relative}
 .vhero-rot{display:grid}
 .vhero-word{grid-area:1 / 1;opacity:0;pointer-events:none;
@@ -1474,6 +1488,8 @@ html{overflow-x:hidden}
   .vhero-eyebrow{font-size:clamp(.58rem,2.7vw,.74rem);letter-spacing:.04em;text-align:center}
   .vhero-kicker{display:flex;width:-moz-fit-content;width:fit-content;max-width:100%;
     justify-content:center;text-align:center;margin-inline:auto}
+  .vhero-kicker .k-text{display:flex;flex-direction:column;align-items:center;line-height:1.34}  /* stack: line 2 = GYEON & ONYX certified */
+  .vhero-kicker .k-sep{display:none}
   .vhero-name{margin-inline:auto}                                  /* centre the headline block (has max-width) */
   .vhero-sub{margin-inline:auto}                                   /* centre the tagline block */
   .vhero-support{margin-inline:auto}                               /* centre the support paragraph */
@@ -1483,28 +1499,22 @@ html{overflow-x:hidden}
   .vhero-inner{padding-block:clamp(78px,11vh,108px) clamp(36px,6vh,64px)}  /* kill the dead space up top */
 }
 .vhero-eyebrow b{color:var(--accent)}
-/* mobile hero brand lockup (enlarged logo + subtitle; header goes logo-less) */
-.vhero-brand{display:none;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:20px}
-/* CDS logo as a brushed-metal mask with an animated sheen sweep */
-.vhero-logo{width:clamp(190px,58vw,280px);aspect-ratio:951/300;height:auto;display:block;
+/* mobile hero brand lockup (large hero logo + tidy subtitle; header goes logo-less) */
+.vhero-brand{display:none;flex-direction:column;align-items:flex-start;gap:clamp(12px,3vw,17px);margin-bottom:clamp(20px,5vw,32px)}
+/* CDS logo as a big brushed-metal mask with an animated sheen sweep (the hero centrepiece) */
+.vhero-logo{width:clamp(280px,84vw,420px);aspect-ratio:951/300;height:auto;display:block;
   -webkit-mask:url('../assets/img/logo-mark.png') center/contain no-repeat;
   mask:url('../assets/img/logo-mark.png') center/contain no-repeat;
-  background:linear-gradient(105deg,#cfd4dc 0%,#cfd4dc 40%,#ffffff 48%,#ffffff 52%,#cfd4dc 60%,#cfd4dc 100%);
+  background:linear-gradient(105deg,#c6cbd4 0%,#c6cbd4 38%,#ffffff 47%,#ffffff 53%,#c6cbd4 62%,#c6cbd4 100%);
   background-size:260% 100%;background-position:150% 0;
-  animation:logoShine 5s ease-in-out infinite;
-  filter:drop-shadow(0 8px 26px rgba(0,0,0,.55))}
-@keyframes logoShine{0%{background-position:150% 0}22%,100%{background-position:-60% 0}}
+  animation:logoShine 4.6s ease-in-out infinite;
+  filter:drop-shadow(0 10px 32px rgba(0,0,0,.6))}
+@keyframes logoShine{0%{background-position:150% 0}24%,100%{background-position:-60% 0}}
 @media(prefers-reduced-motion:reduce){.vhero-logo{animation:none;background-position:50% 0}}
-/* Car Detailing Solutions — brighter, white glow, left-to-right sheen flash */
+/* Car Detailing Solutions — tidy, calm subtitle under the big logo (shine lives on the logo now) */
 .vhero-brand-sub{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;
-  letter-spacing:.24em;font-size:clamp(.62rem,2.6vw,.78rem);color:#f2f4f8;
-  background:linear-gradient(105deg,#dfe2e9 0%,#dfe2e9 42%,#ffffff 50%,#dfe2e9 58%,#dfe2e9 100%);
-  background-size:250% 100%;background-position:150% 0;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  animation:subShine 5s ease-in-out infinite;
-  filter:drop-shadow(0 0 11px rgba(255,255,255,.42))}
-@keyframes subShine{0%{background-position:150% 0}24%,100%{background-position:-60% 0}}
-@media(prefers-reduced-motion:reduce){.vhero-brand-sub{animation:none;background-position:50% 0}}
+  letter-spacing:.3em;font-size:clamp(.6rem,2.4vw,.76rem);color:#c9ccd6;
+  text-shadow:0 1px 12px rgba(0,0,0,.55)}
 /* GYEON / ONYX certified logos under the hero CTAs */
 .vhero-brands{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(9px,1.4vw,14px);margin-top:clamp(22px,2.8vw,32px)}
 .vhero-brands-label{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.22em;
