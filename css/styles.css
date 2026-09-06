@@ -1408,7 +1408,7 @@ html{overflow-x:hidden}
   padding:8px 16px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r-pill);
   background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);margin-bottom:clamp(20px,3vw,32px)}
 .vhero-kicker .stars{color:var(--accent);letter-spacing:.04em}
-.vhero-h{margin:0;min-height:clamp(196px,23vw,286px);position:relative}
+.vhero-h{margin:0;min-height:clamp(172px,20vw,262px);position:relative}
 .vhero-rot{display:grid}
 .vhero-word{grid-area:1 / 1;opacity:0;pointer-events:none;
   transition:opacity .55s var(--ease),transform .55s var(--ease)}                 /* smooth fade OUT */
@@ -1469,7 +1469,11 @@ html{overflow-x:hidden}
 .vhero-eyebrow{display:block;font-family:"DM Sans",sans-serif;font-weight:700;text-transform:uppercase;
   font-size:clamp(.9rem,1.4vw,1.1rem);letter-spacing:.03em;color:#f1f2f5;white-space:nowrap;
   margin-bottom:15px;text-shadow:0 1px 14px rgba(0,0,0,.55)}
-@media(max-width:900px){.vhero-eyebrow{font-size:clamp(.58rem,2.7vw,.74rem);letter-spacing:.04em}}
+@media(max-width:900px){
+  .vhero-eyebrow{font-size:clamp(.58rem,2.7vw,.74rem);letter-spacing:.04em;text-align:center}
+  .vhero-kicker{display:flex;width:-moz-fit-content;width:fit-content;margin-inline:auto}
+  .vhero-brands{justify-content:center}
+}
 .vhero-eyebrow b{color:var(--accent)}
 /* mobile hero brand lockup (enlarged logo + subtitle; header goes logo-less) */
 .vhero-brand{display:none;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:20px}
@@ -1483,8 +1487,21 @@ html{overflow-x:hidden}
   filter:drop-shadow(0 8px 26px rgba(0,0,0,.55))}
 @keyframes logoShine{0%{background-position:150% 0}22%,100%{background-position:-60% 0}}
 @media(prefers-reduced-motion:reduce){.vhero-logo{animation:none;background-position:50% 0}}
-.vhero-brand-sub{font-family:"DM Sans",sans-serif;font-weight:500;text-transform:uppercase;
-  letter-spacing:.24em;font-size:clamp(.62rem,2.6vw,.78rem);color:var(--muted-2)}
+/* Car Detailing Solutions — brighter, white glow, left-to-right sheen flash */
+.vhero-brand-sub{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;
+  letter-spacing:.24em;font-size:clamp(.62rem,2.6vw,.78rem);color:#f2f4f8;
+  background:linear-gradient(105deg,#dfe2e9 0%,#dfe2e9 42%,#ffffff 50%,#dfe2e9 58%,#dfe2e9 100%);
+  background-size:250% 100%;background-position:150% 0;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:subShine 5s ease-in-out infinite;
+  filter:drop-shadow(0 0 11px rgba(255,255,255,.42))}
+@keyframes subShine{0%{background-position:150% 0}24%,100%{background-position:-60% 0}}
+@media(prefers-reduced-motion:reduce){.vhero-brand-sub{animation:none;background-position:50% 0}}
+/* GYEON / ONYX certified logos under the hero CTAs */
+.vhero-brands{display:flex;align-items:center;gap:clamp(18px,2.4vw,28px);margin-top:clamp(24px,3vw,34px);flex-wrap:wrap}
+.vhero-brands-label{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.18em;
+  font-size:.62rem;color:var(--muted-2)}
+.vhero-brand-logo{height:clamp(19px,2.3vw,27px);width:auto;opacity:.72;filter:brightness(1.15)}
 @media(max-width:900px){
   .nav .brand{display:none}          /* naked header over the video on mobile */
   .vhero-place{display:none}
