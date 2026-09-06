@@ -364,6 +364,8 @@
     }
     function restart() { if (reduceMotion) return; clearInterval(timer); timer = setInterval(function () { go(cur + 1); }, 5600); }
     tabs.forEach(function (t, i) { t.addEventListener("click", function () { go(i, true); }); });
+    var nextBtn = document.querySelector("[data-cp-next]");
+    if (nextBtn) nextBtn.addEventListener("click", function () { go(cur + 1, true); }); // infinite: 04 -> 01
     cp.addEventListener("mouseenter", function () { clearInterval(timer); });
     cp.addEventListener("mouseleave", restart);
     go(0); restart();

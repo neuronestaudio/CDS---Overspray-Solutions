@@ -1367,6 +1367,7 @@ html{overflow-x:hidden}
 .cp-progress{position:absolute;top:-1px;left:0;width:25%;height:2px;background:var(--accent);
   box-shadow:0 0 16px rgba(225,29,42,.55);transition:transform .45s var(--ease)}
 .cp-stage{display:grid}
+.cp-controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .cp-panel{grid-area:1 / 1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,58px);align-items:center;
   opacity:0;visibility:hidden;transform:translateY(12px);pointer-events:none;
   transition:opacity .5s var(--ease),transform .5s var(--ease),visibility .5s}
