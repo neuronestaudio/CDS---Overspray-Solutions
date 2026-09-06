@@ -1419,7 +1419,7 @@ html{overflow-x:hidden}
   text-shadow:0 2px 34px rgba(0,0,0,.55)}
 .vhero-name em{color:var(--accent);font-style:normal}
 .vhero-sub{display:block;margin-top:clamp(14px,1.7vw,22px);font-family:"DM Sans",sans-serif;font-weight:500;
-  font-size:clamp(.95rem,1.35vw,1.15rem);line-height:1.42;color:#d0d3da;max-width:none;text-shadow:0 1px 20px rgba(0,0,0,.5)}
+  font-size:clamp(.95rem,1.35vw,1.15rem);line-height:1.42;color:#d0d3da;max-width:none;text-wrap:balance;text-shadow:0 1px 20px rgba(0,0,0,.5)}
 .vhero-support{margin-top:clamp(16px,2vw,26px);max-width:52ch;font-family:"DM Sans",sans-serif;font-weight:400;
   font-size:clamp(.95rem,1.25vw,1.12rem);line-height:1.55;color:#b9bcc4;text-shadow:0 1px 16px rgba(0,0,0,.5)}
 .vhero .hero-actions{margin-top:clamp(24px,3vw,36px)}
@@ -1432,7 +1432,7 @@ html{overflow-x:hidden}
   .vhero{min-height:90svh}
   .vhero-copy{max-width:100%}
   .vhero-scrim{background:linear-gradient(0deg,rgba(6,6,9,.94) 0%,rgba(6,6,9,.4) 46%,rgba(6,6,9,.58) 100%)}
-  .vhero-sub{max-width:none}
+  .vhero-sub{max-width:32ch}   /* keep the tagline to ~2 balanced lines on mobile (no orphan word) */
 }
 @media(prefers-reduced-motion:reduce){.vhero-word{transition:none}.vhero-word.is-on{animation:none}.vhero-scroll svg{animation:none}}
 
@@ -1472,7 +1472,7 @@ html{overflow-x:hidden}
 @media(max-width:900px){
   .vhero-eyebrow{font-size:clamp(.58rem,2.7vw,.74rem);letter-spacing:.04em;text-align:center}
   .vhero-kicker{display:flex;width:-moz-fit-content;width:fit-content;margin-inline:auto}
-  .vhero-brands{justify-content:center}
+  .vhero-brands{align-items:center}
   .vhero{align-items:flex-start}                                   /* pull content to the top */
   .vhero-inner{padding-block:clamp(78px,11vh,108px) clamp(36px,6vh,64px)}  /* kill the dead space up top */
 }
@@ -1500,10 +1500,12 @@ html{overflow-x:hidden}
 @keyframes subShine{0%{background-position:150% 0}24%,100%{background-position:-60% 0}}
 @media(prefers-reduced-motion:reduce){.vhero-brand-sub{animation:none;background-position:50% 0}}
 /* GYEON / ONYX certified logos under the hero CTAs */
-.vhero-brands{display:flex;align-items:center;gap:clamp(18px,2.4vw,28px);margin-top:clamp(24px,3vw,34px);flex-wrap:wrap}
-.vhero-brands-label{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.18em;
-  font-size:.62rem;color:var(--muted-2)}
-.vhero-brand-logo{height:clamp(19px,2.3vw,27px);width:auto;opacity:.72;filter:brightness(1.15)}
+.vhero-brands{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(9px,1.4vw,14px);margin-top:clamp(22px,2.8vw,32px)}
+.vhero-brands-label{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.22em;
+  font-size:.66rem;color:var(--muted-2)}
+.vhero-brands-row{display:flex;align-items:center;gap:clamp(26px,4.5vw,46px)}
+.vhero-brand-logo{height:clamp(44px,9vw,58px);width:auto;opacity:.9;filter:brightness(1.18)}
+@media(max-width:900px){.vhero-brands{align-items:center}}   /* centre the certified logos on mobile (wins over the base) */
 @media(max-width:900px){
   .nav .brand{display:none}          /* naked header over the video on mobile */
   .vhero-place{display:none}
