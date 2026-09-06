@@ -1419,7 +1419,7 @@ html{overflow-x:hidden}
   text-shadow:0 2px 34px rgba(0,0,0,.55)}
 .vhero-name em{color:var(--accent);font-style:normal}
 .vhero-sub{display:block;margin-top:clamp(14px,1.7vw,22px);font-family:"DM Sans",sans-serif;font-weight:500;
-  font-size:clamp(1rem,1.7vw,1.35rem);line-height:1.42;color:#d0d3da;max-width:34ch;text-shadow:0 1px 20px rgba(0,0,0,.5)}
+  font-size:clamp(.95rem,1.35vw,1.15rem);line-height:1.42;color:#d0d3da;max-width:none;text-shadow:0 1px 20px rgba(0,0,0,.5)}
 .vhero-support{margin-top:clamp(16px,2vw,26px);max-width:52ch;font-family:"DM Sans",sans-serif;font-weight:400;
   font-size:clamp(.95rem,1.25vw,1.12rem);line-height:1.55;color:#b9bcc4;text-shadow:0 1px 16px rgba(0,0,0,.5)}
 .vhero .hero-actions{margin-top:clamp(24px,3vw,36px)}
@@ -1432,7 +1432,7 @@ html{overflow-x:hidden}
   .vhero{min-height:90svh}
   .vhero-copy{max-width:100%}
   .vhero-scrim{background:linear-gradient(0deg,rgba(6,6,9,.94) 0%,rgba(6,6,9,.4) 46%,rgba(6,6,9,.58) 100%)}
-  .vhero-sub{max-width:30ch}
+  .vhero-sub{max-width:none}
 }
 @media(prefers-reduced-motion:reduce){.vhero-word{transition:none}.vhero-word.is-on{animation:none}.vhero-scroll svg{animation:none}}
 
