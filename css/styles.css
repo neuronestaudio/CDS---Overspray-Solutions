@@ -1408,7 +1408,7 @@ html{overflow-x:hidden}
   padding:8px 16px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r-pill);
   background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);margin-bottom:clamp(20px,3vw,32px)}
 .vhero-kicker .stars{color:var(--accent);letter-spacing:.04em}
-.vhero-h{margin:0;min-height:clamp(172px,20vw,262px);position:relative}
+.vhero-h{margin:0;min-height:clamp(150px,16.5vw,232px);position:relative}
 .vhero-rot{display:grid}
 .vhero-word{grid-area:1 / 1;opacity:0;pointer-events:none;
   transition:opacity .55s var(--ease),transform .55s var(--ease)}                 /* smooth fade OUT */
@@ -1473,6 +1473,8 @@ html{overflow-x:hidden}
   .vhero-eyebrow{font-size:clamp(.58rem,2.7vw,.74rem);letter-spacing:.04em;text-align:center}
   .vhero-kicker{display:flex;width:-moz-fit-content;width:fit-content;margin-inline:auto}
   .vhero-brands{justify-content:center}
+  .vhero{align-items:flex-start}                                   /* pull content to the top */
+  .vhero-inner{padding-block:clamp(78px,11vh,108px) clamp(36px,6vh,64px)}  /* kill the dead space up top */
 }
 .vhero-eyebrow b{color:var(--accent)}
 /* mobile hero brand lockup (enlarged logo + subtitle; header goes logo-less) */
