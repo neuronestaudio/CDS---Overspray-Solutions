@@ -1470,9 +1470,15 @@ html{overflow-x:hidden}
   font-size:clamp(.9rem,1.4vw,1.1rem);letter-spacing:.03em;color:#f1f2f5;white-space:nowrap;
   margin-bottom:15px;text-shadow:0 1px 14px rgba(0,0,0,.55)}
 @media(max-width:900px){
+  .vhero-copy{text-align:center}                                   /* centre the whole hero column */
   .vhero-eyebrow{font-size:clamp(.58rem,2.7vw,.74rem);letter-spacing:.04em;text-align:center}
-  .vhero-kicker{display:flex;width:-moz-fit-content;width:fit-content;margin-inline:auto}
+  .vhero-kicker{display:flex;width:-moz-fit-content;width:fit-content;max-width:100%;
+    justify-content:center;text-align:center;margin-inline:auto}
+  .vhero-name{margin-inline:auto}                                  /* centre the headline block (has max-width) */
+  .vhero-sub{margin-inline:auto}                                   /* centre the tagline block */
+  .vhero-support{margin-inline:auto}                               /* centre the support paragraph */
   .vhero-brands{align-items:center}
+  .vhero .hero-actions{justify-content:center}                     /* centre the CTA */
   .vhero{align-items:flex-start}                                   /* pull content to the top */
   .vhero-inner{padding-block:clamp(78px,11vh,108px) clamp(36px,6vh,64px)}  /* kill the dead space up top */
 }
