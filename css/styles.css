@@ -1491,8 +1491,18 @@ html{overflow-x:hidden}
 /* mobile hero brand lockup (large hero logo + tidy subtitle; header goes logo-less) */
 .vhero-brand{display:none;flex-direction:column;align-items:flex-start;gap:clamp(12px,3vw,17px);margin-bottom:clamp(20px,5vw,32px)}
 /* CDS Ceramic Coatings hero logo — the mobile centrepiece (full-colour chrome lockup) */
+.vhero-logo-wrap{position:relative;display:inline-block;line-height:0}
 .vhero-logo{width:clamp(260px,82vw,400px);aspect-ratio:581/251;height:auto;display:block;
   filter:drop-shadow(0 12px 34px rgba(0,0,0,.62))}
+/* sheen sweep, masked to the logo shape so the highlight only travels across the mark itself */
+.vhero-logo-shine{position:absolute;inset:0;pointer-events:none;
+  -webkit-mask:url('../assets/img/logo-cds-ceramic.png') center/contain no-repeat;
+  mask:url('../assets/img/logo-cds-ceramic.png') center/contain no-repeat;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.25) 46%,rgba(255,255,255,.92) 50%,rgba(255,255,255,.25) 54%,transparent 60%);
+  background-size:260% 100%;background-position:175% 0;
+  mix-blend-mode:screen;animation:logoSheen 4.8s ease-in-out infinite}
+@keyframes logoSheen{0%{background-position:175% 0}30%,100%{background-position:-75% 0}}
+@media(prefers-reduced-motion:reduce){.vhero-logo-shine{animation:none;opacity:0}}
 /* Car Detailing Solutions — tidy, calm subtitle under the big logo (shine lives on the logo now) */
 .vhero-brand-sub{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;
   letter-spacing:.3em;font-size:clamp(.6rem,2.4vw,.76rem);color:#c9ccd6;
@@ -1525,6 +1535,12 @@ html{overflow-x:hidden}
    ========================================================================= */
 .why-cc{background:var(--bg)}
 .why-cc .h-sec em{font-style:normal;color:var(--accent)}
+/* the red accent words in display headings get a metallic gradient fill instead of flat red */
+.vhero-name em,.h-sec em,.lp-h1 em,.beforeafter-sec .h-sec em,.why-cc .h-sec em{font-style:normal;
+  background:linear-gradient(180deg,#ff7a82 0%,#f42c39 33%,#d4151f 63%,#9d0f18 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent}
+.vhero-name em{filter:drop-shadow(0 3px 14px rgba(225,29,42,.3))}
 .why-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.5vw,22px);margin-top:clamp(30px,4vw,48px)}
 .why-card{position:relative;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-card);
   padding:clamp(20px,2vw,28px);transition:transform .4s var(--ease),border-color .3s var(--ease),box-shadow .4s var(--ease)}
@@ -1554,7 +1570,7 @@ html{overflow-x:hidden}
    labels counter-scale via --k.
    ========================================================================= */
 .sam-sec .sam-head{max-width:760px;margin-bottom:clamp(28px,4vw,44px)}
-.sam-sec .sam-head .h-sec em{font-style:normal;color:var(--accent)}
+.sam-sec .sam-head .h-sec em{font-style:normal}   /* inherits the gradient accent fill */
 .sam-kick{display:inline-block;font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;
   letter-spacing:.2em;font-size:.68rem;color:var(--muted-2)}
 
