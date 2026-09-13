@@ -1621,6 +1621,90 @@ html{overflow-x:hidden}
   .spec-table td::before{display:block;margin-bottom:3px}
 }
 
+
+/* =========================================================================
+   Suburb landing pages — local stats, boundary map, issue cards, FAQs
+   ========================================================================= */
+.sb-stats{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+.sb-stats span{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);border-radius:var(--r-pill);padding:6px 14px;
+  font-family:"DM Sans",sans-serif;font-size:.82rem;color:var(--muted)}
+.sb-stats b{color:var(--text);font-weight:700}
+
+.sb-split{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);
+  gap:clamp(26px,4vw,52px);align-items:start}
+@media(max-width:940px){.sb-split{grid-template-columns:minmax(0,1fr)}}
+.sb-copy p{color:var(--muted);font-size:clamp(1rem,1.2vw,1.1rem);line-height:1.72;margin:0 0 16px}
+.sb-copy p:last-child{margin-bottom:0}
+
+/* boundary map */
+.suburb-map{margin:0;position:sticky;top:clamp(84px,10vh,104px)}
+@media(max-width:940px){.suburb-map{position:static}}
+.suburb-map__canvas{height:clamp(280px,38vh,360px);width:100%;border-radius:var(--r-card);
+  overflow:hidden;border:1px solid var(--line-2);background:var(--bg-3);
+  display:grid;place-items:center;z-index:0}
+.suburb-map__canvas::after{content:"Loading map\2026";font-family:"DM Sans",sans-serif;
+  font-size:.8rem;color:var(--muted-2)}
+.suburb-map__canvas.is-ready::after,.suburb-map__canvas.is-ready{display:block}
+.suburb-map__canvas.is-ready::after{content:none}
+.suburb-map__canvas.is-failed::after{content:"Map unavailable"}
+.suburb-map figcaption{margin-top:10px;font-family:"DM Sans",sans-serif;font-size:.78rem;
+  color:var(--muted-2);line-height:1.6}
+.suburb-map figcaption b{color:var(--muted);font-weight:600}
+/* keep Leaflet's chrome on-brand and inside the rounded frame */
+.suburb-map .leaflet-container{font:inherit;background:var(--bg-3);border-radius:var(--r-card)}
+.suburb-map .leaflet-control-attribution{background:rgba(10,10,12,.82);color:var(--muted-2);font-size:10px}
+.suburb-map .leaflet-control-attribution a{color:var(--muted)}
+.suburb-map .leaflet-bar a{background:var(--bg-2);color:var(--text);border-bottom-color:var(--line)}
+.suburb-map .leaflet-bar a:hover{background:var(--bg-4)}
+/* invert the light OSM tiles into a dark basemap; the boundary overlay is SVG so it keeps its colour */
+.suburb-map .leaflet-tile{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.92) saturate(.75)}
+
+/* what your paint is up against */
+.sb-issues{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.6vw,20px);
+  margin-top:clamp(26px,3.5vw,40px)}
+@media(max-width:720px){.sb-issues{grid-template-columns:minmax(0,1fr)}}
+.sb-issue{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:clamp(18px,2vw,26px);transition:border-color .3s var(--ease),transform .4s var(--ease)}
+.sb-issue:hover{border-color:var(--line-2);transform:translateY(-3px)}
+.sb-issue h3{font-family:"DM Sans",sans-serif;font-weight:700;font-size:1.02rem;margin:0 0 8px;color:var(--text)}
+.sb-issue p{color:var(--muted);font-size:.92rem;line-height:1.6;margin:0}
+
+/* process */
+.sb-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,20px);
+  margin-top:clamp(26px,3.5vw,40px)}
+@media(max-width:860px){.sb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.sb-steps{grid-template-columns:minmax(0,1fr)}}
+.sb-step{border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(16px,1.8vw,22px);
+  background:rgba(255,255,255,.02)}
+.sb-step b{display:block;font-family:"Bebas Neue",Impact,sans-serif;font-size:1.5rem;
+  color:var(--accent);letter-spacing:.03em;line-height:1;margin-bottom:8px}
+.sb-step h3{font-family:"DM Sans",sans-serif;font-weight:700;font-size:.98rem;margin:0 0 6px;color:var(--text)}
+.sb-step p{color:var(--muted);font-size:.88rem;line-height:1.58;margin:0}
+
+/* FAQs */
+.sb-faqs{max-width:860px;margin-top:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:10px}
+.sb-faq{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-card);
+  transition:border-color .3s var(--ease)}
+.sb-faq[open]{border-color:rgba(225,29,42,.4)}
+.sb-faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:clamp(15px,1.7vw,20px) clamp(16px,2vw,24px);
+  font-family:"DM Sans",sans-serif;font-weight:700;font-size:1rem;color:var(--text)}
+.sb-faq summary::-webkit-details-marker{display:none}
+.sb-faq summary::after{content:"+";color:var(--accent);font-size:1.3rem;line-height:1;flex:0 0 auto;
+  transition:transform .3s var(--ease)}
+.sb-faq[open] summary::after{transform:rotate(45deg)}
+.sb-faq p{margin:0;padding:0 clamp(16px,2vw,24px) clamp(16px,1.9vw,22px);
+  color:var(--muted);font-size:.94rem;line-height:1.68}
+
+/* nearby chips */
+.sb-near{display:flex;flex-wrap:wrap;gap:9px;margin-top:clamp(20px,2.5vw,28px)}
+.sb-near a{display:inline-block;border:1px solid var(--line);background:rgba(255,255,255,.03);
+  border-radius:var(--r-pill);padding:7px 15px;font-family:"DM Sans",sans-serif;font-size:.87rem;
+  color:var(--muted);text-decoration:none;transition:border-color .2s var(--ease),color .2s var(--ease)}
+.sb-near a:hover{border-color:rgba(225,29,42,.6);color:var(--text)}
+.sb-near a.all{border-color:rgba(225,29,42,.45);background:var(--accent-soft);color:var(--accent);font-weight:600}
+
 /* =========================================================================
    Service areas — interactive suburb map (vector diagram of every suburb
    we publish a page for, drawn from its gazetted boundary). Ported house
