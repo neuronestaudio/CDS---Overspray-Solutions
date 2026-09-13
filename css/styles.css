@@ -974,39 +974,28 @@ html.splash-off .splash2{display:none}   /* return visit within the session: no 
 .cds-para::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:
   radial-gradient(120% 100% at 50% 46%,rgba(8,8,10,.28) 0%,rgba(8,8,10,.72) 56%,rgba(8,8,10,.96) 100%),
   linear-gradient(180deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.28) 30%,rgba(8,8,10,.28) 68%,rgba(8,8,10,.97) 100%)}
-/* the words spell out CAR DETAILING SOLUTIONS, each keyed off its metallic capital */
-.cds-words{position:relative;z-index:4;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;
-  gap:clamp(12px,2.4vw,44px);padding:0 22px;max-width:1200px;text-align:center;
-  font-family:"Bebas Neue",Impact,sans-serif;line-height:.86;
-  pointer-events:none;-webkit-user-select:none;user-select:none}
-.cds-w{display:inline-flex;align-items:baseline;white-space:nowrap;
-  font-size:clamp(26px,4.6vw,66px);letter-spacing:.02em;
-  background-image:linear-gradient(180deg,#d6d9df 0%,#a9adb5 58%,#7b7f88 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+/* the CDS Ceramic Coatings logo, revealed large as the scratched paint wipes clean */
+.cds-logo-wrap{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;padding:0 22px;
   opacity:0;transform:translateY(28px);will-change:opacity,transform;
-  transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0) * .16s)}
-.cds-w b{font-weight:400;font-size:clamp(58px,11vw,148px);margin-right:.015em;
-  background-image:linear-gradient(180deg,#f4f5f7 0%,#d0d4da 52%,#8f949d 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-.cds-para.lit .cds-w{opacity:1;transform:none}
-/* red splash underline draws in under the full lockup */
-.cds-words::after{content:"";position:absolute;left:50%;bottom:calc(-1 * clamp(12px,1.8vw,26px));
-  transform:translateX(-50%) scaleX(0);transform-origin:center;
-  width:clamp(140px,32%,360px);height:3px;border-radius:3px;
+  transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.cds-para.lit .cds-logo-wrap{opacity:1;transform:none}
+.cds-logo{width:clamp(300px,52vw,680px);height:auto;display:block;
+  filter:drop-shadow(0 18px 46px rgba(0,0,0,.62))}
+/* red splash rule draws in under the logo */
+.cds-rule{margin-top:clamp(14px,2vw,26px);width:clamp(160px,60%,380px);height:3px;border-radius:3px;
+  transform:scaleX(0);transform-origin:center;
   background:linear-gradient(90deg,transparent,var(--accent) 16%,var(--accent) 84%,transparent);
-  box-shadow:0 0 22px rgba(225,29,42,.5);transition:transform .8s var(--ease) .55s}
-.cds-para.lit .cds-words::after{transform:translateX(-50%) scaleX(1)}
-.cds-para-sub{position:absolute;z-index:4;left:0;right:0;bottom:clamp(20px,4.5vh,46px);text-align:center;
-  font-family:"DM Sans";text-transform:uppercase;letter-spacing:.34em;font-size:clamp(.6rem,1.05vw,.78rem);color:var(--muted-2);
-  opacity:0;transition:opacity .8s var(--ease) .7s}
-.cds-para.lit .cds-para-sub{opacity:1}
+  box-shadow:0 0 22px rgba(225,29,42,.5);transition:transform .8s var(--ease) .5s}
+.cds-para.lit .cds-rule{transform:scaleX(1)}
+/* subtitle sits in-flow under the lockup and reveals with it */
+.cds-para-sub{margin-top:clamp(13px,2.2vw,20px);text-align:center;
+  font-family:"DM Sans";text-transform:uppercase;letter-spacing:.34em;
+  font-size:clamp(.6rem,1.05vw,.78rem);color:var(--muted-2)}
 @media(prefers-reduced-motion:reduce){.cds-w{opacity:1;transform:none;transition:none}}
-/* phones: stack the three words so nothing clips, keep the dramatic capitals */
+/* phones: keep the logo big but comfortably inside the frame */
 @media(max-width:600px){
   .cds-para{min-height:clamp(360px,64vh,520px)}
-  .cds-words{flex-direction:column;gap:2px}
-  .cds-w{font-size:clamp(20px,5.2vw,30px)}
-  .cds-w b{font-size:clamp(46px,13.5vw,72px)}
+  .cds-logo{width:min(84vw,420px)}
   .cds-para-sub{letter-spacing:.22em;padding:0 18px}
 }
 
