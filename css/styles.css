@@ -1501,16 +1501,9 @@ html{overflow-x:hidden}
 .vhero-eyebrow b{color:var(--accent)}
 /* mobile hero brand lockup (large hero logo + tidy subtitle; header goes logo-less) */
 .vhero-brand{display:none;flex-direction:column;align-items:flex-start;gap:clamp(12px,3vw,17px);margin-bottom:clamp(20px,5vw,32px)}
-/* CDS logo as a big brushed-metal mask with an animated sheen sweep (the hero centrepiece) */
-.vhero-logo{width:clamp(280px,84vw,420px);aspect-ratio:951/300;height:auto;display:block;
-  -webkit-mask:url('../assets/img/logo-mark.png') center/contain no-repeat;
-  mask:url('../assets/img/logo-mark.png') center/contain no-repeat;
-  background:linear-gradient(105deg,#c6cbd4 0%,#c6cbd4 38%,#ffffff 47%,#ffffff 53%,#c6cbd4 62%,#c6cbd4 100%);
-  background-size:260% 100%;background-position:150% 0;
-  animation:logoShine 4.6s ease-in-out infinite;
-  filter:drop-shadow(0 10px 32px rgba(0,0,0,.6))}
-@keyframes logoShine{0%{background-position:150% 0}24%,100%{background-position:-60% 0}}
-@media(prefers-reduced-motion:reduce){.vhero-logo{animation:none;background-position:50% 0}}
+/* CDS Ceramic Coatings hero logo — the mobile centrepiece (full-colour chrome lockup) */
+.vhero-logo{width:clamp(260px,82vw,400px);aspect-ratio:581/251;height:auto;display:block;
+  filter:drop-shadow(0 12px 34px rgba(0,0,0,.62))}
 /* Car Detailing Solutions — tidy, calm subtitle under the big logo (shine lives on the logo now) */
 .vhero-brand-sub{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;
   letter-spacing:.3em;font-size:clamp(.6rem,2.4vw,.76rem);color:#c9ccd6;
