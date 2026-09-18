@@ -1,0 +1,69 @@
+{
+    "redirects":  [
+                      {
+                          "source":  "/index.php",
+                          "destination":  "/",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/about.php",
+                          "destination":  "/about.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/services.php",
+                          "destination":  "/services.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/contact.php",
+                          "destination":  "/#contact",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/ceramic-coating.php",
+                          "destination":  "/",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/paint-correction.php",
+                          "destination":  "/paint-correction-melbourne.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/interior-detailing.php",
+                          "destination":  "/interior-leather-protection-melbourne.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/exterior-detailing.php",
+                          "destination":  "/services.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/full-detail.php",
+                          "destination":  "/services.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/full-deluxe-detail.php",
+                          "destination":  "/services.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/truck-detailing.php",
+                          "destination":  "/ute-4wd-ceramic-coating-melbourne.html",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/projects.php",
+                          "destination":  "/#work",
+                          "permanent":  true
+                      },
+                      {
+                          "source":  "/testimonials.php",
+                          "destination":  "/#reviews",
+                          "permanent":  true
+                      }
+                  ]
+}
