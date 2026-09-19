@@ -49,14 +49,15 @@ site-wide "Areas" nav / drawer / footer link (`ensure_area_links()`, idempotent)
 substance lives in 12 **archetypes** (`content_pool.py`: new estates, established,
 family, industrial, urban, bayside, hills, acreage, rural; plus `content_pool_40.py`:
 prestige, inner, valley - added with the 40 km ring), each with a pool bigger
-than a page renders (3 intros / 8 conditions / 7 FAQs; a page shows 1 / 4 / 3).
+than a page renders (3 intros / 8 conditions / 6 FAQs; a page shows 1 / 4 / 3, plus the
+pinned mobile-or-studio FAQ from `mode_pool.py`).
 `shared_pool.py` rotates the blocks that would otherwise be identical everywhere
 (lede, owner paragraph, headings, process strip, CTA). Each page picks by an FNV-1a
 hash of its own slug. Localised with facts that are that place's own: postcode,
 land area, distance to the studio, true polygon neighbours, real named landmarks.
 
-Last measurement (19 Sep 2026): 285 pages, 3,784 same-archetype pairs, mean 0.177,
-worst 0.570, threshold 0.72. Largest archetype is `family` (44 pages) - widen its
+Last measurement (19 Sep 2026, with the pinned mobile-or-studio FAQ): 285 pages, 3,784
+same-archetype pairs, mean 0.193, worst 0.601, threshold 0.72. Largest archetype is `family` (44 pages) - widen its
 pool first if a future expansion pushes it over.
 
 Shape: 22 regions (hub / sitemap / breadcrumbs) -> 8 map zones -> 12 archetypes.
@@ -64,6 +65,22 @@ A new *kind* of place gets a new archetype, not a squeeze into an old one: the
 inner south-east (no hose, street parking, tram dust) and the Yarra Valley floor
 read nothing like `established` or `rural`. Suburbs 30-40 km out answer "is it
 worth the drive" honestly instead of pretending the studio is round the corner.
+
+## Mobile AND studio
+
+Andy works both ways: mobile at the customer's home or workplace, and from the Berwick
+studio. The site said studio-only until 19 Sep 2026, which was wrong. `mode_pool.py`
+pins a mobile-or-studio FAQ first on every page, assembled from three rotating parts
+(opener + archetype-specific core + close) so it does not become the block every page
+shares. Pages therefore show 4 FAQs: the pinned one plus 3 picked from the archetype's 6.
+
+- Openers must stay **neutral statements**. The question and the opener are picked
+  independently, and "Yes - ..." under "Mobile or studio - which suits?" does not parse.
+- The only rule the copy states is the true one: a coating has to cure dry and under
+  cover (a garage or carport on a mobile job, otherwise the studio). Do not invent
+  call-out fees, minimum jobs, or a mobile-only / studio-only split of services.
+- No street address is published anywhere, so the schema keeps a locality-only
+  `PostalAddress` and the studio pin sits on Berwick's centroid.
 
 ## Things that will bite you
 
