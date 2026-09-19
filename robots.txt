@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cds-overspray-solutions.vercel.app/sitemap.xml
+Sitemap: https://cardetailingsolutions.com.au/sitemap.xml
