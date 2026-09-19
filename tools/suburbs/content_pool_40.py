@@ -5,12 +5,12 @@ ring (19 Sep 2026). The inner south-east and the Yarra Valley floor are differen
 rather than being squeezed into `established`, `urban` or `rural`.
 
 Same shape and placeholders as content_pool.py: 3 intros (page shows 1),
-8 conditions (shows 4), 7 FAQs (shows 3); {suburb} and {km}.
+8 conditions (shows 4), 6 FAQs (shows 3); {suburb} and {km}.
 
-These suburbs are 30-40 km from the Berwick studio, so every pool answers the
-obvious question honestly - is it worth the drive - rather than pretending the
-studio is around the corner. Nothing here promises pick-up, mobile work or any
-product CDS does not list.
+These suburbs are 30-40 km from the Berwick studio. Andy is mobile as well as
+studio-based, so the mobile-or-studio question is answered on every page by the
+pinned FAQ in mode_pool.py, not here. Nothing here promises a product CDS does
+not list.
 """
 
 EXTRA = {
@@ -45,7 +45,6 @@ EXTRA = {
         ("Low-kilometre garage cars", "Cars that do few kilometres still oxidise and gather dust marks from covers and wipe-downs. They are ideal candidates for a multi-year system because the paint under them is so good."),
     ],
     "faqs": [
-        ("Is it worth driving to Berwick from {suburb}?", "It is about {km} km. A correction and coating is a one-off job that lasts years, and the car is in the studio for one to three days, so most owners treat it as a drop-off rather than a wait. What you get for the drive is one experienced person doing the whole job in a controlled space."),
         ("Do you work on high-value and exotic cars?", "Yes. Every car is measured panel by panel before correction, and the approach is set by what the clear coat will safely allow - which matters most on cars where a respray is not an acceptable outcome."),
         ("My new car already has swirl marks. Is that normal?", "Unfortunately, yes. Pre-delivery washing and polishing is usually quick rather than careful. The marks are in the clear coat, not through it, and they correct out fully."),
         ("GYEON or ONYX for a prestige car?", "For a garaged car where clarity in direct sun matters most we generally lean GYEON; for one that is driven daily and parked outside, ONYX 10H graphene for durability. Often either is a good answer and we will say so."),
@@ -85,7 +84,6 @@ EXTRA = {
         ("Short trips and brake dust", "Stop-start inner-city driving loads the front wheels with hot brake dust that bakes into the finish. Coated wheels release it with a rinse."),
     ],
     "faqs": [
-        ("Is it worth bringing the car out to Berwick from {suburb}?", "It is about {km} km, so it is a planned drop-off rather than a quick visit. The job is a one-off that lasts years, the car stays one to three days, and it has to be done indoors in a clean space - which is exactly what an inner-city street or basement cannot offer."),
         ("I can only use automatic car washes. Is a coating still worth it?", "More so. Use a touch-free wash rather than a brush wash. On coated paint the dirt is not bonded, so a touch-free wash actually gets the car clean, and the swirls stop accumulating."),
         ("Can you remove the little rust-coloured specks on my paint?", "Yes. That is rail or brake dust embedded in the clear coat. It is dissolved with an iron treatment and clayed out, then the paint is sealed so it has a much harder time coming back."),
         ("Can you get paint transfer and scuffs off my bumper?", "Usually. Transfer from another car or a bollard sits on the surface and polishes off. If the scratch is through the clear coat we will tell you before quoting."),
@@ -124,7 +122,6 @@ EXTRA = {
         ("Stone chips from loose surfaces", "Gravel flicks up into the bonnet and sills. A coating does not stop chips, but it seals the paint around them so they are less of a way in for corrosion."),
     ],
     "faqs": [
-        ("Is the drive to Berwick worth it from {suburb}?", "It is about {km} km. A coating is a one-off job that protects the vehicle for years, the car stays one to three days, and it has to cure indoors in a dust-free space - which a valley driveway is not."),
         ("Will a coating really help with the dust?", "Yes. Dust does not bond to sealed paint, so a rinse lifts it instead of a wipe, and that is what prevents the scratching."),
         ("Can spray-drift marks be removed?", "Usually. Fresh residue washes off; older spotting that has etched can normally be polished out. Coating afterwards makes the next lot much easier to deal with."),
         ("Do you coat utes and 4WDs?", "Yes - paint, trays, canopies, bars and trim. A coated working vehicle takes a fraction of the time to clean."),

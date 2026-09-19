@@ -16,10 +16,11 @@ from suburb_list import REGIONS, ZONES, all_targets, slugify
 from assign import archetype_for
 from content_pool import ARCHETYPES, pick, pick_one
 import shared_pool as SP
+import mode_pool as MP
 
 ROOT = os.path.dirname(os.path.dirname(HERE))
 BASE = "https://cardetailingsolutions.com.au"  # the live domain since 18 Sep 2026; never the vercel.app host
-CSSV = "68"
+CSSV = "69"
 MAPJSV = "4"
 ZONE_COLOUR = {"casey": "#e5484d", "south": "#e8a33d", "east": "#9b7bea",
                "hills": "#3fb67a", "north": "#4aa3d8", "bay": "#22b8c9",
@@ -190,25 +191,31 @@ def suburb_page(slug):
     region, zone = REGION_OF[slug], ZONE_OF[slug]
     ps = "ceramic-coating-" + slug
 
-    title = "Ceramic Coating %s%s | Paint Correction &amp; Protection &mdash; CDS" % (
+    title = "Ceramic Coating %s%s | Mobile &amp; In-Studio &mdash; CDS" % (
         n, (" " + pc) if pc else "")
-    where = ("our studio is right here in %s" % n) if km == 0 else ("our Berwick studio is about %d km away" % km)
-    desc = "%s in %s%s. Certified GYEON &amp; ONYX coatings, owner-operated, and %s." % (
+    where = ("mobile across %s or at our studio right here" % n) if km == 0 else (
+        "mobile in %s or at our Berwick studio, about %d km away" % (n, km))
+    desc = "%s in %s%s. Certified GYEON &amp; ONYX coatings, owner-operated, %s." % (
         HOOK[arch], n, (" " + pc) if pc else "", where)
 
     lede = fill(pick_one(SP.LEDES, slug, "lede"), r)
     if km == 0:
-        lede = ("Ceramic coating, paint correction and paint protection from the CDS studio here in "
-                "Berwick %s &mdash; owner-operated, certified GYEON and ONYX, and a controlled, "
-                "dust-free space for every coating to cure properly." % pc)
+        lede = ("Ceramic coating, paint correction and paint protection in Berwick %s &mdash; mobile, at "
+                "your home or workplace, or at the CDS studio right here. Owner-operated, certified "
+                "GYEON and ONYX." % pc)
     intro = fill(pick_one(A["intros"], slug, "intro"), r)
     if km == 0:
-        intro = ("Berwick is home. The CDS studio is here, so Berwick cars get the shortest trip in, "
-                 "the fastest turnaround and a clean, controlled space for the coating to cure. "
+        intro = ("Berwick is home. The CDS studio is here and Andy is mobile as well, so a Berwick car "
+                 "can be done in your own garage or dropped a few minutes up the road. "
                  + intro)
     owner = fill(pick_one(SP.OWNER, slug, "owner"), r)
     conds = pick(A["conditions"], 4, slug, "cond")
-    faqs = [(fill(q, r), fill(a, r)) for q, a in pick(A["faqs"], 3, slug, "faq")]
+    # Mobile or studio is the first thing anyone asks, so it is pinned - and built from
+    # three rotating parts so it does not become the block every page shares verbatim.
+    mode_a = " ".join([MP.OPEN_HOME if km == 0 else pick_one(MP.OPEN, slug, "mo"),
+                       MP.CORE[arch], pick_one(MP.CLOSE, slug, "mc")])
+    faqs = [(fill(pick_one(MP.QUESTIONS, slug, "mq"), r), fill(mode_a, r))]
+    faqs += [(fill(q, r), fill(a, r)) for q, a in pick(A["faqs"], 3, slug, "faq")]
     steps = pick_one(SP.PROCESS, slug, "proc")
     svc = pick(SP.SERVICES, 7, slug, "svc")
     near = neighbours_for(slug)
@@ -222,6 +229,7 @@ def suburb_page(slug):
     stats = ['<span>Postcode <b>%s</b></span>' % pc] if pc else []
     stats += ['<span>Area <b>%s</b></span>' % esc(region),
               '<span>Land area <b>%s km&#178;</b></span>' % r["area_km2"]]
+    stats.append('<span><b>Mobile</b> or in-studio</span>')
     stats.append('<span><b>Our studio</b> is in %s</span>' % n if km == 0
                  else '<span><b>~%d km</b> from our Berwick studio</span>' % km)
 
@@ -250,7 +258,7 @@ def suburb_page(slug):
 
     ld = [
         {"@context": "https://schema.org", "@type": "Service",
-         "serviceType": "Ceramic Coating, Paint Correction and Paint Protection",
+         "serviceType": "Mobile and in-studio ceramic coating, paint correction and paint protection",
          "name": "Ceramic Coating %s" % n, "url": "%s/%s.html" % (BASE, ps),
          "areaServed": {"@type": "City", "name": n + ((" " + pc) if pc else ""),
                         "containedInPlace": {"@type": "AdministrativeArea", "name": "Victoria, Australia"}},
@@ -506,7 +514,7 @@ def explorer(eps=0.0006):
 
 def explorer_head(facts, h2):
     return ('<div class="sx-head reveal"><div class="sx-head__copy"><span class="eyebrow">Service areas</span>'
-            '<h2 class="h-sec">%s</h2><p class="lede">Search your suburb, tap &ldquo;near me&rdquo;, or pick it on the map. '
+            '<h2 class="h-sec">%s</h2><p class="lede">Search your suburb, tap &ldquo;near me&rdquo;, or pick it on the map. We come to you, or you bring the car to our Berwick studio. '
             'Every one of the %d suburbs has its own page, drawn from its real gazetted boundary.</p></div>'
             '<ul class="sx-stats" aria-label="Coverage"><li><b>%d</b><span>Suburbs</span></li><li><b>%d</b><span>Areas</span></li>'
             '<li><b>%d<em>km</em></b><span>Around Berwick</span></li></ul></div>'
@@ -541,8 +549,8 @@ def home_ld(facts):
     return {"@context": "https://schema.org", "@type": "AutomotiveBusiness",
             "@id": BASE + "/#business", "name": "CDS · Overspray Solutions",
             "alternateName": "Car Detailing Solutions",
-            "description": ("Owner-operated ceramic coating, paint correction, paint protection and overspray removal "
-                            "studio in Berwick, servicing Melbourne's south-east."),
+            "description": ("Owner-operated ceramic coating, paint correction, paint protection and overspray removal. "
+                            "Mobile across Melbourne's south-east, and from our studio in Berwick."),
             "url": BASE + "/", "telephone": "+61410939700", "email": "info@cardetailingsolutions.com.au",
             "image": BASE + "/assets/img/logo-cds-ceramic.png", "logo": BASE + "/assets/img/logo-mark.png",
             "priceRange": "$$",
@@ -573,7 +581,7 @@ def hub_page(sx, facts):
               {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE + "/index.html"},
               {"@type": "ListItem", "position": 2, "name": "Service Areas", "item": BASE + "/service-areas.html"}]}]
     desc = ("Ceramic coating, paint correction and overspray removal across %d suburbs of Melbourne&rsquo;s "
-            "south-east, from our studio in Berwick. Search your suburb or find it on the map." % n)
+            "south-east &mdash; mobile, or at our Berwick studio. Search your suburb or find it on the map." % n)
     nav = NAVDRAWER.replace('<a href="service-areas.html">Areas</a>',
                             '<a href="service-areas.html" aria-current="page">Areas</a>', 1)
     return head("Service Areas | Ceramic Coating Across Melbourne&rsquo;s South-East &mdash; CDS",
@@ -584,8 +592,9 @@ def hub_page(sx, facts):
     <span class="eyebrow">{PIN}Berwick 3806 &middot; Melbourne&rsquo;s south-east</span>
     <h1 class="lp-h1">Areas we <em>service</em></h1>
     <p class="lp-lede">{n} suburbs, from Berwick out to St Kilda, Kew and Eltham in one direction and Longwarry,
-    Lang Lang and the Yarra Valley in the other &mdash; every suburb within {facts['radius']} km of our Berwick
-    studio, each with its own page drawn from its real gazetted boundary.</p>
+    Lang Lang and the Yarra Valley in the other &mdash; every suburb within {facts['radius']} km of Berwick.
+    We come to you, or you bring the car to our Berwick studio. Each suburb has its own page, drawn from its
+    real gazetted boundary.</p>
     {ACTIONS}
   </div>
 </header>

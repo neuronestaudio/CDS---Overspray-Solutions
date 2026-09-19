@@ -9,14 +9,15 @@ On the Ronin build, rotating these took the worst same-archetype pair from 0.78 
 """
 
 LEDES = [
-    "Ceramic coating, paint correction and paint protection for {suburb} {pc}, applied at "
-    "our controlled, dust-free studio in Berwick, about {km} km away.",
+    "Ceramic coating, paint correction and paint protection for {suburb} {pc} &mdash; mobile, at "
+    "your home or workplace, or at our Berwick studio about {km} km away.",
     "GYEON and ONYX ceramic coatings, machine paint correction and overspray removal for "
-    "{suburb} drivers, done properly in our Berwick studio ({km} km from {suburb}).",
+    "{suburb} drivers. We come to you, or you bring the car to our Berwick studio "
+    "({km} km from {suburb}).",
     "Professional paint protection for {suburb} {pc}: decontamination, correction and a "
-    "certified coating, all carried out at the CDS studio in Berwick.",
-    "From swirl removal to a multi-year graphene coating, {suburb} cars are looked after "
-    "at our Berwick studio, roughly {km} km up the road.",
+    "certified coating, carried out on site in {suburb} or at the CDS studio in Berwick.",
+    "From swirl removal to a multi-year graphene coating, {suburb} cars are looked after two "
+    "ways: mobile, at your place, or at our Berwick studio roughly {km} km up the road.",
 ]
 
 OWNER = [
@@ -49,8 +50,8 @@ H_SERV = [
 ]
 H_PROC = [
     "How a {suburb} booking runs.",
-    "From drop-off to pick-up.",
-    "What happens when your car comes in.",
+    "From first look to final cure.",
+    "What happens on the day.",
 ]
 H_FAQ = [
     "{suburb} ceramic coating questions.",
@@ -69,16 +70,16 @@ CTA = [
     "Sort your paint out properly",
 ]
 
-# Three complete four-step process strips, each accurate to how the studio works.
+# Three complete four-step process strips, each true of a mobile job and a studio job alike.
 PROCESS = [
     [("01", "Assessment", "We inspect the paint under proper lighting and measure the clear coat, then tell you what it actually needs."),
      ("02", "Decontaminate", "Iron-fallout treatment and a clay strip, so nothing is ever sealed in under the coating."),
      ("03", "Correct", "Machine polishing in measured stages to remove swirls and etching rather than fill them."),
-     ("04", "Coat &amp; cure", "GYEON or ONYX applied and cured in a controlled, dust-free space, with the warranty registered.")],
+     ("04", "Coat &amp; cure", "GYEON or ONYX applied panel by panel and cured under cover &mdash; in the studio, or in your garage on a mobile job &mdash; with the warranty registered.")],
     [("01", "Look and measure", "Paint depth readings and a close look under the lights before anything touches the car."),
      ("02", "Deep clean", "A full wash, then chemical and clay decontamination to strip out what washing leaves behind."),
      ("03", "Polish", "Correction matched to your paint - gentler on soft clear coats, more passes on hard ones."),
-     ("04", "Seal", "The coating goes on panel by panel and cures indoors before the car goes home.")],
+     ("04", "Seal", "The coating goes on panel by panel and cures under cover before the car goes back on the road.")],
     [("01", "Honest quote", "You get a straight assessment of what the paint needs, and what it does not."),
      ("02", "Prep", "Wash, iron treatment and clay, so the surface is genuinely clean before it is corrected."),
      ("03", "Refine", "Swirls, holograms and etching are levelled out by machine, measured as we go."),

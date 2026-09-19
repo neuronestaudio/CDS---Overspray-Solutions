@@ -8,7 +8,7 @@ and pick each page's set from a hash of its own slug. Stable across builds,
 different between neighbours. tools/verify_area_similarity.py measures it.
 
 Pools per archetype: 3 intros (page shows 1), 8 conditions (shows 4),
-7 FAQs (shows 3). Placeholders: {suburb}, {km} (straight-line km to the studio).
+6 FAQs (shows 3, under the pinned mobile-or-studio FAQ from mode_pool.py). Placeholders: {suburb}, {km} (straight-line km to the studio).
 
 Everything here is about CDS as it actually works: an owner-operated studio in
 Berwick, GYEON and ONYX coating systems, paint correction, and overspray and
@@ -26,7 +26,7 @@ ARCHETYPES = {
         "have: there is real depth in the clear coat to bring back, rather than damage "
         "to disguise.",
 
-        "A lot of what comes to the studio from {suburb} is good paint that has simply "
+        "A lot of what we see from {suburb} is good paint that has simply "
         "been washed the wrong way for a few years. Garaged, well kept, never neglected "
         "- and still covered in the fine circular marring a mitt and a hurried towel "
         "leave behind. That is exactly what measured correction is for.",
@@ -50,7 +50,6 @@ ARCHETYPES = {
         ("My car is garaged. Is a coating still worth it?", "Yes - garaged cars have the best paint to protect. A coating keeps that finish from picking up wash marring and makes the car far easier to keep perfect between the days it comes out."),
         ("Can you correct paint that has been badly polished before?", "Usually. We measure the clear coat first, because a previous heavy polish may have taken some of it. If there is enough left, holograms and buffer trails can be refined out; if there is not, we will tell you before starting."),
         ("GYEON or ONYX for a prestige car?", "For a garaged car where the look in direct sun matters most we generally lean GYEON for its clarity; for a car that does real kilometres, ONYX 10H graphene for durability. Often either is a good answer and we will say so."),
-        ("How far is the studio from {suburb}?", "About {km} km. Everything is done at the Berwick studio because a coating has to cure in a clean, controlled space to reach its rated life."),
         ("Will a coating change how my paint looks?", "It sharpens it. A properly corrected and coated finish reads deeper and glossier, and it stops the flat, hazy look paint gets as it oxidises."),
         ("Do you work on classic and collector cars?", "Yes. Older single-stage and early clear-coat paint needs a gentler approach and more care than a modern finish, which is exactly how we treat it."),
         ("What maintenance does a coated car need?", "A proper hand wash with a pH-neutral shampoo, and a check-over once a year. Avoid automatic brush washes - they are the fastest way to wear any coating down."),
@@ -91,7 +90,6 @@ ARCHETYPES = {
         ("Can you get rid of the swirl marks?", "Yes - swirls are fine scratches in the clear coat, and machine correction levels them out. The coating afterwards is what stops them coming straight back."),
         ("Can you do the inside as well?", "Yes. We deep-clean and coat leather, fabric and trim so spills, dye transfer and grime stop soaking in."),
         ("How long will I be without the car?", "Most coatings are a one to three day job depending on how much correction the paint needs. You will get an exact timeframe when we assess it."),
-        ("How far is the studio from {suburb}?", "About {km} km - the studio is in Berwick. Coatings are done there rather than on a driveway because they need a clean, controlled space to cure properly."),
         ("My roof has gone chalky. Can that be fixed?", "If the clear coat is oxidised but still intact, a restoration polish usually brings the colour back. If it has started to peel, no polish will fix it and we will tell you straight."),
         ("Do I need to change how I wash the car?", "Just avoid automatic brush washes and use a proper car shampoo. The coating makes everything else easier."),
     ],
@@ -130,7 +128,6 @@ ARCHETYPES = {
         ("There is building work in my street. Can you remove overspray?", "Yes - it is our specialty. Overspray, render and concrete spatter are removed non-abrasively so the clear coat is preserved, then the paint is coated so the next round of site dust washes off."),
         ("Should I coat a brand-new car?", "It is the best time to. The paint is undamaged, so there is little or nothing to correct and the coating bonds to a perfect surface."),
         ("Is the dealer's paint protection enough?", "Usually not. Dealer packages are typically a quick spray sealant that lasts months. A certified GYEON or ONYX coating is a different class of product and lasts years."),
-        ("How far is the studio from {suburb}?", "About {km} km, in Berwick. The car needs to come in because coatings have to cure in a clean, dust-free space - which a street full of building sites is not."),
         ("Can overspray be removed without a respray?", "In the large majority of cases, yes. It sits on top of the clear coat and can be lifted off, provided it has not been left long enough to etch deeply."),
         ("How soon should I deal with overspray?", "As soon as you notice it. Fresh overspray lifts far more easily than overspray that has baked on through a hot week."),
         ("Can you do the glass and wheels too?", "Yes. Glass picks up just as much site dust as paint, and coated wheels stop brake dust and mud baking on."),
@@ -169,7 +166,6 @@ ARCHETYPES = {
         ("Why does my paint feel rough after a wash?", "That is almost always bonded industrial fallout or overspray. A wash slides over it; it has to be removed chemically and with a clay treatment."),
         ("Can you remove overspray from a work car park?", "Yes - it is where the business started. We lift it off non-abrasively so the clear coat is preserved, and can provide a written assessment if you are claiming against the source."),
         ("Do you coat work utes and vans?", "Yes, including trays, canopies and trim. A coated work vehicle takes a fraction of the time to clean."),
-        ("How far is the studio from {suburb}?", "About {km} km - we are in Berwick. Decontamination and coating are done in the studio so the paint is sealed clean, not over whatever is in the air outside."),
         ("Will fallout come back after it is removed?", "The environment will keep putting it there, but on coated paint it struggles to bond and most of it comes off in a normal wash."),
         ("Is fallout the same as overspray?", "No. Fallout is metal particle that corrodes into the clear coat; overspray is paint or similar material that bonds on top. They are removed differently, which is why we assess before touching the paint."),
         ("Can fallout damage be permanent?", "If it is left long enough to pit the clear coat, some marks may need correction and a few can be too deep to remove fully. Caught early, it comes out cleanly."),
@@ -206,11 +202,10 @@ ARCHETYPES = {
     "faqs": [
         ("I park on the street. Is a coating worth it?", "That is when it is most worth it. Kerbside paint has no shelter, and a coating stops sun, droppings and traffic film from getting into the clear coat."),
         ("Can you remove scuffs and paint transfer?", "Usually. Transfer from another car or a pole sits on top of the paint and polishes off. If a scratch is through the clear coat we will tell you before quoting."),
-        ("How far is the studio from {suburb}?", "About {km} km, in Berwick. Coatings are applied and cured there, in a controlled space."),
         ("Will a coating stop door dings?", "No - nothing liquid stops an impact. It resists wash marring, etching and grime; for impact protection on high-risk areas, paint protection film is the right product."),
         ("Why does my car look dirty so soon after a wash?", "That is traffic film re-bonding to bare paint. On coated paint it cannot key in the same way, so the car stays cleaner for longer."),
         ("Do you do wheels and glass as well?", "Yes. Coated wheels stop brake dust baking on, and coated glass sheds rain at speed and cuts night glare."),
-        ("Can you work around my schedule?", "The studio is open seven days by appointment, and we will give you a realistic drop-off and pick-up window when you book."),
+        ("Can you work around my schedule?", "We work seven days by appointment, mobile or in the studio, and will give you a realistic time window when you book."),
     ],
 },
 
@@ -246,7 +241,6 @@ ARCHETYPES = {
         ("Does salt air really damage paint?", "Yes. Salt holds moisture against the surface and accelerates corrosion wherever the paint is chipped. A coating stops the film bonding and lets it rinse away."),
         ("How often should I wash a car near the water?", "More often than inland - a thorough rinse after windy days and beach trips helps a lot. On a coated car that rinse does most of the work."),
         ("Can you coat the chrome and trim?", "Yes. Brightwork and plastic trim suffer as much as paint by the water, and both can be coated."),
-        ("How far is the studio from {suburb}?", "About {km} km. Coatings are done at the Berwick studio, where the paint can be sealed clean and cured without salt in the air."),
         ("I tow a boat. Anything I should know?", "Rinse the lower panels, wheels and the tow bar area after every ramp run. Coated wheels and sills make that rinse far more effective."),
         ("Will a coating stop rust?", "It will not fix existing rust, and it cannot seal a chip that is already through to metal. It does slow corrosion by keeping salt off intact paint."),
         ("Can you get sand out of the interior?", "Yes - a proper interior detail gets sand out of seat rails, carpet and vents, and a fabric coating makes the next lot easier to vacuum."),
@@ -282,7 +276,6 @@ ARCHETYPES = {
     "faqs": [
         ("Can a coating stop sap damage?", "It will not stop sap landing, but it stops it bonding. On sealed paint you can lift sap off safely instead of finding an etched ring days later. Existing rings are polished out first."),
         ("My white car has brown marks from leaves. Can they come out?", "Usually. Tannin staining responds well to decontamination and a polish, and a coating makes it much harder for new stains to set."),
-        ("How far is the studio from {suburb}?", "About {km} km. Coatings are applied at the Berwick studio, out of the damp, so they can cure properly - the one place a hills car does not want to be during a cure is under a wet canopy."),
         ("What about moss in the window rubbers?", "We clean seals and door shuts as part of a proper detail, and treating the rubbers helps stop it coming back."),
         ("Is it worth coating a car that lives under trees?", "More than almost anywhere else. Shade, damp and sap are exactly the conditions a coating is built to handle."),
         ("Can you do the glass?", "Yes, and in the hills it is one of the most useful things we do - coated glass sheds fog and rain far better."),
@@ -321,7 +314,6 @@ ARCHETYPES = {
         ("Is a coating worth it on a dusty property?", "Yes - it is one of the best places for one. Dust does not bond to sealed paint, so it rinses off instead of having to be wiped, which is what protects the finish."),
         ("Do you coat utes and 4WDs?", "Yes, including trays, canopies, bars and raw plastics. They benefit as much as the paint does."),
         ("Will a coating stop stone chips?", "No. Stone chips are impact damage and only paint protection film meaningfully reduces them. A coating seals the paint around them."),
-        ("How far is the studio from {suburb}?", "About {km} km, in Berwick. The car comes in because a coating needs a clean, dust-free space to cure - a gravel drive is the opposite."),
         ("Can you clean out a car that lives in a shed?", "Yes. Interior detailing handles dust, droppings and odour, and coating the fabric makes it easier to keep clean afterwards."),
         ("How should I wash a car that gets dusty every day?", "Rinse first with plenty of water to lift the grit, then wash - never wipe dust off dry. On coated paint the rinse does most of the job."),
         ("Can you coat the wheels?", "Yes, and on dirt roads it is well worth it - brake dust and mud stop baking onto coated wheels."),
@@ -356,7 +348,6 @@ ARCHETYPES = {
         ("Resale on a working vehicle", "A work ute that has been protected sells for noticeably more than one with sun-baked paint and a stained interior."),
     ],
     "faqs": [
-        ("Is the drive to the studio worth it from {suburb}?", "It is about {km} km to Berwick. A coating is a one-off job that protects the vehicle for years, and it needs a controlled space to cure - which is why it is done in the studio."),
         ("Do you coat farm utes?", "Yes - paint, trays, canopies and trim. A coated ute rinses clean after a day on the tracks."),
         ("Can you get bug marks off the front?", "Fresh bug residue comes off easily; etched marks can usually be polished out. On coated paint they barely stick."),
         ("Will a coating help with the mud and dust?", "Yes. Neither bonds to sealed paint the way it does to bare clear coat, so a hose does most of the cleaning."),
