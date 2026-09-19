@@ -1,69 +1,449 @@
 {
-    "redirects":  [
-                      {
-                          "source":  "/index.php",
-                          "destination":  "/",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/about.php",
-                          "destination":  "/about.html",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/services.php",
-                          "destination":  "/services.html",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/contact.php",
-                          "destination":  "/#contact",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/ceramic-coating.php",
-                          "destination":  "/",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/paint-correction.php",
-                          "destination":  "/paint-correction-melbourne.html",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/interior-detailing.php",
-                          "destination":  "/interior-leather-protection-melbourne.html",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/exterior-detailing.php",
-                          "destination":  "/services.html",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/full-detail.php",
-                          "destination":  "/services.html",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/full-deluxe-detail.php",
-                          "destination":  "/services.html",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/truck-detailing.php",
-                          "destination":  "/ute-4wd-ceramic-coating-melbourne.html",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/projects.php",
-                          "destination":  "/#work",
-                          "permanent":  true
-                      },
-                      {
-                          "source":  "/testimonials.php",
-                          "destination":  "/#reviews",
-                          "permanent":  true
-                      }
-                  ]
+  "redirects": [
+    {
+      "source": "/index.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about.php",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/services.php",
+      "destination": "/services.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact.php",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/paint-correction.php",
+      "destination": "/paint-correction-melbourne.html",
+      "permanent": true
+    },
+    {
+      "source": "/interior-detailing.php",
+      "destination": "/interior-leather-protection-melbourne.html",
+      "permanent": true
+    },
+    {
+      "source": "/exterior-detailing.php",
+      "destination": "/services.html",
+      "permanent": true
+    },
+    {
+      "source": "/full-detail.php",
+      "destination": "/services.html",
+      "permanent": true
+    },
+    {
+      "source": "/full-deluxe-detail.php",
+      "destination": "/services.html",
+      "permanent": true
+    },
+    {
+      "source": "/truck-detailing.php",
+      "destination": "/ute-4wd-ceramic-coating-melbourne.html",
+      "permanent": true
+    },
+    {
+      "source": "/projects.php",
+      "destination": "/#work",
+      "permanent": true
+    },
+    {
+      "source": "/testimonials.php",
+      "destination": "/#reviews",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-abbotsford.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-alphington.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-attwood.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-briar-hill.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-broadmeadows.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-brunswick-east.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-brunswick-west.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-brunswick.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-bulleen.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-bundoora.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-campbellfield.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-carlton-north.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-carlton.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-clifton-hill.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-coburg-north.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-coburg.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-collingwood.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-coolaroo.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-craigieburn.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-dallas.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-diamond-creek.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-doncaster-east.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-doncaster.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-donnybrook.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-doreen.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-eltham-north.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-eltham.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-epping.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-fairfield.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-fawkner.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-fitzroy-north.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-fitzroy.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-gladstone-park.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-glenroy.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-greensborough.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-greenvale.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-heidelberg-heights.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-heidelberg-west.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-heidelberg.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-hurstbridge.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-ivanhoe.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-kalkallo.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-kingsbury.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-lalor.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-lower-plenty.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-macleod.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-meadow-heights.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-melbourne-cbd.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-mernda.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-mill-park.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-montmorency.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-northcote.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-oak-park.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-pascoe-vale.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-plenty.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-preston.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-research.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-reservoir.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-rosanna.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-roxburgh-park.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-somerton.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-south-morang.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-templestowe-lower.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-templestowe.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-thomastown.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-thornbury.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-tullamarine.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-viewbank.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-warrandyte.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-watsonia.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-wattle-glen.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-westmeadows.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-whittlesea.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-wollert.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-yallambie.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    },
+    {
+      "source": "/ceramic-coating-yarrambat.html",
+      "destination": "/service-areas.html",
+      "permanent": true
+    }
+  ]
 }

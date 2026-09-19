@@ -9,7 +9,7 @@ Suburb pages are ceramic-coating-<slug>.html in the repo root. Each carries
 tools/verify_area_similarity.py can measure them. Run that after this, always.
 """
 import os, re, sys, io, json, math, html, glob
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+sys.stdout.reconfigure(encoding="utf-8")  # not a new TextIOWrapper: a second one (on import) closes the first
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from suburb_list import REGIONS, ZONES, all_targets, slugify
@@ -18,11 +18,12 @@ from content_pool import ARCHETYPES, pick, pick_one
 import shared_pool as SP
 
 ROOT = os.path.dirname(os.path.dirname(HERE))
-BASE = "https://cds-overspray-solutions.vercel.app"
-CSSV = "65"
+BASE = "https://cardetailingsolutions.com.au"  # the live domain since 18 Sep 2026; never the vercel.app host
+CSSV = "66"
 MAPJSV = "4"
 ZONE_COLOUR = {"casey": "#e5484d", "south": "#e8a33d", "east": "#9b7bea",
-               "hills": "#3fb67a", "north": "#4aa3d8", "bay": "#22b8c9"}
+               "hills": "#3fb67a", "north": "#4aa3d8", "bay": "#22b8c9",
+               "outer": "#e0679a"}
 ZONE_LABEL = dict(ZONES)
 HOOK = {
     "established": "Measured correction and certified coatings for well-kept cars",
@@ -142,6 +143,11 @@ def head(title, desc, canonical, ld, extra_meta=""):
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#0a0a0c">
 {extra_meta}<link rel="canonical" href="{BASE}/{canonical}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{BASE}/{canonical}">
+<meta property="og:image" content="{BASE}/assets/img/logo-cds-ceramic.png">
 <link rel="shortcut icon" href="assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -386,10 +392,11 @@ def overview_map(eps=0.0006):
     counts = {z: sum(1 for t in shapes if t["zone"] == z) for z, _ in ZONES}
 
     subs = "".join(
-        '<a class="sam__sub" href="ceramic-coating-%s.html" data-slug="%s" data-name="%s" data-postcode="%s" '
-        'data-zone="%s" data-area="%s" data-box="%s" aria-label="%s %s &mdash; open the service area page">'
+        # no data-slug: map.js never reads it, and on 209 links it was dead weight
+        '<a class="sam__sub" href="ceramic-coating-%s.html" data-name="%s" data-postcode="%s" '
+        'data-zone="%s" data-area="%s" data-box="%s" aria-label="%s %s">'
         '<path d="%s"/><text class="sam__lbl" x="%s" y="%s" text-anchor="middle" dominant-baseline="middle">%s</text></a>'
-        % (t["slug"], t["slug"], esc(t["name"]), t["pc"], t["zone"], t["area"],
+        % (t["slug"], esc(t["name"]), t["pc"], t["zone"], t["area"],
            ",".join(str(v) for v in t["box"]), esc(t["name"]), t["pc"], t["d"], t["cx"], t["cy"], esc(t["name"]))
         for t in shapes)
     chips = ['<button type="button" class="sam__zone is-on" data-zone="all"><i class="sam__dot sam__dot--all" '
@@ -474,8 +481,9 @@ def hub_page(sam):
     <span class="eyebrow">{PIN}Berwick 3806 &middot; Melbourne&rsquo;s south-east</span>
     <h1 class="lp-h1">Areas we <em>service</em></h1>
     <p class="lp-lede">{n} suburbs across Casey, Cardinia, Greater Dandenong, Knox, Monash, Kingston, Frankston,
-    the Dandenong Ranges and Western Port &mdash; each with its own page, drawn from its real gazetted
-    boundary. Every coating is done at our studio in Berwick.</p>
+    Maroondah, Whitehorse, Glen Eira and Bayside, plus the Dandenong Ranges, the Yarra Valley edge and Western
+    Port &mdash; every suburb within 30 km of our Berwick studio, each with its own page drawn from its real
+    gazetted boundary.</p>
     {ACTIONS}
   </div>
 </header>
@@ -542,8 +550,8 @@ def sitemap_xml():
     def prio(f):
         if f == "index.html": return "1.0"
         if f == "service-areas.html": return "0.9"
-        if f in sub: return "0.7"
-        if f in ("about.html", "sitemap.html", "warranties.html", "product-tds.html"): return "0.6"
+        if f in sub: return "0.6"
+        if f in ("about.html", "sitemap.html", "warranties.html", "product-tds.html"): return "0.7"
         return "0.8"
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -603,6 +611,16 @@ def main():
 
     sitemap_html()
     print("sitemap.xml: %d urls; sitemap.html columns rebuilt" % sitemap_xml())
+
+    # styles.css just changed (the map block), so every page must reference the new
+    # version or returning visitors keep a stale copy.
+    bumped = 0
+    for p in glob.glob(os.path.join(ROOT, "*.html")):
+        t = open(p, encoding="utf-8").read()
+        t2 = re.sub(r"(css/styles\.css\?v=)\d+", r"\g<1>" + CSSV, t)
+        if t2 != t:
+            open(p, "w", encoding="utf-8").write(t2); bumped += 1
+    print("styles.css?v=%s on %d more pages" % (CSSV, bumped))
 
 
 if __name__ == "__main__":

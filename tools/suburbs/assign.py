@@ -19,6 +19,8 @@ ARCH = {
         "Berwick", "Beaconsfield", "Narre Warren North", "Wheelers Hill", "Glen Waverley",
         "Mount Waverley", "Vermont South", "Burwood East", "Ashwood", "Mount Eliza",
         "Frankston South", "Heathmont", "Dingley Village", "Rowville", "Mulgrave",
+        "Montrose", "Warranwood", "Donvale", "Ringwood North", "Blackburn",
+        "Blackburn North", "Malvern East", "Ashburton",
     ],
     # 1970s-90s family suburbs, long-owned cars, a lot of wash marring
     "family": [
@@ -27,6 +29,10 @@ ARCH = {
         "Knoxfield", "Wantirna", "Wantirna South", "Kilsyth", "Noble Park North",
         "Dandenong North", "Frankston North", "Langwarrin", "Oakleigh East",
         "Oakleigh South", "Clarinda", "Notting Hill", "Chelsea Heights",
+        "Croydon", "Croydon South", "Croydon North", "Croydon Hills", "Mooroolbark",
+        "Lilydale", "Ringwood East", "Vermont", "Forest Hill", "Mitcham", "Nunawading",
+        "Blackburn South", "Burwood", "Box Hill South", "Highett", "Bentleigh East",
+        "Bentleigh", "McKinnon", "Ormond", "Murrumbeena",
     ],
     # new estates: brand-new cars parked beside active building sites
     "growth": [
@@ -45,12 +51,14 @@ ARCH = {
     "urban": [
         "Dandenong", "Noble Park", "Springvale", "Clayton", "Oakleigh", "Huntingdale",
         "Hughesdale", "Chadstone", "Frankston", "Cheltenham", "Mentone",
+        "Ringwood", "Box Hill", "Carnegie", "Glen Huntly",
     ],
     # on the water: salt air, sand, marina and boat-ramp traffic
     "bayside": [
         "Mordialloc", "Aspendale", "Edithvale", "Chelsea", "Bonbeach", "Carrum",
         "Patterson Lakes", "Parkdale", "Seaford", "Mornington", "Mount Martha",
         "Tooradin", "Blind Bight", "Warneet", "Cannons Creek", "Hastings", "Crib Point",
+        "Beaumaris", "Black Rock", "Sandringham", "Hampton East",
     ],
     # the Dandenong Ranges and Cardinia hills: shade, damp, sap, leaf litter
     "hills": [
@@ -58,7 +66,8 @@ ARCH = {
         "Kallista", "Sherbrooke", "Sassafras", "Ferny Creek", "Olinda", "Monbulk",
         "Silvan", "Kalorama", "Mount Dandenong", "The Patch", "Upper Ferntree Gully",
         "The Basin", "Menzies Creek", "Emerald", "Avonsleigh", "Clematis", "Cockatoo",
-        "Gembrook", "Macclesfield",
+        "Gembrook", "Macclesfield", "Tremont", "Nangana", "Mount Evelyn",
+        "Hoddles Creek", "Beenak",
     ],
     # lifestyle acreage: gravel drives, dust, sheds, utes and floats
     "acreage": [
@@ -66,13 +75,14 @@ ARCH = {
         "Mount Burnett", "Narre Warren East", "Lysterfield", "Lysterfield South",
         "Devon Meadows", "Cranbourne South", "Pearcedale", "Langwarrin South", "Baxter",
         "Moorooduc", "Somerville", "Tyabb", "Tynong North", "Nar Nar Goon North",
-        "Garfield North", "Bunyip North", "Bittern",
+        "Garfield North", "Bunyip North", "Bittern", "Park Orchards",
     ],
     # farming flats and country towns: farm roads, mud, long kilometres
     "rural": [
         "Koo Wee Rup", "Lang Lang", "Bayles", "Catani", "Yannathan", "Iona",
         "Maryknoll", "Rythdale", "Cora Lynn", "Dalmore", "Heath Hill", "Cardinia",
-        "Nar Nar Goon", "Tynong", "Garfield", "Bunyip",
+        "Nar Nar Goon", "Tynong", "Garfield", "Bunyip", "Koo Wee Rup North", "Monomeith",
+        "Caldermeade", "Vervale", "Wandin East", "Wandin North", "Yellingbo", "Seville",
     ],
 }
 

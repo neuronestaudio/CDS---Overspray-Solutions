@@ -12,7 +12,7 @@ results. Fetch once and commit the output - the site never calls this at
 runtime. Re-running only fills in what is missing.
 """
 import json, os, math, time, sys, io, urllib.request, urllib.parse
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+sys.stdout.reconfigure(encoding="utf-8")  # not a new TextIOWrapper: a second one (on import) closes the first
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from suburb_list import all_targets
 
@@ -25,9 +25,9 @@ UA = {"User-Agent": "CDS-OverspraySolutions-SuburbPages/1.0 (dion@pndulumdigital
 # Anything outside is a same-name suburb elsewhere - Beaconsfield (NSW, TAS),
 # Clyde (NSW), Emerald (QLD), Seaford (SA), Mulgrave (NSW), Lyndhurst (NSW) and
 # Sandhurst (the old name for Bendigo) all have twins.
-# The north edge must clear Kilsyth (centre -37.819): at -37.82 it was silently
+# The north edge must clear Kilsyth (-37.819) and Lilydale (-37.757): at -37.82 Kilsyth was silently
 # rejected as NO MATCH, not reported as an error.
-BBOX = (144.98, -38.36, 145.75, -37.76)  # west, south, east, north
+BBOX = (144.95, -38.36, 145.75, -37.68)  # west, south, east, north
 
 # Only add an override if a name comes back NO MATCH - a wrong postcode here
 # makes the query return nothing at all.

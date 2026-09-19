@@ -11,7 +11,7 @@ Two Overpass requests for the whole of south-east Melbourne, then point-in-polyg
 locally against the boundaries we already hold. Run fetch_boundaries.py first.
 """
 import json, os, re, sys, io, time, urllib.request, urllib.parse
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+sys.stdout.reconfigure(encoding="utf-8")  # not a new TextIOWrapper: a second one (on import) closes the first
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BOUNDS = os.path.join(HERE, "boundaries.json")
@@ -20,7 +20,7 @@ UA = {"User-Agent": "CDS-OverspraySolutions-SuburbPages/1.0 (dion@pndulumdigital
 ENDPOINT = "https://overpass-api.de/api/interpreter"
 
 # south, west, north, east — the Overpass order
-BOX = "-38.36,144.98,-37.76,145.75"  # south-east Melbourne
+BOX = "-38.36,144.95,-37.68,145.75"  # south-east Melbourne
 MAX_PER_SUBURB = 4
 
 # Ranked: a suburb's four landmarks are taken from the top of this order, so the
@@ -51,11 +51,20 @@ def overpass(q, label):
         print(f"  {label}: from cache", flush=True)
         return json.load(open(cache, encoding="utf-8"))
     data = urllib.parse.urlencode({"data": q}).encode()
-    req = urllib.request.Request(ENDPOINT, data=data, headers=UA)
-    with urllib.request.urlopen(req, timeout=300) as r:
-        res = json.load(r)
-    json.dump(res, open(cache, "w", encoding="utf-8"), separators=(",", ":"))
-    return res
+    last = None
+    # overpass-api.de 504s on a box this size often enough to need a fallback
+    for ep in (ENDPOINT, "https://overpass.kumi.systems/api/interpreter",
+               "https://maps.mail.ru/osm/tools/overpass/api/interpreter"):
+        try:
+            req = urllib.request.Request(ep, data=data, headers=UA)
+            with urllib.request.urlopen(req, timeout=300) as r:
+                res = json.load(r)
+            json.dump(res, open(cache, "w", encoding="utf-8"), separators=(",", ":"))
+            return res
+        except Exception as e:
+            last = e
+            print(f"  {label}: {ep} failed ({e})", flush=True)
+    raise last
 
 
 # Franchise outlets are tagged all over the place and are not landmarks anywhere.
@@ -85,6 +94,12 @@ GENERIC = {
 }
 
 
+# Misspellings in the OSM name tag, corrected before they reach a page.
+SPELLING = {
+    "Eumemmerring Bussiness Park": "Eumemmerring Business Park",
+}
+
+
 def kind_and_label(tags):
     """Return (rank, display name) or None to drop the element.
 
@@ -92,6 +107,7 @@ def kind_and_label(tags):
     centre and the station beat a park.
     """
     name = (tags.get("name") or "").strip()
+    name = SPELLING.get(name, name)
     if not name or len(name) > 42:
         return None
     low = name.lower()
@@ -133,15 +149,29 @@ DROP = re.compile(
     r"monash house|^emergency$|traffic education|yarning circle|duck pond|nature walk|"
     r"airstrip|^site of|^former |shopping strip|business centre|homeco|home co\b|home co\.|"
     r"home consortium|roshchem|marson crescent|edu kingdom|floral arts|\b[a-z]\d+\b|"
-    r"^[a-z]+ precinct$",
+    r"^[a-z]+ precinct$|@|^scope$|woolworths|\bu3a\b",
     re.I)
+
+
+# OSM spelling errors that would otherwise print verbatim on a page.
+TYPO = {"Bussiness": "Business", "Reservior": "Reservoir"}
+
+
+def tidy(name):
+    for a, b in TYPO.items():
+        name = name.replace(a, b)
+    return name
 
 
 def norm(name):
     """Key for spotting two names for one place ('Eden Rise' / 'Eden Rise Shopping
-    Centre', 'Belgrave station' / 'Belgrave (Narrow-gauge) station')."""
+    Centre', 'Belgrave station' / 'Belgrave (Narrow-gauge) station').
+
+    Only 'shopping centre/village' and parentheticals are stripped. Stripping
+    'station' or 'plaza' too made 'Clayton station' and 'Clayton Plaza' collide,
+    and the station was silently dropped."""
     n = re.sub(r"\(.*?\)", "", name.lower())
-    n = re.sub(r"\b(shopping centre|shopping village|station|plaza)\b", "", n)
+    n = re.sub(r"\b(shopping centre|shopping village)\b", "", n)
     return re.sub(r"[^a-z0-9]+", "", n)
 
 
@@ -222,10 +252,13 @@ def main():
         items.sort(key=lambda t: (t[0], len(t[1])))
         picked, names, parks = [], set(), 0
         for rank, name in items:
+            name = tidy(name)
             if DROP.search(name):
                 continue
             low = norm(name)
-            if low in names:
+            # 'Box Hill Central' / 'Box Hill Central South' / '... North' are one
+            # centre: a name that extends an already-picked one is the same place.
+            if any(low == x or low.startswith(x) or x.startswith(low) for x in names):
                 continue
             if rank == 4:
                 if parks >= 1:

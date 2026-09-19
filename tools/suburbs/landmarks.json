@@ -8,8 +8,8 @@
  "beaconsfield": [
   "Beaconsfield station",
   "Beaconsfield Hub",
-  "Beaconsfield Business Park",
-  "Manna Gum Park"
+  "Beaconsfield Plaza",
+  "Beaconsfield Business Park"
  ],
  "narre-warren": [
   "Westfield Fountain Gate Shopping Centre",
@@ -122,6 +122,7 @@
  ],
  "somerville": [
   "Somerville Plaza",
+  "Somerville station",
   "Eramosa Park"
  ],
  "tyabb": [
@@ -287,8 +288,8 @@
  ],
  "dandenong-south": [
   "Home Quarter Dandenong",
+  "Eumemmerring Business Park",
   "Dandenong Industrial Estate",
-  "Eumemmerring Bussiness Park",
   "Iveco Customisation and Innovation Centre"
  ],
  "noble-park": [
@@ -312,7 +313,7 @@
   "Golden Plaza",
   "Springvale Centre",
   "Springvale Mega Centre",
-  "Springvale Shopping Centre"
+  "Springvale Homemaker Centre"
  ],
  "springvale-south": [
   "Springvale South Shopping Village",
@@ -411,9 +412,9 @@
  ],
  "clayton": [
   "Clayton Plaza",
+  "Clayton station",
   "Mannix College",
-  "Monash Surgical Private",
-  "Victorian Heart Hospital"
+  "Monash Surgical Private"
  ],
  "notting-hill": [
   "Monash Business Park",
@@ -461,6 +462,7 @@
  ],
  "mordialloc": [
   "Mordialloc station",
+  "Mordialloc Plaza",
   "Seymour Park"
  ],
  "aspendale": [
@@ -509,6 +511,7 @@
  ],
  "parkdale": [
   "Parkdale Plaza",
+  "Parkdale station",
   "Como Private Hospital",
   "Walter Galt Reserve"
  ],
@@ -556,9 +559,9 @@
  ],
  "carrum-downs": [
   "Carrum Downs Shopping Centre",
-  "Carrum Downs Lifestyle Centre",
-  "The local village @ Carrum Downs",
-  "Daisy's Garden Centre"
+  "Daisy's Garden Centre",
+  "Gathercoles Meat Works",
+  "Rotary Park"
  ],
  "skye": [
   "State Dog Centre (KCC Park)",
@@ -598,5 +601,198 @@
   "Kilsyth Shopping Centre",
   "Churinga Village Shopping Centre",
   "Hansen Park"
+ ],
+ "nangana": [
+  "Shepherd Creek Natural Features Reserve"
+ ],
+ "beaumaris": [
+  "Banksia Reserve"
+ ],
+ "black-rock": [
+  "F.G. Tricks Reserve"
+ ],
+ "sandringham": [
+  "Sandringham station",
+  "Sandringham & District Memorial Hospital",
+  "Merindah Park"
+ ],
+ "hampton-east": [
+  "Wishart Reserve"
+ ],
+ "highett": [
+  "Highett station",
+  "Highett Reserve"
+ ],
+ "bentleigh-east": [
+  "Monash Medical Centre Moorabbin",
+  "Virginia Park",
+  "Nina Reserve"
+ ],
+ "bentleigh": [
+  "Bentleigh station",
+  "Patterson station",
+  "Halley Park"
+ ],
+ "mckinnon": [
+  "McKinnon station",
+  "Allnutt Park"
+ ],
+ "ormond": [
+  "Ormond station",
+  "Joyce Park"
+ ],
+ "glen-huntly": [
+  "Glen Huntly station",
+  "Booran Road Reserve"
+ ],
+ "carnegie": [
+  "Carnegie Central",
+  "Carnegie station",
+  "Packer Park"
+ ],
+ "murrumbeena": [
+  "Hughesdale station",
+  "Murrumbeena station",
+  "Boyd Park"
+ ],
+ "malvern-east": [
+  "Chadstone Shopping Centre",
+  "Darling station",
+  "Holmesglen station",
+  "East Malvern station"
+ ],
+ "ashburton": [
+  "Alamein station",
+  "Ashburton station",
+  "Watson Park"
+ ],
+ "montrose": [
+  "Karen Reserve"
+ ],
+ "croydon-south": [
+  "Eastfield Shopping Centre",
+  "Merrindale Shopping Centre",
+  "Woodland Park"
+ ],
+ "croydon": [
+  "Croydon Central",
+  "Civic Square Shopping Centre",
+  "Croydon station",
+  "McAdam Square"
+ ],
+ "croydon-north": [
+  "Maroondah Village Shopping Centre",
+  "Brushy Park"
+ ],
+ "croydon-hills": [
+  "Yarrunga Reserve"
+ ],
+ "mooroolbark": [
+  "Mooroolbark Terrace",
+  "Mooroolbark station",
+  "Hookey Park"
+ ],
+ "mount-evelyn": [
+  "Quinn Reserve"
+ ],
+ "lilydale": [
+  "Lilydale Village",
+  "Lilydale Marketplace",
+  "Lilydale station",
+  "Yarra Ranges Health"
+ ],
+ "ringwood": [
+  "Eastland",
+  "Ringwood Square Shopping Centre",
+  "Ringwood station",
+  "Heatherdale station"
+ ],
+ "ringwood-east": [
+  "Ringwood East station",
+  "Maroondah Hospital",
+  "Ringwood Private Hospital",
+  "Bedford Road Shopping Center"
+ ],
+ "ringwood-north": [
+  "Ringwood North Shopping Centre",
+  "Mahon Reserve"
+ ],
+ "warranwood": [
+  "The Michael Centre",
+  "Wellington Park"
+ ],
+ "donvale": [
+  "Donvale Rehabilitation Hospital",
+  "Fahey Park"
+ ],
+ "park-orchards": [
+  "Park Orchards Shopping Centre",
+  "Alder Link"
+ ],
+ "vermont": [
+  "Abbey Walk"
+ ],
+ "forest-hill": [
+  "Forest Hill Chase",
+  "Peter James Centre",
+  "Brentford Square Shopping Centre",
+  "Mahoneys Reserve"
+ ],
+ "mitcham": [
+  "Mitcham station",
+  "Mitcham Private Hospital",
+  "Rangeview Shopping Centre",
+  "Antonio Park"
+ ],
+ "nunawading": [
+  "Brand Smart Outlet Mall",
+  "Nunawading station",
+  "Box Hill Institute of TAFE",
+  "Walker Park"
+ ],
+ "blackburn": [
+  "Blackburn Square",
+  "Laburnum station",
+  "Blackburn station",
+  "Laburnum Village"
+ ],
+ "blackburn-south": [
+  "Eastern Health Blackburn",
+  "Eley & Shaun Shopping Centre",
+  "Hunters Knoll"
+ ],
+ "blackburn-north": [
+  "Slater Reserve"
+ ],
+ "burwood": [
+  "Deakin University",
+  "Greenwood Business Park",
+  "Bennettswood Shopping Centre",
+  "Wattle Park"
+ ],
+ "box-hill": [
+  "Box Hill Central",
+  "Box Hill station",
+  "Eastern Health",
+  "Epworth Eastern"
+ ],
+ "box-hill-south": [
+  "Box Hill Large Format Retail Centre",
+  "Eley Road Reserve"
+ ],
+ "wandin-north": [
+  "Koonaburra Reserve"
+ ],
+ "yellingbo": [
+  "Nangana Bushland Reserve"
+ ],
+ "seville": [
+  "Valley Reserve"
+ ],
+ "hoddles-creek": [
+  "Beenak Nature Conservation Area"
+ ],
+ "beenak": [
+  "Kurth Kiln Regional Park"
  ]
 }
