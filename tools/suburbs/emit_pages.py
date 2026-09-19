@@ -19,7 +19,7 @@ import shared_pool as SP
 
 ROOT = os.path.dirname(os.path.dirname(HERE))
 BASE = "https://cardetailingsolutions.com.au"  # the live domain since 18 Sep 2026; never the vercel.app host
-CSSV = "66"
+CSSV = "67"
 MAPJSV = "4"
 ZONE_COLOUR = {"casey": "#e5484d", "south": "#e8a33d", "east": "#9b7bea",
                "hills": "#3fb67a", "north": "#4aa3d8", "bay": "#22b8c9",
@@ -115,11 +115,23 @@ def join_names(names):
 
 
 # ------------------------------------------------------------------ site chrome
-_chrome_src = open(os.path.join(ROOT, "paint-correction-melbourne.html"), encoding="utf-8").read()
-NAVDRAWER = re.search(r"<body>\s*(.*?)\s*<header class=\"lp-hero", _chrome_src, re.S).group(1)
-FOOTER = re.search(r"(<footer class=\"footer\">.*?</footer>)", _chrome_src, re.S).group(1)
-if "Epping" in NAVDRAWER + FOOTER:
-    raise SystemExit("site chrome still says Epping - run the Berwick sweep first")
+NAVDRAWER = FOOTER = EXPLORER_JS = ""
+
+
+def load_chrome():
+    """Lift the shared nav/drawer/footer off a hand-built page. Called from main()
+    after ensure_area_links(), so generated pages inherit the 'Areas' nav link."""
+    global NAVDRAWER, FOOTER, EXPLORER_JS
+    src = open(os.path.join(ROOT, "paint-correction-melbourne.html"), encoding="utf-8").read()
+    NAVDRAWER = re.search(r"<body>\s*(.*?)\s*<header class=\"lp-hero", src, re.S).group(1)
+    FOOTER = re.search(r"(<footer class=\"footer\">.*?</footer>)", src, re.S).group(1)
+    if "Epping" in NAVDRAWER + FOOTER:
+        raise SystemExit("site chrome still says Epping - run the Berwick sweep first")
+    if "service-areas.html" not in NAVDRAWER:
+        raise SystemExit("site chrome has no Areas link - ensure_area_links() did not run")
+    EXPLORER_JS = open(os.path.join(HERE, "explorer.js"), encoding="utf-8").read()
+
+
 ARROW = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
          'stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>')
 ACTIONS = ('<div class="lp-actions"><a href="index.html#contact" class="btn btn-primary btn-lg">'
@@ -131,7 +143,7 @@ PIN = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=
        '6.5 8 11 8 11z"/><circle cx="12" cy="11" r="3"/></svg>')
 
 
-def head(title, desc, canonical, ld, extra_meta=""):
+def head(title, desc, canonical, ld, extra_meta="", nav=None):
     lds = "\n".join('<script type="application/ld+json">%s</script>'
                     % json.dumps(x, ensure_ascii=False) for x in ld)
     return f"""<!DOCTYPE html>
@@ -156,7 +168,7 @@ def head(title, desc, canonical, ld, extra_meta=""):
 {lds}
 </head>
 <body>
-{NAVDRAWER}"""
+{nav or NAVDRAWER}"""
 
 
 def provider():
@@ -345,9 +357,17 @@ def suburb_page(slug):
 </html>"""
 
 
-# ------------------------------------------------------------------ overview map
-def overview_map(eps=0.0006):
-    """The interactive vector map of every suburb (the .sam component)."""
+# ------------------------------------------------------------------ explorer (overview map + directory)
+ICON_SEARCH = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+               'stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>')
+ICON_LOCATE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+               'stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.4"/>'
+               '<path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>')
+
+
+def explorer(eps=0.0006):
+    """The suburb explorer: toolbar, area chips, vector map with distance rings, and a
+    directory of plain links. Returns (markup, facts)."""
     from fetch_boundaries import rdp
     items = [(s, RECS[s]) for s in ORDER if s in RECS]
     mn = [1e9, 1e9]; mx = [-1e9, -1e9]
@@ -369,7 +389,10 @@ def overview_map(eps=0.0006):
     H = round((mx[1] - mn[1]) * sc + PAD * 2)
     px = lambda x: round(((x - mn[0]) * kx * sc + PAD) * 10) / 10
     py = lambda y: round(((mx[1] - y) * sc + PAD) * 10) / 10
+    ppk = sc / 110.95                      # viewBox units per km (x and y agree to <1%)
 
+    region_names = [reg for reg, _z, _n in REGIONS]
+    zone_keys = [z for z, _ in ZONES]
     shapes = []
     for s, r in items:
         box = [1e9, 1e9, -1e9, -1e9]; parts = []
@@ -382,87 +405,162 @@ def overview_map(eps=0.0006):
             parts.append("".join(seg) + "Z")
         c = r["centroid"]
         shapes.append(dict(slug=s, name=r["name"], pc=r.get("postcode") or "", zone=ZONE_OF[s],
-                           area=r["area_km2"], d="".join(parts), cx=px(c[0]), cy=py(c[1]),
-                           box=[round(v, 1) for v in box]))
+                           region=REGION_OF[s], area=r["area_km2"], km=r["km"], d="".join(parts),
+                           cx=px(c[0]), cy=py(c[1]), box=box))
+    # biggest first, so small suburbs paint (and click) on top of large ones
     shapes.sort(key=lambda t: (t["box"][2] - t["box"][0]) * (t["box"][3] - t["box"][1]), reverse=True)
+    index = {t["slug"]: i for i, t in enumerate(shapes)}
+
     zbox = {"all": [PAD, PAD, W - PAD, H - PAD]}
     for t in shapes:
         z = zbox.setdefault(t["zone"], [1e9, 1e9, -1e9, -1e9])
         z[:] = [min(z[0], t["box"][0]), min(z[1], t["box"][1]), max(z[2], t["box"][2]), max(z[3], t["box"][3])]
-    counts = {z: sum(1 for t in shapes if t["zone"] == z) for z, _ in ZONES}
+    zbox = {k: [round(v, 1) for v in b] for k, b in zbox.items()}
+    counts = {z: sum(1 for t in shapes if t["zone"] == z) for z in zone_keys}
 
-    subs = "".join(
-        # no data-slug: map.js never reads it, and on 209 links it was dead weight
-        '<a class="sam__sub" href="ceramic-coating-%s.html" data-name="%s" data-postcode="%s" '
-        'data-zone="%s" data-area="%s" data-box="%s" aria-label="%s %s">'
-        '<path d="%s"/><text class="sam__lbl" x="%s" y="%s" text-anchor="middle" dominant-baseline="middle">%s</text></a>'
-        % (t["slug"], esc(t["name"]), t["pc"], t["zone"], t["area"],
-           ",".join(str(v) for v in t["box"]), esc(t["name"]), t["pc"], t["d"], t["cx"], t["cy"], esc(t["name"]))
-        for t in shapes)
-    chips = ['<button type="button" class="sam__zone is-on" data-zone="all"><i class="sam__dot sam__dot--all" '
-             'aria-hidden="true"></i><span class="sam__zone-name">All areas</span><span class="sam__zone-n">%d</span></button>' % len(shapes)]
-    chips += ['<button type="button" class="sam__zone" data-zone="%s"><i class="sam__dot sam__dot--%s" aria-hidden="true">'
-              '</i><span class="sam__zone-name">%s</span><span class="sam__zone-n">%d</span></button>'
-              % (z, z, esc(lab), counts[z]) for z, lab in ZONES]
-    opts = "".join('<option value="%s">' % esc(t["name"]) for t in sorted(shapes, key=lambda t: t["name"]))
+    sx_, sy_ = px(STUDIO[0]), py(STUDIO[1])
+    max_km = max(t["km"] for t in shapes)
+    rings = [k for k in (10, 20, 30, 40, 50) if k <= max_km + 2]
+    ring_svg = []
+    for k in rings:
+        rad = round(k * ppk, 1)
+        ring_svg.append('<circle cx="%s" cy="%s" r="%s"/>' % (sx_, sy_, rad))
+        for lx, ly in ((sx_, sy_ - rad), (sx_, sy_ + rad), (sx_ + rad, sy_), (sx_ - rad, sy_)):
+            if 14 <= lx <= W - 14 and 12 <= ly <= H - 12:
+                ring_svg.append('<text x="%s" y="%s" text-anchor="middle" dominant-baseline="middle">%d KM</text>'
+                                % (round(lx, 1), round(ly, 1), k))
+                break
 
-    return (
-        '<div class="sam reveal" data-zone="all" data-w="%d" data-h="%d" data-zones=\'%s\' data-zone-names=\'%s\' '
-        'style="--sam-ar:%d / %d">'
-        '<div class="sam__side sam__side--zones"><span class="sam-kick">Explore by area</span>'
-        '<div class="sam__zones" role="group" aria-label="Filter the map by area">%s</div>'
-        '<p class="sam__hint">Tap or hover a suburb to zoom in; tap it again to open its page.</p></div>'
-        '<div class="sam__stage"><svg viewBox="0 0 %d %d" preserveAspectRatio="xMidYMid meet" role="group" '
-        'aria-label="Map of the south-east Melbourne suburbs CDS services, drawn from their gazetted boundaries">'
-        '<g class="sam__world">%s</g></svg>'
-        '<div class="sam__tip" role="tooltip" hidden><b class="sam__tip-name"></b><span class="sam__tip-meta"></span></div>'
-        '<div class="sam__ctls" aria-label="Map zoom"><button type="button" data-act="in" aria-label="Zoom in">+</button>'
-        '<button type="button" data-act="out" aria-label="Zoom out">&minus;</button>'
-        '<button type="button" data-act="reset" aria-label="Reset the view">&#8634;</button></div></div>'
-        '<div class="sam__side sam__side--detail"><label class="sam__search"><span class="sam-kick">Find your suburb</span>'
-        '<input type="search" list="sam-suburbs" placeholder="Start typing&hellip;" autocomplete="off" spellcheck="false"></label>'
-        '<datalist id="sam-suburbs">%s</datalist>'
-        '<div class="sam__card" data-empty><span class="sam-kick sam__card-zone">Selected suburb</span>'
-        '<strong class="sam__card-name">Pick a suburb on the map</strong>'
-        '<span class="sam__card-meta">Its postcode, area and size show here.</span>'
-        '<a class="btn btn-primary sam__card-link" href="index.html#contact"><span class="sam__card-link-text">Get a quote</span> %s</a>'
-        '</div></div></div>'
-        % (W, H, json.dumps(zbox), json.dumps(ZONE_LABEL), W, H, "".join(chips), W, H, subs, opts, ARROW)
-    ), len(shapes)
+    subs = "".join('<a class="sx__sub" href="ceramic-coating-%s.html" data-i="%d" data-z="%s" aria-label="%s%s">'
+                   '<path d="%s"/></a>' % (t["slug"], i, t["zone"], esc(t["name"]),
+                                           (" " + t["pc"]) if t["pc"] else "", t["d"])
+                   for i, t in enumerate(shapes))
+    pin = lambda cls, x, y, label, hidden: (
+        '<g class="sx__pin %s"%s style="transform:translate(%spx,%spx) scale(var(--k,1))">'
+        '<circle class="pulse" r="7"/><circle class="core" r="5"/><text x="11" y="4">%s</text></g>'
+        % (cls, " hidden" if hidden else "", x, y, label))
+
+    chips = ['<button type="button" class="sx__zone is-on" data-zone="all" aria-pressed="true">'
+             '<i class="sx__dot sx__dot--all" aria-hidden="true"></i>All areas <b>%d</b></button>' % len(shapes)]
+    chips += ['<button type="button" class="sx__zone" data-zone="%s" aria-pressed="false"><i class="sx__dot" '
+              'style="--z:var(--z-%s)" aria-hidden="true"></i>%s <b>%d</b></button>' % (z, z, esc(lab), counts[z])
+              for z, lab in ZONES]
+
+    regs = []
+    for region, zone, names in REGIONS:
+        members = sorted((nm for nm in names if slugify(nm) in index), key=str.lower)
+        if not members:
+            continue
+        lis = "".join('<li><a href="ceramic-coating-%s.html" data-i="%d">%s%s</a></li>'
+                      % (slugify(nm), index[slugify(nm)], esc(nm),
+                         (" <small>%s</small>" % shapes[index[slugify(nm)]]["pc"]) if shapes[index[slugify(nm)]]["pc"] else "")
+                      for nm in members)
+        regs.append('<details class="sx__reg" open data-z="%s" data-n="%d"><summary><i class="sx__dot" '
+                    'style="--z:var(--z-%s)" aria-hidden="true"></i><span class="t">%s</span><b>%d</b></summary>'
+                    '<ul>%s</ul></details>' % (zone, len(members), zone, esc(region), len(members), lis))
+
+    data = {"z": [[z, lab] for z, lab in ZONES], "r": region_names,
+            "s": [[t["name"], t["pc"], zone_keys.index(t["zone"]), region_names.index(t["region"]),
+                   t["area"], t["km"], t["cx"], t["cy"]] for t in shapes]}
+    data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+
+    n = len(shapes)
+    markup = (
+        '<div class="sx reveal" data-zone="all" data-w="%d" data-h="%d" data-ppk="%.4f" data-proj="%.6f,%.6f,%.6f,%.4f,%d" '
+        'data-studio="%s,%s" data-zones=\'%s\'>'
+        % (W, H, ppk, mn[0], mx[1], kx, sc, PAD, sx_, sy_, json.dumps(zbox, separators=(",", ":")))
+        + '<div class="sx__bar"><div class="sx__search">' + ICON_SEARCH
+        + '<input type="search" role="combobox" aria-label="Search suburbs or postcodes" aria-expanded="false" '
+          'aria-controls="sx-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" '
+          'placeholder="Search %d suburbs or a postcode&hellip;">' % n
+        + '<button type="button" class="sx__clear" aria-label="Clear search" hidden>&times;</button>'
+          '<ul class="sx__results" id="sx-results" role="listbox" aria-label="Matching suburbs" hidden></ul></div>'
+        + '<button type="button" class="sx__locate" aria-label="Find the suburb I am in">' + ICON_LOCATE
+        + '<span>Near me</span></button></div>'
+        + '<div class="sx__zones" role="group" aria-label="Filter by area">' + "".join(chips) + '</div>'
+        + '<div class="sx__body"><div class="sx__map"><div class="sx__stage">'
+        + '<svg viewBox="0 0 %d %d" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Map of the %d '
+          'south-east Melbourne suburbs CDS services, drawn from their gazetted boundaries">' % (W, H, n)
+        + '<g class="sx__world"><g class="sx__rings">' + "".join(ring_svg) + '</g>' + subs
+        + '<g class="sx__labels"></g>' + pin("sx__studio", sx_, sy_, "CDS studio", False)
+        + pin("sx__me", 0, 0, "You", True) + '</g></svg>'
+        + '<div class="sx__tip" role="tooltip" hidden></div>'
+        + '<div class="sx__ctls" aria-label="Map zoom"><button type="button" data-act="in" aria-label="Zoom in">+</button>'
+          '<button type="button" data-act="out" aria-label="Zoom out">&minus;</button>'
+          '<button type="button" data-act="reset" aria-label="Reset the map">&#8634;</button></div>'
+        + '<div class="sx__legend">Rings every 10 km from our Berwick studio</div></div>'
+        + '<div class="sx__card" aria-live="polite" hidden><div class="sx__card-top"><span class="sx__card-zone"></span>'
+          '<button type="button" class="sx__close" aria-label="Close">&times;</button></div>'
+          '<strong class="sx__card-name"></strong><p class="sx__card-meta"></p><div class="sx__near"></div>'
+          '<div class="sx__card-cta"><a class="btn btn-primary sx__card-open" href="service-areas.html"><span>Open</span> '
+        + ARROW + '</a><a class="btn btn-ghost" href="index.html#contact">Get a quote</a></div></div></div>'
+        + '<div class="sx__panel"><div class="sx__panel-head"><span class="sx-kick">Every suburb, by area</span>'
+          '<span class="sx__count">%d suburbs</span></div><div class="sx__dir">' % n + "".join(regs) + '</div></div></div>'
+        + '<script type="application/json" class="sx__data">' + data_json + '</script></div>')
+    facts = {"n": n, "zones": len(ZONES), "regions": len(regs), "radius": int(max_km // 10 * 10), "max_km": max_km}
+    return markup, facts
 
 
-def region_lists():
-    """Every suburb, grouped by region - the crawlable route to all pages."""
+def explorer_head(facts, h2):
+    return ('<div class="sx-head reveal"><div class="sx-head__copy"><span class="eyebrow">Service areas</span>'
+            '<h2 class="h-sec">%s</h2><p class="lede">Search your suburb, tap &ldquo;near me&rdquo;, or pick it on the map. '
+            'Every one of the %d suburbs has its own page, drawn from its real gazetted boundary.</p></div>'
+            '<ul class="sx-stats" aria-label="Coverage"><li><b>%d</b><span>Suburbs</span></li><li><b>%d</b><span>Areas</span></li>'
+            '<li><b>%d<em>km</em></b><span>Around Berwick</span></li></ul></div>'
+            % (h2, facts["n"], facts["n"], facts["zones"], facts["radius"]))
+
+
+def region_grid():
+    """service-areas.html only: every suburb by region, always visible, with the
+    #region anchors the suburb-page breadcrumbs point at."""
     out = []
     for region, zone, names in REGIONS:
-        items = [(slugify(nm), nm) for nm in names if slugify(nm) in RECS]
+        items = sorted(((slugify(nm), nm) for nm in names if slugify(nm) in RECS), key=lambda t: t[1].lower())
         lis = "".join('<li><a href="ceramic-coating-%s.html">%s</a></li>' % (s, esc(nm)) for s, nm in items)
-        out.append('<div class="sam-list-col" id="%s"><h3>%s <span>%d</span></h3><ul>%s</ul></div>'
+        out.append('<div class="sx-grid__col" id="%s"><h3>%s <span>%d</span></h3><ul>%s</ul></div>'
                    % (slugify(region), esc(region), len(items), lis))
-    return "".join(out)
+    return '<div class="sx-grid">' + "".join(out) + '</div>'
 
 
 def map_css():
-    base = open(os.path.join(HERE, "map_base.css"), encoding="utf-8").read()
-    zv = "".join("--z-%s:%s;" % (z, ZONE_COLOUR[z]) for z, _ in ZONES) + "--z:var(--z-casey);"
-    base = base.replace("/*ZONEVARS*/", zv)
+    base = open(os.path.join(HERE, "explorer_base.css"), encoding="utf-8").read()
     zones = [z for z, _ in ZONES]
-    extra = ["", ".sam__sub{--z:var(--z-casey)}"]
-    extra += ['.sam__sub[data-zone="%s"]{--z:var(--z-%s)}' % (z, z) for z in zones]
-    extra += [".sam__dot--%s{--z:var(--z-%s)}" % (z, z) for z in zones]
-    extra.append(".sam__dot--all{background:conic-gradient(%s)}"
-                 % ",".join("var(--z-%s)" % z for z in zones + zones[:1]))
-    extra.append(",\n".join('.sam[data-zone="%s"] .sam__sub:not([data-zone="%s"]) path' % (z, z) for z in zones) + "{opacity:.14}")
-    extra.append(",\n".join('.sam[data-zone="%s"] .sam__sub:not([data-zone="%s"]) .sam__lbl' % (z, z) for z in zones) + "{opacity:0}")
+    base = base.replace("/*ZONEVARS*/", "".join("--z-%s:%s;" % (z, ZONE_COLOUR[z]) for z in zones) + "--z:var(--z-casey);")
+    extra = ['.sx__sub[data-z="%s"]{--z:var(--z-%s)}' % (z, z) for z in zones]
+    extra.append(".sx__dot--all{background:conic-gradient(%s)}" % ",".join("var(--z-%s)" % z for z in zones + zones[:1]))
+    extra.append(",\n".join('.sx[data-zone="%s"] .sx__sub:not([data-z="%s"]) path' % (z, z) for z in zones) + "{opacity:.12}")
+    extra.append(",\n".join('.sx[data-zone="%s"] .sx__lbl:not([data-z="%s"])' % (z, z) for z in zones) + "{opacity:0!important}")
     return base.rstrip() + "\n" + "\n".join(extra) + "\n"
 
 
-MAP_JS = open(os.path.join(HERE, "map.js"), encoding="utf-8").read()
+def home_ld(facts):
+    """The homepage's business schema. It had none at all before 19 Sep 2026."""
+    return {"@context": "https://schema.org", "@type": "AutomotiveBusiness",
+            "@id": BASE + "/#business", "name": "CDS · Overspray Solutions",
+            "alternateName": "Car Detailing Solutions",
+            "description": ("Owner-operated ceramic coating, paint correction, paint protection and overspray removal "
+                            "studio in Berwick, servicing Melbourne's south-east."),
+            "url": BASE + "/", "telephone": "+61410939700", "email": "info@cardetailingsolutions.com.au",
+            "image": BASE + "/assets/img/logo-cds-ceramic.png", "logo": BASE + "/assets/img/logo-mark.png",
+            "priceRange": "$$",
+            "address": {"@type": "PostalAddress", "addressLocality": "Berwick", "addressRegion": "VIC",
+                        "postalCode": "3806", "addressCountry": "AU"},
+            "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
+                                           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+                                                         "Saturday", "Sunday"],
+                                           "opens": "07:00", "closes": "19:00"}],
+            "areaServed": {"@type": "GeoCircle",
+                           "geoMidpoint": {"@type": "GeoCoordinates", "latitude": round(STUDIO[1], 4),
+                                           "longitude": round(STUDIO[0], 4)},
+                           "geoRadius": str(facts["radius"] * 1000)},
+            "hasMap": BASE + "/service-areas.html",
+            "knowsAbout": ["Ceramic coating", "Graphene coating", "Paint correction", "Paint protection",
+                           "Overspray removal", "Industrial fallout removal"]}
 
 
 # ------------------------------------------------------------------ hub page
-def hub_page(sam):
-    n = len(RECS)
+def hub_page(sx, facts):
+    n = facts["n"]
     ld = [{"@context": "https://schema.org", "@type": "ItemList",
            "name": "CDS service areas", "numberOfItems": n,
            "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": RECS[s]["name"],
@@ -471,10 +569,12 @@ def hub_page(sam):
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
               {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE + "/index.html"},
               {"@type": "ListItem", "position": 2, "name": "Service Areas", "item": BASE + "/service-areas.html"}]}]
-    desc = ("Ceramic coating, paint correction and overspray removal across %d suburbs of Melbourne's "
-            "south-east, from our studio in Berwick. Find your suburb on the map." % n)
+    desc = ("Ceramic coating, paint correction and overspray removal across %d suburbs of Melbourne&rsquo;s "
+            "south-east, from our studio in Berwick. Search your suburb or find it on the map." % n)
+    nav = NAVDRAWER.replace('<a href="service-areas.html">Areas</a>',
+                            '<a href="service-areas.html" aria-current="page">Areas</a>', 1)
     return head("Service Areas | Ceramic Coating Across Melbourne&rsquo;s South-East &mdash; CDS",
-                desc, "service-areas.html", ld) + f"""
+                desc, "service-areas.html", ld, nav=nav) + f"""
 <header class="lp-hero textured">
   <div class="wrap">
     <nav class="lp-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i>/</i><span>Service Areas</span></nav>
@@ -482,14 +582,15 @@ def hub_page(sam):
     <h1 class="lp-h1">Areas we <em>service</em></h1>
     <p class="lp-lede">{n} suburbs across Casey, Cardinia, Greater Dandenong, Knox, Monash, Kingston, Frankston,
     Maroondah, Whitehorse, Glen Eira and Bayside, plus the Dandenong Ranges, the Yarra Valley edge and Western
-    Port &mdash; every suburb within 30 km of our Berwick studio, each with its own page drawn from its real
-    gazetted boundary.</p>
+    Port &mdash; every suburb within {facts['radius']} km of our Berwick studio, each with its own page drawn from
+    its real gazetted boundary.</p>
     {ACTIONS}
   </div>
 </header>
-<section class="section sam-sec textured" id="map">
+<section class="section sx-sec textured" id="map">
   <div class="wrap">
-    {sam}
+    {explorer_head(facts, 'Find your <em>suburb</em>.')}
+    {sx}
   </div>
 </section>
 <section class="section" style="background:var(--bg-2);border-block:1px solid var(--line)">
@@ -498,7 +599,7 @@ def hub_page(sam):
       <span class="eyebrow">Every suburb</span>
       <h2 class="h-sec">All {n} service areas, by region.</h2>
     </div>
-    <div class="sam-list-grid sam-list-grid--open">{region_lists()}</div>
+    {region_grid()}
   </div>
 </section>
 <section class="lp-ctaband">
@@ -510,35 +611,58 @@ def hub_page(sam):
 {FOOTER}
 <script src="js/page.js?v=10"></script>
 <script>
-{MAP_JS}</script>
+{EXPLORER_JS}</script>
 </body>
 </html>"""
 
 
-def home_block(sam, n):
+def home_block(sx, facts):
     return f"""<!--SAM-START-->
-<!-- ============ SERVICE AREAS (interactive suburb map) ============ -->
-<section class="section sam-sec textured" id="areas">
+<!-- ============ SERVICE AREAS (suburb explorer: generated by tools/suburbs/emit_pages.py) ============ -->
+<section class="section sx-sec textured" id="areas">
   <div class="wrap">
-    <div class="sam-head reveal">
-      <span class="eyebrow">Service areas</span>
-      <h2 class="h-sec">Areas we <em>service</em>.</h2>
-      <p class="lede">{n} suburbs across Melbourne&rsquo;s south-east, each with its own page &mdash; drawn here from
-      its real gazetted boundary, from Berwick out to the bay, the Dandenong Ranges and Western Port.</p>
-    </div>
-    {sam}
-    <details class="sam-list reveal">
-      <summary class="sam-kick">Browse all {n} suburbs as a list <span aria-hidden="true">+</span></summary>
-      <div class="sam-list-grid">{region_lists()}</div>
-    </details>
-    <p class="sam-more reveal"><a href="service-areas.html">Open the full service-areas page &rarr;</a></p>
+    {explorer_head(facts, 'Find your <em>suburb</em>.')}
+    {sx}
+    <p class="sx-more reveal"><a href="service-areas.html">Open the full service-areas page, with every suburb by region &rarr;</a></p>
   </div>
 </section>
 <script>
-{MAP_JS}</script>
+{EXPLORER_JS}</script>
 <!--SAM-END-->
 
 """
+
+
+# ------------------------------------------------------------------ site-wide nav
+def ensure_area_links():
+    """Put 'Areas' in the primary nav, the mobile drawer and the footer of every page.
+    Idempotent. Generated pages inherit it from the chrome lifted afterwards."""
+    touched = 0
+    for p in glob.glob(os.path.join(ROOT, "*.html")):
+        s = t = open(p, encoding="utf-8").read()
+
+        def nav(m):
+            b = m.group(0)
+            if "service-areas.html" in b:
+                return b
+            return re.sub(r'(<a href="about\.html"[^>]*>About</a>)',
+                          r'\1\n      <a href="service-areas.html">Areas</a>', b, count=1)
+        t = re.sub(r'<nav class="nav-links".*?</nav>', nav, t, count=1, flags=re.S)
+
+        # the About d-link only ever appears inside the mobile drawer
+        if 'class="d-link" href="service-areas.html"' not in t:
+            t = t.replace('<a class="d-link" href="about.html">About</a>',
+                          '<a class="d-link" href="about.html">About</a>\n'
+                          '  <a class="d-link" href="service-areas.html">Service Areas</a>', 1)
+
+        def foot(m):
+            if "service-areas.html" in m.group(1):
+                return m.group(0)
+            return m.group(1) + '<a href="service-areas.html">Service areas</a>' + m.group(2)
+        t = re.sub(r'(<div class="foot-col">\s*<h4>Services</h4>.*?)(\s*</div>)', foot, t, count=1, flags=re.S)
+        if t != s:
+            open(p, "w", encoding="utf-8").write(t); touched += 1
+    return touched
 
 
 # ------------------------------------------------------------------ sitemaps
@@ -584,36 +708,44 @@ def sitemap_html():
 def main():
     if MISSING:
         print("NOTE: no boundary for %d suburb(s), skipped: %s" % (len(MISSING), ", ".join(MISSING)))
+    print("Areas nav/drawer/footer link added on %d pages" % ensure_area_links())
+    load_chrome()
+
     for s in RECS:
         open(os.path.join(ROOT, "ceramic-coating-%s.html" % s), "w", encoding="utf-8").write(suburb_page(s))
     print("suburb pages: %d" % len(RECS))
 
-    sam, nmap = overview_map()
-    open(os.path.join(ROOT, "service-areas.html"), "w", encoding="utf-8").write(hub_page(sam))
-    print("service-areas.html: hub with %d-suburb map" % nmap)
+    sx, facts = explorer()
+    open(os.path.join(ROOT, "service-areas.html"), "w", encoding="utf-8").write(hub_page(sx, facts))
+    print("service-areas.html: hub, %(n)d suburbs, %(zones)d areas, rings to %(radius)d km" % facts)
 
     ip = os.path.join(ROOT, "index.html")
     idx = open(ip, encoding="utf-8").read()
-    blk = home_block(sam, nmap)
+    blk = home_block(sx, facts)
     if "<!--SAM-START-->" not in idx:
         raise SystemExit("index.html has no SAM markers")
     idx = re.sub(r"<!--SAM-START-->.*?<!--SAM-END-->\s*", lambda m: blk, idx, flags=re.S)
+    ld = ("<!--LD-START-->\n<script type=\"application/ld+json\">%s</script>\n<!--LD-END-->\n"
+          % json.dumps(home_ld(facts), ensure_ascii=False))
+    if "<!--LD-START-->" in idx:
+        idx = re.sub(r"<!--LD-START-->.*?<!--LD-END-->\n", lambda m: ld, idx, flags=re.S)
+    else:
+        idx = idx.replace("</head>", ld + "</head>", 1)
     open(ip, "w", encoding="utf-8").write(idx)
-    print("index.html: map block replaced (%d KB)" % (len(blk) // 1024))
+    print("index.html: explorer block %d KB + business schema" % (len(blk) // 1024))
 
     cp = os.path.join(ROOT, "css", "styles.css")
     css = open(cp, encoding="utf-8").read()
     marker = "\n/* =========================================================================\n   Service areas"
-    i = css.index(marker)
-    css = css[:i] + "\n" + map_css()
+    css = css[:css.index(marker)] + "\n" + map_css()
     open(cp, "w", encoding="utf-8").write(css)
-    print("styles.css: map block regenerated for %d zones" % len(ZONES))
+    print("styles.css: explorer block regenerated for %d areas" % len(ZONES))
 
     sitemap_html()
     print("sitemap.xml: %d urls; sitemap.html columns rebuilt" % sitemap_xml())
 
-    # styles.css just changed (the map block), so every page must reference the new
-    # version or returning visitors keep a stale copy.
+    # styles.css just changed, so every page must reference the new version or
+    # returning visitors keep a stale copy.
     bumped = 0
     for p in glob.glob(os.path.join(ROOT, "*.html")):
         t = open(p, encoding="utf-8").read()

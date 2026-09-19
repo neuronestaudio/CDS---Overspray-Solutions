@@ -21,6 +21,27 @@ the sitemaps all follow. Pages emit the live host, https://cardetailingsolutions
 If a suburb is ever removed, add a 308 for its URL to `vercel.json` (append to the
 existing `redirects` array - it also holds the old site's `.php` redirects).
 
+## The suburb explorer (homepage `#areas` + `service-areas.html`)
+
+`explorer_base.css` + `explorer.js` + `explorer()` in `emit_pages.py`. One component:
+search combobox (name or postcode, keyboard-driven), "near me" (geolocation ->
+`isPointInFill` on the polygons, nearest centroid as the fallback), area chips, the vector
+map with 10 km rings from the studio, a suburb card with the five nearest suburbs, and an
+always-visible directory. Every suburb is a plain `<a href>` twice over (map + directory),
+so it is crawlable and works with JS off. `emit_pages.py` also owns the homepage's business
+schema (`<!--LD-START-->`, an `AutomotiveBusiness` with a `GeoCircle` service area) and the
+site-wide "Areas" nav / drawer / footer link (`ensure_area_links()`, idempotent).
+
+- Per-suburb data lives in ONE json blob (`.sx__data`), not in `data-*` attributes, and map
+  labels are built on first zoom. That took the homepage block from 173 KB to 156 KB while
+  adding the whole directory. `--k` undoes both the zoom and the SVG's render scale, so
+  labels and pins are the same size on a phone as on a desktop.
+- **Headless QA lies about the selected state.** Under `--virtual-time-budget` the 0.22 s
+  fill transition often never ticks, so a selected suburb screenshots as unselected and
+  `getComputedStyle` reports the start value with `getAnimations().length == 3`. Add
+  `.sx__sub path{transition:none!important}` to the test copy before judging it.
+- The studio pin sits on Berwick's *centroid*. We do not hold the street address.
+
 ## Why the content is structured this way
 
 209 pages off one template is the doorway-page pattern Google filters. So the
