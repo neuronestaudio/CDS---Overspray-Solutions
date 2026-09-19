@@ -66,11 +66,6 @@
       "permanent": true
     },
     {
-      "source": "/ceramic-coating-abbotsford.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
       "source": "/ceramic-coating-alphington.html",
       "destination": "/service-areas.html",
       "permanent": true
@@ -102,11 +97,6 @@
     },
     {
       "source": "/ceramic-coating-brunswick.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
-      "source": "/ceramic-coating-bulleen.html",
       "destination": "/service-areas.html",
       "permanent": true
     },
@@ -171,16 +161,6 @@
       "permanent": true
     },
     {
-      "source": "/ceramic-coating-doncaster-east.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
-      "source": "/ceramic-coating-doncaster.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
       "source": "/ceramic-coating-donnybrook.html",
       "destination": "/service-areas.html",
       "permanent": true
@@ -192,11 +172,6 @@
     },
     {
       "source": "/ceramic-coating-eltham-north.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
-      "source": "/ceramic-coating-eltham.html",
       "destination": "/service-areas.html",
       "permanent": true
     },
@@ -286,11 +261,6 @@
       "permanent": true
     },
     {
-      "source": "/ceramic-coating-lower-plenty.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
       "source": "/ceramic-coating-macleod.html",
       "destination": "/service-areas.html",
       "permanent": true
@@ -346,11 +316,6 @@
       "permanent": true
     },
     {
-      "source": "/ceramic-coating-research.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
       "source": "/ceramic-coating-reservoir.html",
       "destination": "/service-areas.html",
       "permanent": true
@@ -376,16 +341,6 @@
       "permanent": true
     },
     {
-      "source": "/ceramic-coating-templestowe-lower.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
-      "source": "/ceramic-coating-templestowe.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
       "source": "/ceramic-coating-thomastown.html",
       "destination": "/service-areas.html",
       "permanent": true
@@ -397,16 +352,6 @@
     },
     {
       "source": "/ceramic-coating-tullamarine.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
-      "source": "/ceramic-coating-viewbank.html",
-      "destination": "/service-areas.html",
-      "permanent": true
-    },
-    {
-      "source": "/ceramic-coating-warrandyte.html",
       "destination": "/service-areas.html",
       "permanent": true
     },

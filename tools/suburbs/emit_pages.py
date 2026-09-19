@@ -19,11 +19,11 @@ import shared_pool as SP
 
 ROOT = os.path.dirname(os.path.dirname(HERE))
 BASE = "https://cardetailingsolutions.com.au"  # the live domain since 18 Sep 2026; never the vercel.app host
-CSSV = "67"
+CSSV = "68"
 MAPJSV = "4"
 ZONE_COLOUR = {"casey": "#e5484d", "south": "#e8a33d", "east": "#9b7bea",
                "hills": "#3fb67a", "north": "#4aa3d8", "bay": "#22b8c9",
-               "outer": "#e0679a"}
+               "outer": "#e0679a", "inner": "#c5d04a"}
 ZONE_LABEL = dict(ZONES)
 HOOK = {
     "established": "Measured correction and certified coatings for well-kept cars",
@@ -35,6 +35,9 @@ HOOK = {
     "hills": "Protection from gum sap, damp and leaf stain",
     "acreage": "Dust-proof protection for acreage cars, utes and 4WDs",
     "rural": "Protection for farm utes and country kilometres",
+    "prestige": "Measured multi-stage correction and certified coatings for prestige cars",
+    "inner": "Swirl removal and coating for apartment and street-parked cars",
+    "valley": "Protection from gravel dust, spray drift and highway kilometres",
 }
 
 # ------------------------------------------------------------------ data
@@ -580,10 +583,9 @@ def hub_page(sx, facts):
     <nav class="lp-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i>/</i><span>Service Areas</span></nav>
     <span class="eyebrow">{PIN}Berwick 3806 &middot; Melbourne&rsquo;s south-east</span>
     <h1 class="lp-h1">Areas we <em>service</em></h1>
-    <p class="lp-lede">{n} suburbs across Casey, Cardinia, Greater Dandenong, Knox, Monash, Kingston, Frankston,
-    Maroondah, Whitehorse, Glen Eira and Bayside, plus the Dandenong Ranges, the Yarra Valley edge and Western
-    Port &mdash; every suburb within {facts['radius']} km of our Berwick studio, each with its own page drawn from
-    its real gazetted boundary.</p>
+    <p class="lp-lede">{n} suburbs, from Berwick out to St Kilda, Kew and Eltham in one direction and Longwarry,
+    Lang Lang and the Yarra Valley in the other &mdash; every suburb within {facts['radius']} km of our Berwick
+    studio, each with its own page drawn from its real gazetted boundary.</p>
     {ACTIONS}
   </div>
 </header>

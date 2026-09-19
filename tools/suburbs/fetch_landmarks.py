@@ -20,7 +20,7 @@ UA = {"User-Agent": "CDS-OverspraySolutions-SuburbPages/1.0 (dion@pndulumdigital
 ENDPOINT = "https://overpass-api.de/api/interpreter"
 
 # south, west, north, east — the Overpass order
-BOX = "-38.36,144.95,-37.68,145.75"  # south-east Melbourne
+BOX = "-38.45,144.90,-37.60,145.98"  # south-east Melbourne
 MAX_PER_SUBURB = 4
 
 # Ranked: a suburb's four landmarks are taken from the top of this order, so the
@@ -149,7 +149,10 @@ DROP = re.compile(
     r"monash house|^emergency$|traffic education|yarning circle|duck pond|nature walk|"
     r"airstrip|^site of|^former |shopping strip|business centre|homeco|home co\b|home co\.|"
     r"home consortium|roshchem|marson crescent|edu kingdom|floral arts|\b[a-z]\d+\b|"
-    r"^[a-z]+ precinct$|@|^scope$|woolworths|\bu3a\b",
+    r"^[a-z]+ precinct$|@|^scope$|woolworths|\bu3a\b|"
+    # added with the 40 km ring: council planning names, clinics, coded reserves
+    r"local centre|retail precinct|orthodontist|park services|hospice|day surgery|"
+    r"rehabilitation|bluecross|heritage river|\bssr\b|^school park$",
     re.I)
 
 

@@ -21,6 +21,27 @@ ARCH = {
         "Frankston South", "Heathmont", "Dingley Village", "Rowville", "Mulgrave",
         "Montrose", "Warranwood", "Donvale", "Ringwood North", "Blackburn",
         "Blackburn North", "Malvern East", "Ashburton",
+        "Box Hill North", "Doncaster", "Doncaster East", "Templestowe", "Templestowe Lower",
+        "Bulleen", "Lower Plenty", "Viewbank",
+    ],
+    # blue-chip inner east and bayside: European marques, hard and soft clear coats,
+    # owners who look at the paint in direct sun
+    "prestige": [
+        "Toorak", "Armadale", "Malvern", "Kooyong", "Glen Iris", "Camberwell", "Canterbury",
+        "Surrey Hills", "Mont Albert", "Mont Albert North", "Balwyn", "Balwyn North",
+        "Deepdene", "Kew", "Kew East", "Hawthorn East", "Brighton East", "Caulfield",
+        "Caulfield North", "Caulfield South", "Gardenvale", "Ivanhoe East", "Eaglemont",
+    ],
+    # inner city: apartments, basement stackers, tram streets, no hose
+    "inner": [
+        "St Kilda", "St Kilda East", "St Kilda West", "Balaclava", "Ripponlea", "Elwood",
+        "Elsternwick", "Windsor", "Prahran", "South Yarra", "Richmond", "Cremorne",
+        "Burnley", "Abbotsford", "Middle Park", "Hawthorn",
+    ],
+    # Yarra Valley floor: vineyards, orchards, gravel, fog, long highway runs
+    "valley": [
+        "Seville East", "Woori Yallock", "Launching Place", "Yarra Junction", "Gladysdale",
+        "Three Bridges", "Gilderoy", "Gruyere", "Coldstream", "Yering",
     ],
     # 1970s-90s family suburbs, long-owned cars, a lot of wash marring
     "family": [
@@ -32,7 +53,7 @@ ARCH = {
         "Croydon", "Croydon South", "Croydon North", "Croydon Hills", "Mooroolbark",
         "Lilydale", "Ringwood East", "Vermont", "Forest Hill", "Mitcham", "Nunawading",
         "Blackburn South", "Burwood", "Box Hill South", "Highett", "Bentleigh East",
-        "Bentleigh", "McKinnon", "Ormond", "Murrumbeena",
+        "Bentleigh", "McKinnon", "Ormond", "Murrumbeena", "Chirnside Park",
     ],
     # new estates: brand-new cars parked beside active building sites
     "growth": [
@@ -51,14 +72,15 @@ ARCH = {
     "urban": [
         "Dandenong", "Noble Park", "Springvale", "Clayton", "Oakleigh", "Huntingdale",
         "Hughesdale", "Chadstone", "Frankston", "Cheltenham", "Mentone",
-        "Ringwood", "Box Hill", "Carnegie", "Glen Huntly",
+        "Ringwood", "Box Hill", "Carnegie", "Glen Huntly", "Caulfield East",
     ],
     # on the water: salt air, sand, marina and boat-ramp traffic
     "bayside": [
         "Mordialloc", "Aspendale", "Edithvale", "Chelsea", "Bonbeach", "Carrum",
         "Patterson Lakes", "Parkdale", "Seaford", "Mornington", "Mount Martha",
         "Tooradin", "Blind Bight", "Warneet", "Cannons Creek", "Hastings", "Crib Point",
-        "Beaumaris", "Black Rock", "Sandringham", "Hampton East",
+        "Beaumaris", "Black Rock", "Sandringham", "Hampton East", "Hampton", "Brighton",
+        "Jam Jerrup",
     ],
     # the Dandenong Ranges and Cardinia hills: shade, damp, sap, leaf litter
     "hills": [
@@ -67,7 +89,7 @@ ARCH = {
         "Silvan", "Kalorama", "Mount Dandenong", "The Patch", "Upper Ferntree Gully",
         "The Basin", "Menzies Creek", "Emerald", "Avonsleigh", "Clematis", "Cockatoo",
         "Gembrook", "Macclesfield", "Tremont", "Nangana", "Mount Evelyn",
-        "Hoddles Creek", "Beenak",
+        "Hoddles Creek", "Beenak", "Warrandyte", "North Warrandyte", "Eltham", "Research",
     ],
     # lifestyle acreage: gravel drives, dust, sheds, utes and floats
     "acreage": [
@@ -75,7 +97,8 @@ ARCH = {
         "Mount Burnett", "Narre Warren East", "Lysterfield", "Lysterfield South",
         "Devon Meadows", "Cranbourne South", "Pearcedale", "Langwarrin South", "Baxter",
         "Moorooduc", "Somerville", "Tyabb", "Tynong North", "Nar Nar Goon North",
-        "Garfield North", "Bunyip North", "Bittern", "Park Orchards",
+        "Garfield North", "Bunyip North", "Bittern", "Park Orchards", "Tonimbuk",
+        "Warrandyte South", "Wonga Park", "Tuerong", "Bend of Islands", "Labertouche",
     ],
     # farming flats and country towns: farm roads, mud, long kilometres
     "rural": [
@@ -83,6 +106,7 @@ ARCH = {
         "Maryknoll", "Rythdale", "Cora Lynn", "Dalmore", "Heath Hill", "Cardinia",
         "Nar Nar Goon", "Tynong", "Garfield", "Bunyip", "Koo Wee Rup North", "Monomeith",
         "Caldermeade", "Vervale", "Wandin East", "Wandin North", "Yellingbo", "Seville",
+        "Modella", "Lang Lang East", "Longwarry", "Longwarry North",
     ],
 }
 

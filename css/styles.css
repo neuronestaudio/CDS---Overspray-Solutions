@@ -1740,7 +1740,7 @@ html{overflow-x:hidden}
   transition:color .2s var(--ease),border-color .2s var(--ease)}
 .sx-more a:hover{color:var(--text);border-color:var(--accent)}
 
-.sx{--z-casey:#e5484d;--z-south:#e8a33d;--z-east:#9b7bea;--z-hills:#3fb67a;--z-north:#4aa3d8;--z-outer:#e0679a;--z-bay:#22b8c9;--z:var(--z-casey);position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:12px;
+.sx{--z-casey:#e5484d;--z-south:#e8a33d;--z-east:#9b7bea;--z-hills:#3fb67a;--z-north:#4aa3d8;--z-outer:#e0679a;--z-inner:#c5d04a;--z-bay:#22b8c9;--z:var(--z-casey);position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:12px;
   padding:clamp(10px,1.4vw,18px);border-radius:22px;border:1px solid var(--line-2);
   background:linear-gradient(160deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.018) 42%,rgba(255,255,255,.04) 100%);
   box-shadow:0 50px 110px -60px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.1);
@@ -1927,14 +1927,16 @@ html{overflow-x:hidden}
 .sx__sub[data-z="hills"]{--z:var(--z-hills)}
 .sx__sub[data-z="north"]{--z:var(--z-north)}
 .sx__sub[data-z="outer"]{--z:var(--z-outer)}
+.sx__sub[data-z="inner"]{--z:var(--z-inner)}
 .sx__sub[data-z="bay"]{--z:var(--z-bay)}
-.sx__dot--all{background:conic-gradient(var(--z-casey),var(--z-south),var(--z-east),var(--z-hills),var(--z-north),var(--z-outer),var(--z-bay),var(--z-casey))}
+.sx__dot--all{background:conic-gradient(var(--z-casey),var(--z-south),var(--z-east),var(--z-hills),var(--z-north),var(--z-outer),var(--z-inner),var(--z-bay),var(--z-casey))}
 .sx[data-zone="casey"] .sx__sub:not([data-z="casey"]) path,
 .sx[data-zone="south"] .sx__sub:not([data-z="south"]) path,
 .sx[data-zone="east"] .sx__sub:not([data-z="east"]) path,
 .sx[data-zone="hills"] .sx__sub:not([data-z="hills"]) path,
 .sx[data-zone="north"] .sx__sub:not([data-z="north"]) path,
 .sx[data-zone="outer"] .sx__sub:not([data-z="outer"]) path,
+.sx[data-zone="inner"] .sx__sub:not([data-z="inner"]) path,
 .sx[data-zone="bay"] .sx__sub:not([data-z="bay"]) path{opacity:.12}
 .sx[data-zone="casey"] .sx__lbl:not([data-z="casey"]),
 .sx[data-zone="south"] .sx__lbl:not([data-z="south"]),
@@ -1942,4 +1944,5 @@ html{overflow-x:hidden}
 .sx[data-zone="hills"] .sx__lbl:not([data-z="hills"]),
 .sx[data-zone="north"] .sx__lbl:not([data-z="north"]),
 .sx[data-zone="outer"] .sx__lbl:not([data-z="outer"]),
+.sx[data-zone="inner"] .sx__lbl:not([data-z="inner"]),
 .sx[data-zone="bay"] .sx__lbl:not([data-z="bay"]){opacity:0!important}

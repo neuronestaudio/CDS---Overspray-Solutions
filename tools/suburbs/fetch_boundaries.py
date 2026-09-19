@@ -27,7 +27,9 @@ UA = {"User-Agent": "CDS-OverspraySolutions-SuburbPages/1.0 (dion@pndulumdigital
 # Sandhurst (the old name for Bendigo) all have twins.
 # The north edge must clear Kilsyth (-37.819) and Lilydale (-37.757): at -37.82 Kilsyth was silently
 # rejected as NO MATCH, not reported as an error.
-BBOX = (144.95, -38.36, 145.75, -37.68)  # west, south, east, north
+# 40 km ring: Middle Park (144.96E) in the west, Labertouche (145.85E) in the east,
+# Yering / Bend of Islands (-37.69) in the north, Jam Jerrup (-38.33) in the south.
+BBOX = (144.90, -38.45, 145.98, -37.60)  # west, south, east, north
 
 # Only add an override if a name comes back NO MATCH - a wrong postcode here
 # makes the query return nothing at all.

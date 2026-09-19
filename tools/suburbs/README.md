@@ -1,6 +1,7 @@
 # Suburb page pipeline
 
-Generates the 209 `ceramic-coating-<suburb>.html` pages, the `service-areas.html`
+Generates the 285 `ceramic-coating-<suburb>.html` pages (every suburb within 40 km
+of the Berwick studio), the `service-areas.html`
 hub, the interactive map block on the homepage, and both sitemaps. Ported from the
 Ronin build (itself JED -> East Shore). Every network step caches, so re-running is
 cheap and only fills in what is missing.
@@ -44,29 +45,44 @@ site-wide "Areas" nav / drawer / footer link (`ensure_area_links()`, idempotent)
 
 ## Why the content is structured this way
 
-209 pages off one template is the doorway-page pattern Google filters. So the
-substance lives in 9 **archetypes** (`content_pool.py`: new estates, established,
-family, industrial, urban, bayside, hills, acreage, rural), each with a pool bigger
+285 pages off one template is the doorway-page pattern Google filters. So the
+substance lives in 12 **archetypes** (`content_pool.py`: new estates, established,
+family, industrial, urban, bayside, hills, acreage, rural; plus `content_pool_40.py`:
+prestige, inner, valley - added with the 40 km ring), each with a pool bigger
 than a page renders (3 intros / 8 conditions / 7 FAQs; a page shows 1 / 4 / 3).
 `shared_pool.py` rotates the blocks that would otherwise be identical everywhere
 (lede, owner paragraph, headings, process strip, CTA). Each page picks by an FNV-1a
 hash of its own slug. Localised with facts that are that place's own: postcode,
 land area, distance to the studio, true polygon neighbours, real named landmarks.
 
-Last measurement (19 Sep 2026): 209 pages, 2,649 same-archetype pairs, mean 0.174,
-worst 0.570, threshold 0.72. Largest archetype is `family` (43 pages) - widen its
+Last measurement (19 Sep 2026): 285 pages, 3,784 same-archetype pairs, mean 0.177,
+worst 0.570, threshold 0.72. Largest archetype is `family` (44 pages) - widen its
 pool first if a future expansion pushes it over.
+
+Shape: 22 regions (hub / sitemap / breadcrumbs) -> 8 map zones -> 12 archetypes.
+A new *kind* of place gets a new archetype, not a squeeze into an old one: the
+inner south-east (no hose, street parking, tram dust) and the Yarra Valley floor
+read nothing like `established` or `rural`. Suburbs 30-40 km out answer "is it
+worth the drive" honestly instead of pretending the studio is round the corner.
 
 ## Things that will bite you
 
 - **Victorian suburbs are `admin_level=9` in OSM, not 10.** A query for 10 returns
   nothing at all rather than an error.
 - **The bounding box silently rejects.** At a north edge of -37.82, Kilsyth (centre
-  -37.819) came back NO MATCH, not as an error. The box now runs to -37.68 to clear
-  Lilydale. Widen it before adding anything further out.
+  -37.819) came back NO MATCH, not as an error. The box is now
+  (144.90, -38.45, 145.98, -37.60), which clears St Kilda, Eltham and Longwarry.
+  Widen it in BOTH fetch scripts before adding anything further out.
 - **Karingal has no boundary of its own in OSM** - only a point inside Frankston's
   polygon. It was dropped rather than given an invented shape.
-- **Koo Wee Rup North has no postcode** in OSM; the page omits it rather than guess.
+- **Koo Wee Rup North and Labertouche have no postcode** in OSM; the page omits it
+  rather than guess.
+- **Bringing a retired suburb back:** a `vercel.json` redirect beats a file at the
+  same path, so the page would 308 forever. Drop any redirect whose source file
+  exists again (eleven came back with the 40 km ring: Eltham, Doncaster, ...).
+- **Twin names.** Richmond, Windsor, Brighton, Hampton, Kew, Malvern, St Kilda etc.
+  exist elsewhere in Australia; the bbox is what keeps Nominatim on the Melbourne
+  one. Check centroid + area after fetching any new name.
 - **Overpass 504s** on a box this size. Both Overpass scripts fall back to two
   mirrors; the parks query sometimes needs a second run.
 - **Landmark dedupe:** `norm()` strips only parentheticals and "shopping
@@ -74,5 +90,7 @@ pool first if a future expansion pushes it over.
   Plaza collide and the station vanished. A name that extends an already-picked
   one ("Box Hill Central South") is treated as the same place.
 - `DROP` in `fetch_landmarks.py` was built by reading the full output: depots, gas
-  terminals, freeway service centres, coded reserves ("G76"), HomeCo repeats. Read
+  terminals, freeway service centres, coded reserves ("G76"), HomeCo repeats, and -
+  from the inner suburbs - council "Local Centre" planning names, clinics and an
+  "Orthodontist". Read
   the output again after widening the box - new junk arrives with new suburbs.

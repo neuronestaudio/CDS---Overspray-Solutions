@@ -368,6 +368,11 @@ ARCHETYPES = {
 }
 
 
+# The 40 km expansion added archetypes for the inner south-east and the Yarra Valley.
+from content_pool_40 import EXTRA as _EXTRA_40
+ARCHETYPES.update(_EXTRA_40)
+
+
 # ------------------------------------------------------------------ rotation
 def fnv1a(s):
     """FNV-1a 32-bit. Stable across builds and Python versions (hash() is not)."""

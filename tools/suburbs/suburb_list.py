@@ -2,12 +2,13 @@
 """Single source of truth for CDS's service areas.
 
 CDS works out of a studio in Berwick VIC 3806. The service area is every gazetted
-suburb within 30 km of it, plus the nearest ring beyond (to about 32 km): Casey,
-Cardinia, Greater Dandenong, Knox, Monash, Kingston, Frankston, Maroondah, Whitehorse,
-Glen Eira, Bayside, the Dandenong Ranges, the Yarra Valley edge and the Western Port
+suburb within 40 km of it: Casey, Cardinia, Greater Dandenong, Knox, Monash, Kingston,
+Frankston, Maroondah, Whitehorse, Manningham, Glen Eira, Bayside, Stonnington,
+Boroondara, Port Phillip, the Dandenong Ranges, the Yarra Valley and the Western Port
 side of the Mornington Peninsula. radius_census.py measures the rings: 181 suburbs
 sit within 30 km of Berwick and 287 within 40 km (OSM admin_level=9, centre to
-centre). Moorabbin Airport (an airport) and French Island are deliberately skipped.
+centre). All 287 are covered except Moorabbin Airport (an airport) and French Island
+(no road access), which are deliberately skipped.
 
 Regions group suburbs for the sitemap, breadcrumbs and the service-areas hub.
 ZONES groups regions into the filter chips on the homepage map. Archetypes (what
@@ -40,6 +41,7 @@ REGIONS = [
     ("Western Port", "south", [
         "Pearcedale", "Tooradin", "Blind Bight", "Warneet", "Cannons Creek",
         "Somerville", "Tyabb", "Hastings", "Baxter", "Bittern", "Crib Point",
+        "Jam Jerrup",
     ]),
     ("Pakenham & Cardinia", "east", [
         "Pakenham", "Pakenham South", "Officer South", "Cardinia", "Nar Nar Goon",
@@ -47,6 +49,10 @@ REGIONS = [
         "Bunyip", "Bunyip North", "Koo Wee Rup", "Lang Lang", "Bayles", "Catani",
         "Yannathan", "Iona", "Maryknoll", "Rythdale", "Cora Lynn", "Dalmore",
         "Heath Hill", "Koo Wee Rup North", "Monomeith", "Caldermeade", "Vervale",
+        "Tonimbuk", "Lang Lang East",
+    ]),
+    ("West Gippsland edge", "east", [
+        "Longwarry", "Longwarry North", "Labertouche", "Modella",
     ]),
     ("Beaconsfield Upper & the Cardinia hills", "hills", [
         "Beaconsfield Upper", "Guys Hill", "Dewhurst", "Pakenham Upper",
@@ -88,19 +94,43 @@ REGIONS = [
     ("Ringwood, Croydon & Maroondah", "outer", [
         "Montrose", "Croydon South", "Croydon", "Croydon North", "Croydon Hills",
         "Mooroolbark", "Mount Evelyn", "Lilydale", "Ringwood", "Ringwood East",
-        "Ringwood North", "Warranwood", "Donvale", "Park Orchards",
+        "Ringwood North", "Warranwood", "Donvale", "Park Orchards", "Chirnside Park",
     ]),
     ("Box Hill, Nunawading & Whitehorse", "outer", [
         "Vermont", "Forest Hill", "Mitcham", "Nunawading", "Blackburn", "Blackburn South",
-        "Blackburn North", "Burwood", "Box Hill", "Box Hill South",
+        "Blackburn North", "Burwood", "Box Hill", "Box Hill South", "Box Hill North",
     ]),
-    ("Yarra Valley edge", "hills", [
+    ("Doncaster, Templestowe & Warrandyte", "outer", [
+        "Doncaster", "Doncaster East", "Templestowe", "Templestowe Lower", "Bulleen",
+        "Warrandyte", "Warrandyte South", "Wonga Park",
+    ]),
+    ("Eltham, Lower Plenty & Ivanhoe East", "outer", [
+        "Eltham", "Research", "North Warrandyte", "Bend of Islands", "Lower Plenty",
+        "Viewbank", "Ivanhoe East", "Eaglemont",
+    ]),
+    ("Yarra Valley", "hills", [
         "Wandin East", "Wandin North", "Yellingbo", "Seville", "Hoddles Creek", "Beenak",
+        "Seville East", "Woori Yallock", "Launching Place", "Yarra Junction", "Gladysdale",
+        "Three Bridges", "Gilderoy", "Gruyere", "Coldstream", "Yering",
+    ]),
+    ("Toorak, Prahran & St Kilda", "inner", [
+        "Toorak", "Armadale", "Malvern", "Kooyong", "Prahran", "Windsor", "South Yarra",
+        "St Kilda", "St Kilda East", "St Kilda West", "Balaclava", "Ripponlea", "Elwood",
+        "Middle Park",
+    ]),
+    ("Caulfield, Elsternwick & Brighton", "inner", [
+        "Caulfield", "Caulfield North", "Caulfield South", "Caulfield East", "Elsternwick",
+        "Gardenvale", "Brighton", "Brighton East", "Hampton",
+    ]),
+    ("Hawthorn, Kew, Camberwell & Richmond", "inner", [
+        "Hawthorn", "Hawthorn East", "Kew", "Kew East", "Camberwell", "Canterbury",
+        "Balwyn", "Balwyn North", "Deepdene", "Surrey Hills", "Mont Albert",
+        "Mont Albert North", "Glen Iris", "Richmond", "Cremorne", "Burnley", "Abbotsford",
     ]),
     ("Frankston & the peninsula edge", "bay", [
         "Frankston", "Frankston South", "Frankston North", "Seaford",
         "Carrum Downs", "Skye", "Sandhurst", "Langwarrin", "Langwarrin South",
-        "Mount Eliza", "Mornington", "Moorooduc", "Mount Martha",
+        "Mount Eliza", "Mornington", "Moorooduc", "Mount Martha", "Tuerong",
     ]),
 ]
 
@@ -110,7 +140,8 @@ ZONES = [
     ("east", "Pakenham & Cardinia"),
     ("hills", "The Hills"),
     ("north", "Dandenong, Knox & Monash"),
-    ("outer", "Ringwood, Box Hill & Croydon"),
+    ("outer", "Ringwood, Box Hill & Doncaster"),
+    ("inner", "Inner South-East"),
     ("bay", "Bayside & Frankston"),
 ]
 
