@@ -1,0 +1,117 @@
+# -*- coding: utf-8 -*-
+"""Single source of truth for CDS's service areas.
+
+CDS works out of a studio in Berwick VIC 3806. The service area is the south-east
+of Melbourne within roughly 35 km of it: Casey, Cardinia, Greater Dandenong, Knox,
+Monash, Kingston, Frankston, the Dandenong Ranges and the Western Port side of the
+Mornington Peninsula.
+
+Regions group suburbs for the sitemap, breadcrumbs and the service-areas hub.
+ZONES groups regions into the filter chips on the homepage map. Archetypes (what
+the paint is up against in that *kind* of place) are assigned in assign.py.
+
+Karingal is deliberately absent: OSM holds it only as a point inside Frankston's
+boundary, with no polygon of its own, so it would need an invented shape.
+
+Add a suburb here, re-run the pipeline (README.md), and the page, the maps, the
+neighbour links and both sitemaps all follow.
+"""
+import re
+
+STUDIO = ("Berwick", "3806")
+
+REGIONS = [
+    ("Berwick & surrounds", "casey", [
+        "Berwick", "Beaconsfield", "Narre Warren", "Narre Warren North",
+        "Narre Warren South", "Harkaway", "Officer",
+    ]),
+    ("Hallam, Endeavour Hills & Hampton Park", "casey", [
+        "Hallam", "Endeavour Hills", "Doveton", "Eumemmerring", "Hampton Park",
+        "Lynbrook", "Lyndhurst", "Lysterfield South",
+    ]),
+    ("Cranbourne & the southern growth corridor", "south", [
+        "Cranbourne", "Cranbourne North", "Cranbourne East", "Cranbourne West",
+        "Cranbourne South", "Clyde", "Clyde North", "Botanic Ridge",
+        "Junction Village", "Devon Meadows",
+    ]),
+    ("Western Port", "south", [
+        "Pearcedale", "Tooradin", "Blind Bight", "Warneet", "Cannons Creek",
+        "Somerville", "Tyabb", "Hastings", "Baxter", "Bittern", "Crib Point",
+    ]),
+    ("Pakenham & Cardinia", "east", [
+        "Pakenham", "Pakenham South", "Officer South", "Cardinia", "Nar Nar Goon",
+        "Nar Nar Goon North", "Tynong", "Tynong North", "Garfield", "Garfield North",
+        "Bunyip", "Bunyip North", "Koo Wee Rup", "Lang Lang", "Bayles", "Catani",
+        "Yannathan", "Iona", "Maryknoll", "Rythdale", "Cora Lynn", "Dalmore",
+        "Heath Hill",
+    ]),
+    ("Beaconsfield Upper & the Cardinia hills", "hills", [
+        "Beaconsfield Upper", "Guys Hill", "Dewhurst", "Pakenham Upper",
+        "Mount Burnett", "Narre Warren East", "Emerald", "Cockatoo", "Gembrook",
+        "Avonsleigh", "Clematis", "Menzies Creek", "Macclesfield",
+    ]),
+    ("Dandenong Ranges", "hills", [
+        "Belgrave", "Belgrave Heights", "Belgrave South", "Upwey", "Tecoma", "Selby",
+        "Kallista", "Sherbrooke", "Sassafras", "Ferny Creek", "Olinda", "Monbulk",
+        "Silvan", "Kalorama", "Mount Dandenong", "The Patch", "Upper Ferntree Gully",
+    ]),
+    ("Dandenong, Noble Park & Keysborough", "north", [
+        "Dandenong", "Dandenong North", "Dandenong South", "Noble Park",
+        "Noble Park North", "Keysborough", "Springvale", "Springvale South",
+        "Bangholme",
+    ]),
+    ("Rowville, Knox & Ferntree Gully", "north", [
+        "Rowville", "Lysterfield", "Scoresby", "Knoxfield", "Ferntree Gully",
+        "Boronia", "Wantirna", "Wantirna South", "Bayswater", "The Basin",
+        "Bayswater North", "Heathmont", "Kilsyth", "Kilsyth South",
+    ]),
+    ("Monash", "north", [
+        "Mulgrave", "Wheelers Hill", "Glen Waverley", "Mount Waverley", "Clayton",
+        "Notting Hill", "Oakleigh", "Oakleigh East", "Oakleigh South", "Huntingdale",
+        "Hughesdale", "Chadstone", "Ashwood", "Vermont South", "Burwood East",
+    ]),
+    ("Kingston & the bayside", "bay", [
+        "Dingley Village", "Braeside", "Mordialloc", "Aspendale", "Aspendale Gardens",
+        "Edithvale", "Chelsea", "Chelsea Heights", "Bonbeach", "Carrum",
+        "Patterson Lakes", "Waterways", "Mentone", "Parkdale", "Cheltenham",
+        "Heatherton", "Clayton South", "Clarinda", "Moorabbin",
+    ]),
+    ("Frankston & the peninsula edge", "bay", [
+        "Frankston", "Frankston South", "Frankston North", "Seaford",
+        "Carrum Downs", "Skye", "Sandhurst", "Langwarrin", "Langwarrin South",
+        "Mount Eliza", "Mornington", "Moorooduc", "Mount Martha",
+    ]),
+]
+
+ZONES = [
+    ("casey", "Berwick & Casey"),
+    ("south", "Cranbourne & Western Port"),
+    ("east", "Pakenham & Cardinia"),
+    ("hills", "The Hills"),
+    ("north", "Dandenong, Knox & Monash"),
+    ("bay", "Bayside & Frankston"),
+]
+
+
+def slugify(name):
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+
+def all_targets():
+    """[(region, zone, name, slug)] in list order. Fails on a duplicate."""
+    out, seen = [], set()
+    for region, zone, names in REGIONS:
+        for name in names:
+            slug = slugify(name)
+            if slug in seen:
+                raise SystemExit("duplicate suburb in REGIONS: %s" % name)
+            seen.add(slug)
+            out.append((region, zone, name, slug))
+    return out
+
+
+if __name__ == "__main__":
+    t = all_targets()
+    print("%d regions, %d suburbs, %d zones" % (len(REGIONS), len(t), len(ZONES)))
+    for region, zone, names in REGIONS:
+        print("  %-44s %-6s %d" % (region, zone, len(names)))
