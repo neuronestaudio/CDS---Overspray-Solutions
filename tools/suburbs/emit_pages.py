@@ -20,7 +20,7 @@ import mode_pool as MP
 
 ROOT = os.path.dirname(os.path.dirname(HERE))
 BASE = "https://cardetailingsolutions.com.au"  # the live domain since 18 Sep 2026; never the vercel.app host
-CSSV = "71"
+CSSV = "72"
 MAPJSV = "4"
 ZONE_COLOUR = {"casey": "#e5484d", "south": "#e8a33d", "east": "#9b7bea",
                "hills": "#3fb67a", "north": "#4aa3d8", "bay": "#22b8c9",

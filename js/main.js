@@ -371,5 +371,35 @@
     go(0); restart();
   })();
 
+  /* ---------- Reviews marquee ----------
+     The cards are real, visible markup; this only clones them (aria-hidden) and starts the loop.
+     --rev-shift is measured, not assumed to be 50%, so the seam is exact at any width. */
+  (function () {
+    var box = document.querySelector('[data-marquee]');
+    if (!box || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var loop = box.firstElementChild, real = [].slice.call(loop.children);
+    if (!real.length) return;
+    function build() {
+      [].slice.call(loop.querySelectorAll('[data-clone]')).forEach(function (n) { n.remove(); });
+      var sets = 0, first;
+      do {                                        /* enough clones that the track never runs dry */
+        real.forEach(function (n, i) {
+          var c = n.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.setAttribute('data-clone', '');
+          loop.appendChild(c); if (!sets && !i) first = c;
+        });
+        sets++;
+      } while (loop.scrollWidth < box.clientWidth * 2 + first.offsetLeft && sets < 6);
+      var shift = first.offsetLeft - real[0].offsetLeft;
+      if (!(shift > 0)) return;
+      box.style.setProperty('--rev-shift', shift + 'px');
+      box.style.setProperty('--rev-dur', Math.round(shift / 34) + 's');   /* ~34 px a second: readable */
+      box.scrollLeft = 0; box.classList.add('is-live');
+    }
+    build();
+    var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 200); });
+    var hold; box.addEventListener('touchstart', function () { clearTimeout(hold); box.classList.add('is-hold'); }, { passive: true });
+    box.addEventListener('touchend', function () { hold = setTimeout(function () { box.classList.remove('is-hold'); }, 2500); });
+  })();
+
   /* ---------- Booking wizard lives in js/booking.js ---------- */
 })();

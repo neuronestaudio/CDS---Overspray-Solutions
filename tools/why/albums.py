@@ -52,3 +52,36 @@ ALBUMS = [
     ]),
 ]
 SOURCE_NAME = {"shark6": "BYD Shark 6", "modely": "Tesla Model Y", "model3": "Tesla Model 3", "prado": "Toyota LandCruiser Prado"}
+
+# ---------------------------------------------------------------------------------------
+# The section is organised by REASON, not by vehicle: eight compact pills, each with its one
+# line of copy and a carousel mixed across all four albums. (title, pill label, ghost keyword
+# drawn behind the slide row, copy, [(album slug, 1-based slide index), ...]).
+# Slides are ordered to alternate cars; every one of the 32 slides appears at least once -
+# build_why.py fails if one is orphaned. The copy is the section's original eight cards.
+REASONS = [
+    ("Years of protection", "Protection", "Protection",
+     "Bonds tightly to the paint and outlasts traditional waxes and sealants by years, not months.",
+     [("shark6", 1), ("modely", 3), ("prado", 4), ("model3", 10), ("shark6", 9), ("modely", 8)]),
+    ("Hydrophobic", "Hydrophobic", "Hydrophobic",
+     "Rain and water bead up and sheet straight off, carrying dirt and grime away with them.",
+     [("modely", 6), ("shark6", 5), ("model3", 8), ("shark6", 8), ("prado", 1)]),
+    ("Easier to wash", "Easy wash", "Effortless",
+     "Dirt, mud and road salt struggle to stick, so every wash is faster, safer and needed less often.",
+     [("shark6", 6), ("modely", 7), ("model3", 2), ("prado", 2), ("modely", 2), ("model3", 9)]),
+    ("UV & fade defence", "UV defence", "UV shield",
+     "Blocks the UV radiation that oxidises paint and leaves it looking dull, chalky and faded.",
+     [("shark6", 7), ("modely", 4), ("shark6", 2), ("modely", 5)]),
+    ("Stain resistance", "Stain resistance", "Resistant",
+     "Bird droppings, bug splatter, tree sap and acidic fallout are far less likely to etch the clear coat.",
+     [("shark6", 4), ("model3", 6), ("model3", 4), ("model3", 5), ("model3", 8)]),
+    ("Deeper gloss", "Deep gloss", "Gloss",
+     "Magnifies the reflectivity of your paint for a rich, wet, mirror-like finish that turns heads.",
+     [("model3", 7), ("shark6", 3), ("prado", 3), ("model3", 3), ("prado", 5), ("modely", 2)]),
+    ("No more waxing", "No waxing", "No wax",
+     "No re-waxing or resealing every few months \u2014 one professional coat does the job for years.",
+     [("modely", 8), ("model3", 10), ("shark6", 6), ("prado", 4)]),
+    ("Holds resale value", "Resale value", "Value",
+     "Keeps the paint sharp and pristine, so the car presents better and holds its value longer.",
+     [("modely", 1), ("model3", 1), ("prado", 1), ("modely", 3), ("shark6", 9), ("prado", 5)]),
+]
