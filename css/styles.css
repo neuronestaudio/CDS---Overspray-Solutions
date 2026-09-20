@@ -1112,6 +1112,26 @@ html{overflow-x:hidden}
 .bento .card:not(.card-photo):hover::after{animation-duration:1.5s;filter:brightness(1.35) saturate(1.2)}
 .bento .card:not(.card-photo):hover h3{color:#fff}
 
+/* --- bento service cards with a photo band: Andy's own jobs on top, copy on solid card below.
+   Not .card-photo on purpose - these keep the border beam and the icon. --- */
+.bento .card-shot{padding:0;min-height:0}
+.card-shot-media{position:relative;flex:none;aspect-ratio:16/9;overflow:hidden;background:#0b0b0e}
+.card-shot-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:saturate(1.04) contrast(1.03);transition:transform .8s var(--ease)}
+.card-shot-media::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,6,8,.30) 0%,rgba(6,6,8,0) 26%,rgba(6,6,8,0) 56%,var(--bg-2) 100%)}
+.bento .card-shot:hover .card-shot-media img{transform:scale(1.06)}
+.card-shot-body{position:relative;z-index:2;display:flex;flex-direction:column;flex:1;padding:0 26px 26px}
+.bento .card-shot .card-ic{width:48px;height:48px;padding:11px;margin:-24px 0 16px;border-radius:14px;color:#fff;
+  background:rgba(14,14,18,.72);-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);
+  border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 26px -12px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.10)}
+.bento .card-shot h3{margin:0 0 10px}
+/* feature card: wide slice on desktop keeps the studio lights + the reflections down the flank */
+.card-photo img.shot-audi{object-position:50% 24%}
+@media (max-width:760px){.card-photo img.shot-audi{object-position:62% 50%}}
+@media (prefers-reduced-motion:reduce){.card-shot-media img{transition:none}.bento .card-shot:hover .card-shot-media img{transform:none}}
+
+
 /* --- expanding image panels (hover to expand, neighbours compress) --- */
 /* --sk and --tilt are locked to the SAME angle (atan .112 ≈ 6.4°) so the label
    stays parallel to the racing-stripe edge at every viewport width */
