@@ -9,7 +9,7 @@
    --------------------------------------------------------------------------- */
 (function () {
   "use strict";
-  var CONFIG = { GHL_ENDPOINT: "https://services.leadconnectorhq.com/hooks/l7a2YPCfWt2FBxHLseQ8/webhook-trigger/NdDTcJmDyHN7Mdki2rGE" };
+  var CONFIG = { GHL_ENDPOINT: "/api/lead" };  // writes the contact via the GHL API, then pokes the workflow webhook
 
   var form = document.getElementById("bookingForm");
   if (!form) return;
