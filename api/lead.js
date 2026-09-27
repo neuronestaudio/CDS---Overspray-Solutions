@@ -27,6 +27,13 @@ const FIELD_KEYS = [
   'gclid', 'fbclid', 'gbraid', 'wbraid', 'msclkid'
 ];
 
+// GHL reserves some names as native contact keys and refuses to create a custom
+// field using one. "gclid" is the trap: the field cannot exist in the sub-account,
+// so the value was accepted by the upsert and silently dropped (verified 27 Sep
+// 2026 - 7 of 8 fields saved, gclid was the one missing). The field is named
+// "Google Click ID" (key google_click_id) and the form's own name maps onto it here.
+const KEY_ALIAS = { gclid: 'google_click_id' };
+
 const str = (v) => (v === undefined || v === null ? '' : String(v)).trim();
 
 function splitName(body) {
@@ -82,7 +89,7 @@ module.exports = async function handler(req, res) {
     const { firstName, lastName } = splitName(body);
     const customFields = FIELD_KEYS
       .filter((k) => str(body[k]))
-      .map((k) => ({ key: k, field_value: str(body[k]).slice(0, 2000) }));
+      .map((k) => ({ key: KEY_ALIAS[k] || k, field_value: str(body[k]).slice(0, 2000) }));
 
     const payload = {
       locationId,
