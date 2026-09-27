@@ -919,7 +919,7 @@ body.hero-v-b .hero-cds{display:inline-flex}
 
 /* mobile number with a country-code select */
 .tel-row{display:flex;gap:8px}
-.tel-row .tel-cc{flex:0 0 auto;width:120px}
+.tel-row .tel-cc{flex:0 0 auto;width:136px}
 .tel-row input{flex:1;min-width:0}
 .opt{color:var(--muted-2);font-weight:400;text-transform:none;letter-spacing:0}
 
@@ -1098,7 +1098,14 @@ html{overflow-x:hidden}
 
 /* --- select arrow: clean across mobile browsers --- */
 .field select{-webkit-appearance:none;-moz-appearance:none}
-.tel-cc{background-position:right 10px center;padding-right:32px}
+/* Country code: the chevron is 18px wide sitting 12px in, so it occupies the
+   last 30px. padding-right must clear that with room to spare or the label
+   ("AU +61") runs under the arrow. Keep padding-right > 30px whenever this
+   select's width or font changes. */
+.tel-cc{background-position:right 12px center;padding-right:40px;text-overflow:ellipsis}
+@media(max-width:380px){
+  .tel-row .tel-cc{width:118px;font-size:.88rem;padding-left:12px;padding-right:34px;background-position:right 10px center}
+}
 
 /* =========================================================================
    Hero top feather, icon-card hover, expanding overspray panel gallery
