@@ -16,3 +16,6 @@ assets/video/hero-e.mp4
 tools/suburbs/overpass-*.json
 tools/suburbs/*.log
 tools/suburbs/__pycache__/
+
+# Andy's ASIC business-name record: personal data, never publish
+CDS - Registration/
