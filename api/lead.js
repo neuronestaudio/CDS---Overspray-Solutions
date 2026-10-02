@@ -17,7 +17,8 @@
  * conversations API. That API only mails an address that belongs to a contact,
  * hence the internal contact "Website Lead Alerts (internal)" whose email is
  * info@cardetailingsolutions.com.au (DND on SMS/calls, email left open). The
- * alerts thread under that contact in GHL's inbox.
+ * alerts thread under that contact in GHL's inbox. To add a recipient, add the
+ * address to that contact's additional emails AND to ALERT_EMAILS below.
  *
  * GOTCHA: custom fields only save when addressed by BARE key ("service") or by
  * field id. The "contact.service" form the API hands you in customFields listings
@@ -43,6 +44,8 @@ const FIELD_KEYS = [
 const KEY_ALIAS = { gclid: 'google_click_id' };
 
 const ALERT_CONTACT_ID = process.env.GHL_ALERT_CONTACT_ID || '7ZBvk22e35iWd22XjxXQ';
+// Each address must be the alert contact's primary or an additional email.
+const ALERT_EMAILS = ['info@cardetailingsolutions.com.au', 'dion@pndulumdigital.com'];
 
 const str = (v) => (v === undefined || v === null ? '' : String(v)).trim();
 
@@ -176,22 +179,25 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  // Email Andy. Never let it fail the request.
-  let emailed = false;
+  // Email the alert list, one message each so one bad address can't sink the
+  // rest. Never let it fail the request.
+  const emailed = [];
   if (token && locationId && ALERT_CONTACT_ID) {
-    try {
-      const name = str(body.full_name) || str(body.name);
-      const msg = alertEmail(body, { name, phone, email, contactId, locationId });
-      const a = await postJson(`${GHL}/conversations/messages`, {
-        Authorization: `Bearer ${token}`,
-        Version: '2021-07-28',
-        Accept: 'application/json'
-      }, { type: 'Email', contactId: ALERT_CONTACT_ID, emailFrom: 'CDS Website <info@cardetailingsolutions.com.au>', ...msg }, 6000);
-      emailed = a.ok;
-      if (!a.ok) console.error('GHL alert email failed', a.status, a.text.slice(0, 300));
-    } catch (err) {
-      console.error('GHL alert email threw', err && err.message);
-    }
+    const name = str(body.full_name) || str(body.name);
+    const msg = alertEmail(body, { name, phone, email, contactId, locationId });
+    await Promise.all(ALERT_EMAILS.map(async (to) => {
+      try {
+        const a = await postJson(`${GHL}/conversations/messages`, {
+          Authorization: `Bearer ${token}`,
+          Version: '2021-07-28',
+          Accept: 'application/json'
+        }, { type: 'Email', contactId: ALERT_CONTACT_ID, emailTo: to, emailFrom: 'CDS Website <info@cardetailingsolutions.com.au>', ...msg }, 6000);
+        if (a.ok) emailed.push(to);
+        else console.error('GHL alert email failed', to, a.status, a.text.slice(0, 300));
+      } catch (err) {
+        console.error('GHL alert email threw', to, err && err.message);
+      }
+    }));
   }
 
   // Always log the lead so it exists in the deployment logs even if GHL is down.
