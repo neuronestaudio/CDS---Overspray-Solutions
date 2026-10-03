@@ -1441,7 +1441,7 @@ html{overflow-x:hidden}
     linear-gradient(90deg,rgba(6,6,9,.92) 0%,rgba(6,6,9,.66) 40%,rgba(6,6,9,.3) 72%,rgba(6,6,9,.52) 100%),
     linear-gradient(0deg,rgba(6,6,9,.9) 0%,rgba(6,6,9,0) 32%,rgba(6,6,9,0) 64%,rgba(6,6,9,.66) 100%)}
 .vhero-inner{position:relative;width:100%;padding-block:clamp(130px,20vh,210px)}
-.vhero-copy{max-width:800px}
+.vhero-copy{max-width:800px;margin-inline:auto;text-align:center}
 .vhero-kicker{display:inline-flex;align-items:center;gap:10px;font-family:"DM Sans",sans-serif;font-weight:600;
   text-transform:uppercase;letter-spacing:.15em;font-size:clamp(.64rem,1.05vw,.78rem);color:#d8dae0;
   padding:8px 16px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r-pill);
@@ -1455,14 +1455,14 @@ html{overflow-x:hidden}
 .vhero-word.is-on{opacity:1;pointer-events:auto;animation:vwordIn .7s var(--ease) both}  /* fade + swipe-up IN */
 @keyframes vwordIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 .vhero-name{display:block;font-family:"DM Sans",sans-serif;font-weight:800;text-transform:uppercase;
-  font-size:clamp(2.4rem,6.6vw,5.5rem);line-height:.94;letter-spacing:-.022em;color:#fff;max-width:15ch;
+  font-size:clamp(2.4rem,6.6vw,5.5rem);line-height:.94;letter-spacing:-.022em;color:#fff;max-width:15ch;margin-inline:auto;
   text-shadow:0 2px 34px rgba(0,0,0,.55)}
 .vhero-name em{color:var(--accent);font-style:normal}
 .vhero-sub{display:block;margin-top:clamp(14px,1.7vw,22px);font-family:"DM Sans",sans-serif;font-weight:500;
   font-size:clamp(.95rem,1.35vw,1.15rem);line-height:1.42;color:#d0d3da;max-width:none;text-wrap:balance;text-shadow:0 1px 20px rgba(0,0,0,.5)}
-.vhero-support{margin-top:clamp(16px,2vw,26px);max-width:52ch;font-family:"DM Sans",sans-serif;font-weight:400;
+.vhero-support{margin-top:clamp(16px,2vw,26px);max-width:52ch;margin-inline:auto;font-family:"DM Sans",sans-serif;font-weight:400;
   font-size:clamp(.95rem,1.25vw,1.12rem);line-height:1.55;color:#b9bcc4;text-shadow:0 1px 16px rgba(0,0,0,.5)}
-.vhero .hero-actions{margin-top:clamp(24px,3vw,36px)}
+.vhero .hero-actions{margin-top:clamp(24px,3vw,36px);justify-content:center}
 .vhero-scroll{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:2;
   display:inline-flex;flex-direction:column;align-items:center;gap:7px;color:#c9ccd3;text-decoration:none;
   font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:.62rem}
@@ -1545,7 +1545,7 @@ html{overflow-x:hidden}
   letter-spacing:.3em;font-size:clamp(.6rem,2.4vw,.76rem);color:#c9ccd6;
   text-shadow:0 1px 12px rgba(0,0,0,.55)}
 /* GYEON / ONYX certified logos under the hero CTAs */
-.vhero-brands{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(9px,1.4vw,14px);margin-top:clamp(22px,2.8vw,32px)}
+.vhero-brands{display:flex;flex-direction:column;align-items:center;gap:clamp(9px,1.4vw,14px);margin-top:clamp(22px,2.8vw,32px)}
 .vhero-brands-label{font-family:"DM Sans",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.22em;
   font-size:.66rem;color:var(--muted-2)}
 .vhero-brands-row{display:flex;align-items:center;gap:clamp(26px,4.5vw,46px)}
